@@ -100,7 +100,7 @@ class CommonGiftPopLogic extends AppBaseController {
   List<CommonGiftCountModel> luckyCountList = [
     CommonGiftCountModel(name: "一心一意", count: 1),
     CommonGiftCountModel(name: "十全十美", count: 10),
-    CommonGiftCountModel(name: "一切顺利", count: 66),
+    CommonGiftCountModel(name: "一切顺利", count: 30),
   ];
 
   // 要赠送礼物的数量
@@ -125,7 +125,7 @@ class CommonGiftPopLogic extends AppBaseController {
     int? count = await Get.bottomSheet(
         CommonGiftCustomCount(
           textController: _controller,
-          maxValue: _giftTypeId == GiftController.ftId ? 66 : null,
+          maxValue: _giftTypeId == GiftController.ftId ? 30 : null,
         ),
         isScrollControlled: true);
     giftCount.value = count ?? 1;
@@ -168,6 +168,7 @@ class CommonGiftPopLogic extends AppBaseController {
 
   updateGiftType(int giftTypeId) {
     _giftTypeId = giftTypeId;
+    giftCount.value = 1;
   }
 
   ///赠送礼物
