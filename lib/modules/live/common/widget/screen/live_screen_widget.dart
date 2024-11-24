@@ -1,6 +1,4 @@
 import 'package:youyu/config/resource.dart';
-import 'package:youyu/config/theme.dart';
-import 'package:youyu/controllers/user/user_controller.dart';
 import 'package:youyu/modules/live/index/live_index_logic.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/models/my_getuserinfo.dart';
@@ -11,10 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
-import 'package:youyu/widgets/app/image/app_net_image.dart';
 import 'list/live_screen_list_view.dart';
 import 'live_screen_logic.dart';
-import 'package:marquee/marquee.dart';
 
 class LiveScreenWidget extends StatefulWidget {
   const LiveScreenWidget(

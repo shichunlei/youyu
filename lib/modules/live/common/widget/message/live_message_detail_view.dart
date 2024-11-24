@@ -7,9 +7,10 @@ import 'package:youyu/modules/primary/message/message/list/message_chat_list.dar
 import 'package:youyu/modules/primary/message/message/message_detail_logic.dart';
 import 'package:youyu/modules/primary/message/message/view/message_detail_main_view.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
-import 'package:youyu/widgets/app/other/app_emoji_widget.dart';
+import 'package:youyu/widgets/app/other/emoji/app_emoji_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_item.dart';
 
 import 'widget/live_message_detail_nav_bar.dart';
 
@@ -59,8 +60,12 @@ class _LiveMessageDetailPageState extends State<LiveMessageDetailPage>
     //初始化
     WidgetsBinding.instance.addObserver(this);
     emojiWidget = AppEmojiWidget(
+      isShowCustom: true,
       onBackspacePressed: () {},
       editingController: logic.chatTextEditingController,
+      onClickGif: (AppCustomEmojiItem item) {
+        //TODO:test
+      },
     );
 
     chatListWidget = MessageChatListWidget(

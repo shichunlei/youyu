@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:youyu/config/api.dart';
 import 'package:youyu/controllers/base/base_controller.dart';
 import 'package:youyu/controllers/user/user_controller.dart';
@@ -11,7 +10,6 @@ import 'package:youyu/modules/live/common/model/firend_state.dart';
 import 'package:youyu/modules/live/common/model/world_msg_model.dart';
 import 'package:youyu/services/live/live_service.dart';
 import 'package:youyu/services/trtc/trtc_service.dart';
-import 'package:youyu/utils/log_utils.dart';
 import 'package:youyu/utils/number_ext.dart';
 import 'package:youyu/utils/tag_utils.dart';
 import '../common/notification/live_index_notification.dart';

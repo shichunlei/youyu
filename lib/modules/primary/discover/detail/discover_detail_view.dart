@@ -1,4 +1,5 @@
 import 'package:youyu/utils/screen_utils.dart';
+import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_item.dart';
 
 import 'package:youyu/widgets/discover/discover_item.dart';
 import 'package:youyu/config/resource.dart';
@@ -10,7 +11,7 @@ import 'package:youyu/widgets/app/app_page.dart';
 import 'package:youyu/widgets/app/app_top_bar.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
 import 'package:youyu/widgets/app/list/app_list_separated_view.dart';
-import 'package:youyu/widgets/app/other/app_emoji_widget.dart';
+import 'package:youyu/widgets/app/other/emoji/app_emoji_widget.dart';
 import 'package:youyu/widgets/app/other/app_load_footer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,8 +39,9 @@ class _DiscoverDetailPageState extends State<DiscoverDetailPage>
     //初始化
     WidgetsBinding.instance.addObserver(this);
     emojiWidget = AppEmojiWidget(
+      isShowCustom: false,
       onBackspacePressed:(){},
-      editingController: logic.textController,
+      editingController: logic.textController
     );
   }
 

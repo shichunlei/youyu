@@ -40,28 +40,6 @@ class CommonGiftPopLogic extends AppBaseController {
   // 是否全选用户
   bool isSelectedAllUser = false;
 
-  //全选/取消用户
-  /*
-  onSelectedUserAllOrCancel() {
-    if (giftUserList.isNotEmpty) {
-      if (selectedUsers.length == giftUserList.length) {
-        isSelectedAllUser = false;
-        selectedUsers = [];
-      } else {
-        isSelectedAllUser = true;
-        List<int> ids = [];
-        for (var user in giftUserList) {
-          ids.add(user.user.id ?? 0);
-        }
-        selectedUsers = ids;
-      }
-    } else {
-      isSelectedAllUser = false;
-    }
-    update([userListId]);
-  }
-   */
-
   //选择用户
   onSelectedUser(int userId) {
     if (!isSeatUsers) return;
@@ -161,14 +139,17 @@ class CommonGiftPopLogic extends AppBaseController {
     UserController.to.updateMyInfo();
   }
 
-  updateGiftInfo(Gift gift, int giftTypeId) {
-    _curGift = gift;
-    _giftTypeId = giftTypeId;
+  ///更改选中的礼物类型，然后默认此类型的第一个礼物
+  updateGiftType(int index) {
+    _giftTypeId = tabs[index].id;
+    updateGiftInfo(tabs[index].customExtra?.first, _giftTypeId);
+    giftCount.value = 1;
   }
 
-  updateGiftType(int giftTypeId) {
+  ///更改选中的礼物
+  updateGiftInfo(Gift? gift, int giftTypeId) {
+    _curGift = gift;
     _giftTypeId = giftTypeId;
-    giftCount.value = 1;
   }
 
   ///赠送礼物

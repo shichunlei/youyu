@@ -8,7 +8,7 @@ import 'package:youyu/modules/primary/message/message/tip/message_detail_tip_wid
 import 'package:youyu/modules/primary/message/message/voice/message_voice_modal_widget.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/app_page.dart';
-import 'package:youyu/widgets/app/other/app_emoji_widget.dart';
+import 'package:youyu/widgets/app/other/emoji/app_emoji_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

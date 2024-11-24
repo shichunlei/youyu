@@ -86,7 +86,7 @@ class _CommonGiftPopPageState extends State<CommonGiftPopPage>
     ///tab controller
     tabController = TabController(vsync: this, length: logic.tabs.length);
     tabController?.addListener(() {
-      logic.updateGiftType(logic.tabs[(tabController?.index ?? 0)].id);
+      logic.updateGiftType(tabController?.index ?? 0);
     });
   }
 

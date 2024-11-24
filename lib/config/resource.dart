@@ -26,6 +26,10 @@ class AppResource {
     return 'assets/svga/$name.$format';
   }
 
+  static String getGif(String name, {String format = 'gif'}) {
+    return 'assets/gif/$name.$format';
+  }
+
   ///font
   AppFontType ys = AppFontType.ys;
 

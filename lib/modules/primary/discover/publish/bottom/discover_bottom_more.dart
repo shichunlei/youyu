@@ -6,9 +6,10 @@ import 'package:youyu/modules/primary/discover/publish/bottom/discover_audio_rec
 import 'package:youyu/modules/primary/discover/publish/discover_publish_logic.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
-import 'package:youyu/widgets/app/other/app_emoji_widget.dart';
+import 'package:youyu/widgets/app/other/emoji/app_emoji_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_item.dart';
 
 class DiscoverBottomMoreWidget extends StatelessWidget {
   const DiscoverBottomMoreWidget({super.key, required this.logic});
@@ -95,7 +96,9 @@ class DiscoverBottomMoreWidget extends StatelessWidget {
         width: double.infinity,
         height: logic.pageState == DiscoverPageState.audio ? 263.h : 0,
         child: logic.pageState == DiscoverPageState.audio
-            ? DiscoverAudioRecordWidget(logic: logic,)
+            ? DiscoverAudioRecordWidget(
+                logic: logic,
+              )
             : const SizedBox.shrink(),
       ),
     );
@@ -113,7 +116,8 @@ class DiscoverBottomMoreWidget extends StatelessWidget {
           height: logic.pageState == DiscoverPageState.emoji ? 263.h : 0,
           child: logic.pageState == DiscoverPageState.emoji
               ? AppEmojiWidget(
-                  onBackspacePressed:(){},
+                  isShowCustom: false,
+                  onBackspacePressed: () {},
                   editingController: logic.contentController,
                 )
               : Container(),

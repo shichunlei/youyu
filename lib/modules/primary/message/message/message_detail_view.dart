@@ -7,9 +7,10 @@ import 'package:youyu/modules/primary/message/message/view/message_detail_main_v
 import 'package:youyu/router/router.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
-import 'package:youyu/widgets/app/other/app_emoji_widget.dart';
+import 'package:youyu/widgets/app/other/emoji/app_emoji_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_item.dart';
 import 'message_detail_logic.dart';
 
 class MessageDetailPage extends StatefulWidget {
@@ -21,7 +22,6 @@ class MessageDetailPage extends StatefulWidget {
 
 class _MessageDetailPageState extends State<MessageDetailPage>
     with WidgetsBindingObserver {
-
   MessageDetailLogic logic = Get.find<MessageDetailLogic>();
 
   bool isDispose = false;
@@ -35,8 +35,12 @@ class _MessageDetailPageState extends State<MessageDetailPage>
     WidgetsBinding.instance.addObserver(this);
 
     emojiWidget = AppEmojiWidget(
+      isShowCustom: true,
       onBackspacePressed: () {},
       editingController: logic.chatTextEditingController,
+      onClickGif: (AppCustomEmojiItem item) {
+        //TODO:test
+      },
     );
 
     chatListWidget = MessageChatListWidget(

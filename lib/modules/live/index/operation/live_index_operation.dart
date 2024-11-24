@@ -32,13 +32,14 @@ import 'package:youyu/config/theme.dart';
 import 'package:youyu/utils/format_utils.dart';
 import 'package:youyu/widgets/app/actionsheet/app_action_ext_sheet.dart';
 import 'package:youyu/widgets/app/actionsheet/app_action_sheet.dart';
-import 'package:youyu/widgets/app/other/app_emoji_widget.dart';
+import 'package:youyu/widgets/app/other/emoji/app_emoji_widget.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/models/localmodel/item_title_model.dart';
 import 'package:youyu/models/localmodel/menu_model.dart';
+import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_item.dart';
 import 'package:youyu/widgets/gift/common_gift_pop_view.dart';
 import 'package:youyu/widgets/gift/model/common_gift_pop_model.dart';
 import 'package:youyu/config/api.dart';
@@ -912,10 +913,14 @@ class LiveIndexOperation {
         isScrollControlled: false,
         builder: (context) {
           return AppEmojiWidget(
+            isShowCustom: true,
             onEmojiSelected: (Category? category, Emoji emoji) {
               LiveIndexLogic.to.notification?.sendMsg
                   .sendTextMessage(emoji.emoji);
               Get.back();
+            },
+            onClickGif: (AppCustomEmojiItem item) {
+              //TODO:test
             },
           );
         });

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:io';
 import 'package:youyu/utils/screen_utils.dart';
-
 import 'package:youyu/widgets/svga/simple_player_once.dart';
 import 'package:youyu/models/gift_record.dart';
 import 'package:youyu/models/room_detail_info.dart';
@@ -96,10 +95,8 @@ class LiveGiftNotify extends LiveNotificationDispatch with AsyncDownListener {
   }
 
   insertGiftModel(LiveMessageModel<LiveGiftMsg> model) {
-    /*TODO:动画先去掉
     _giftSlideQue.add(model);
     continueGiftScreen();
-     */
   }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -131,11 +128,11 @@ class LiveGiftNotify extends LiveNotificationDispatch with AsyncDownListener {
   continueGiftScreen() async {
     _playTimer?.cancel();
     _playTimer = Timer(const Duration(milliseconds: 10), () {
+      ///根据展示的总数量
       for (int i = 0; i < _subWidgetSlideList.length; i++) {
         LiveMessageModel<LiveGiftMsg>? model = _giftSlideQue.lastOrNull;
         ///判断数量增加
-        if (model != null &&
-            _equalSameGiftDataWithCount(
+        if (model != null && _equalSameGiftDataWithCount(
                 _subWidgetSlideList[i].value?.model.data, model.data)) {
 
           _subWidgetSlideKeyList[i].currentState?.addCount(model.data,
@@ -171,8 +168,8 @@ class LiveGiftNotify extends LiveNotificationDispatch with AsyncDownListener {
             continue;
           }
         }
-
       }
+
 
       _judgmentShow();
     });
