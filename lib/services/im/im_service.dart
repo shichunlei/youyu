@@ -821,6 +821,20 @@ class IMService extends AppBaseController {
    */
 
   /// ************************** 其他方法 ***********************
+  setLocalCustomIntRes(String msgID,int localCustomInt) async {
+    // 设置消息自定义数据
+    // 设置之后此消息会多出一个localCustomInt属性，用户可以读取此属性来获取设置的自定义属性
+    V2TimCallback setLocalCustomIntRes = await TencentImSDKPlugin.v2TIMManager
+        .getMessageManager()
+        .setLocalCustomInt(
+        msgID: msgID, // 需要设置的消息id messageId为消息发送后服务端创建的messageid，不是创建消息时的消息id
+        localCustomInt: localCustomInt); // 需要设置的自定义属性
+    if (setLocalCustomIntRes.code == 0) {
+       //设置成功
+      print("suc");
+    }
+  }
+
 
   ///进入会话页面
   ///userId 用户系统id

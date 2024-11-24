@@ -64,7 +64,7 @@ class _LiveMessageDetailPageState extends State<LiveMessageDetailPage>
       onBackspacePressed: () {},
       editingController: logic.chatTextEditingController,
       onClickGif: (AppCustomEmojiItem item) {
-        //TODO:test
+        logic.onSendGifMessage(item);
       },
     );
 

@@ -122,6 +122,8 @@ class ConversationController extends AppBaseController
       case MessageElemType.V2TIM_ELEM_TYPE_CUSTOM:
         if (msg?.customElem?.desc == IMMsgType.gift.type) {
           return '[ 礼物 ]';
+        } if (msg?.customElem?.desc == IMMsgType.gif.type) {
+          return '[ 表情 ]';
         } else {
           return defaultMsg;
         }

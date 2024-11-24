@@ -297,6 +297,7 @@ class _AppEmojiPickerViewState extends State<AppEmojiPickerView>
   }
 
   _onClickGifItem(AppCustomEmojiItem item) {
+    closeSkinToneOverlay();
     if (widget.onClickGif != null) {
       widget.onClickGif!(item);
     }
@@ -307,7 +308,7 @@ class _AppEmojiPickerViewState extends State<AppEmojiPickerView>
     return [
       AppCustomEmojiCategory(
         AppCustomEmojiType.GIF,
-        [AppEmojiGifData.gifData[AppEmojiGifData.GIF_1]],
+        AppEmojiGifData().gifDataList,
       )
     ];
   }

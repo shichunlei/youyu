@@ -28,10 +28,10 @@ class LiveMsgLuckGiftWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _nameTagWidget(),
-          SizedBox(
-            height: 5.h,
-          ),
+          // _nameTagWidget(),
+          // SizedBox(
+          //   height: 5.h,
+          // ),
           _giftWidget()
         ],
       ),
@@ -86,6 +86,20 @@ class LiveMsgLuckGiftWidget extends StatelessWidget {
         child: RichText(
           text: TextSpan(
             children: [
+              WidgetSpan(
+                alignment: PlaceholderAlignment.middle,
+                child: Text(
+                  model.data?.sender?.nickname ?? "",
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: AppTheme.colorTextWhite,
+                  ),
+                ),
+              ),
+              WidgetSpan(
+                alignment: PlaceholderAlignment.middle,
+                child: SizedBox(width: 4.w),
+              ),
               TextSpan(
                 text: "送给 ",
                 style: TextStyle(

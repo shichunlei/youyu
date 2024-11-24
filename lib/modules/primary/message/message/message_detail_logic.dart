@@ -1,8 +1,13 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
+import 'package:youyu/services/im/model/ext/im_gif_model.dart';
+import 'package:youyu/services/im/model/im_custom_message_mdoel.dart';
+import 'package:youyu/services/im/model/im_msg_type.dart';
 import 'package:youyu/utils/platform_utils.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/utils/toast_utils.dart';
+import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_item.dart';
 import 'package:youyu/widgets/gift/common_gift_pop_view.dart';
 import 'package:youyu/widgets/gift/model/common_gift_pop_model.dart';
 import 'package:youyu/config/theme.dart';
@@ -380,6 +385,35 @@ class MessageDetailLogic extends AppBaseController with UserBlackListener {
     } catch (e) {
       onAudioDel();
       ToastUtils.show("发送失败");
+    }
+  }
+
+  //gif消息
+  onSendGifMessage(AppCustomEmojiItem item) async {
+    String gifName = item.name;
+    if (item.isRandom) {
+      Random random = Random();
+      int randomIndex = random.nextInt(item.emojis?.length ?? 0);
+      String randomData = item.emojis![randomIndex];
+      gifName = randomData;
+    }
+
+    IMGifModel gifModel = IMGifModel(name: gifName, isShowEnd: item.isShowEnd);
+    IMCustomMessageModel<IMGifModel> model = IMCustomMessageModel(
+        userInfo: UserController.imUserInfo(),
+        data: gifModel,
+        timestamp: DateTime.now().millisecondsSinceEpoch);
+    try {
+      var v2timValueCallback = await IMService().sendC2CCustomMsg(
+        model,
+        IMMsgType.gif.type,
+        receiver: userId.toString(),
+      );
+      if (v2timValueCallback.code == 0) {
+        return v2timValueCallback.data;
+      }
+    } catch (e) {
+      //...
     }
   }
 

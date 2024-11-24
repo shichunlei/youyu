@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:youyu/modules/live/common/widget/screen/widget/live_msg_gif_widget.dart';
 import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/models/localmodel/tab_model.dart';
@@ -25,6 +26,7 @@ import 'package:youyu/services/trtc/trtc_service.dart';
 import 'package:youyu/widgets/app/app_round_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../message/sub/live_gif_msg.dart';
 import 'live_screen_list_logic.dart';
 
 class LiveScreenListPage extends StatefulWidget {
@@ -162,6 +164,13 @@ class LiveScreenListPageState extends State<LiveScreenListPage>
                                         key: UniqueKey(),
                                         model: model
                                             as LiveMessageModel<LiveTextMsg>,
+                                        onTap: widget.onClickItem,
+                                      );
+                                    case LiveMessageType.gif:
+                                      return LiveMsgGifWidget(
+                                        key: UniqueKey(),
+                                        model: model
+                                        as LiveMessageModel<LiveGifMsg>,
                                         onTap: widget.onClickItem,
                                       );
                                     case LiveMessageType.groupAt:

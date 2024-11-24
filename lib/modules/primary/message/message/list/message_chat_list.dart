@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'message_chat_list_logic.dart';
+import 'widget/im_msg_gif_widget.dart';
 
 ///聊天内容
 class MessageChatListWidget extends StatefulWidget {
@@ -106,6 +107,15 @@ class _MessageChatListWidgetState extends State<MessageChatListWidget> {
                                   index: msgIndex,
                                   logic: logic,
                                 );
+                              } else if (message.customElem?.desc ==
+                                  IMMsgType.gif.type) {
+                                ///gift
+                                return IMMsgGifWidget(
+                                  key: ObjectKey(message.msgID ?? ""),
+                                  message: message,
+                                  index: msgIndex,
+                                  logic: logic,
+                                );
                               }
                             }
                             return SizedBox(
@@ -150,8 +160,7 @@ class _MessageChatListWidgetState extends State<MessageChatListWidget> {
                       child: Text(
                         '有新消息',
                         style: AppTheme().textStyle(
-                            fontSize: 14.sp,
-                            color: AppTheme.colorTextWhite),
+                            fontSize: 14.sp, color: AppTheme.colorTextWhite),
                       )),
                 ))),
         Obx(() => logic.isChatLoading.value

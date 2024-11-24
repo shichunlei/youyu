@@ -6,6 +6,7 @@ enum LiveMessageType {
   topSpace, //顶部占位（本地处理）
   announcement, //房间公告消息&欢迎语
   text, //文字消息
+  gif,//gif消息
   join, //加入房间消息
   leave, //离开房间消息
   gift, //礼物消息

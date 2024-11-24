@@ -31,6 +31,8 @@ enum IMMsgType {
   roomSetting(type: "room_setting"),
 
   ///直播间&会话都显示
+  //gif消息
+  gif(type: "gif"),
   //礼物消息
   gift(type: "gift"),
   //福袋礼物

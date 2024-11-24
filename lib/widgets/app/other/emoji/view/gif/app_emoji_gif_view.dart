@@ -1,6 +1,8 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/material/tabs.dart';
+import 'package:gif/gif.dart';
+import 'package:youyu/config/resource.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
 import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_category_type.dart';
@@ -48,9 +50,13 @@ class AppEmojiGifView with AppEmojiSubView {
         itemBuilder: (BuildContext context, int index) {
           AppCustomEmojiItem? item = customCategory?.emojiList[index];
           return InkWell(
-            child: AppLocalImage(
+            child: Gif(
+              image: AssetImage(AppResource.getGif(item?.name ?? "",
+                  format: item?.format ?? "")),
+              //fps: 30,
               width: (ScreenUtils.screenWidth - 10 * 2.w + space * 3) / 4,
-              path: item?.name ?? "",
+              // duration: const Duration(seconds: 3),
+              autostart: Autostart.no,
             ),
             onTap: () {
               if (item != null) {

@@ -11,6 +11,7 @@ import 'package:youyu/modules/live/common/message/sub/live_manager_msg.dart';
 import 'package:youyu/modules/live/common/message/sub/live_text_msg.dart';
 import 'package:youyu/modules/live/common/notification/abs/live_notification.dart';
 import 'package:youyu/modules/live/common/widget/screen/live_screen_widget.dart';
+import 'package:youyu/services/im/model/ext/im_gif_model.dart';
 import 'package:youyu/services/im/model/ext/im_gift_model.dart';
 import 'package:youyu/services/im/model/ext/im_group_at_model.dart';
 import 'package:youyu/services/im/model/ext/im_live_text_model.dart';
@@ -22,6 +23,8 @@ import 'package:youyu/utils/format_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_member_info.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
+
+import '../message/sub/live_gif_msg.dart';
 
 ///公屏消息
 class LiveScreenNotify extends LiveNotificationDispatch {
@@ -59,6 +62,27 @@ class LiveScreenNotify extends LiveNotificationDispatch {
           timestamp: imModel.timestamp,
           data: LiveTextMsg(text: imModel.data?.text ?? ""));
 
+      _insertMessage(model);
+    }
+  }
+
+  ///gif消息
+  insertGifMessage(V2TimMessage message, bool isManager) {
+    if (message.customElem?.data != null) {
+      //转im model
+      IMCustomMessageModel<IMGifModel> imModel =
+          IMCustomMessageModel<IMGifModel>.fromJson(
+              IMMsgType.getTypeByType(message.customElem?.desc ?? ""),
+              jsonDecode(message.customElem?.data ?? ""));
+      //转live model
+      LiveMessageModel<LiveGifMsg> model = LiveMessageModel(
+          isManager: isManager,
+          type: LiveMessageType.gif,
+          userInfo: imModel.userInfo,
+          timestamp: imModel.timestamp,
+          data: LiveGifMsg(
+              name: imModel.data?.name ?? "",
+              isShowEnd: imModel.data?.isShowEnd));
       _insertMessage(model);
     }
   }

@@ -9,9 +9,9 @@ class IMGiftModel implements BaseModel {
   final UserInfo? receiver;
 
   //礼物模型
-  final Gift? gift;
+  Gift? gift;
 
-  IMGiftModel({required this.gift, required this.receiver});
+  IMGiftModel({this.gift, required this.receiver});
 
   @override
   Map<String, dynamic> toJson() => <String, dynamic>{

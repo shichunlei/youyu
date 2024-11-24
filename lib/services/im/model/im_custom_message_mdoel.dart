@@ -1,6 +1,7 @@
 import 'package:youyu/models/base_model.dart';
 import 'package:youyu/models/my_getuserinfo.dart';
 import 'package:youyu/services/im/model/ext/im_forbidden_model.dart';
+import 'package:youyu/services/im/model/ext/im_gif_model.dart';
 import 'package:youyu/services/im/model/ext/im_group_at_model.dart';
 import 'package:youyu/services/im/model/ext/im_hug_up_mic_model.dart';
 import 'package:youyu/services/im/model/ext/im_kick_out_model.dart';
@@ -47,6 +48,9 @@ class IMCustomMessageModel<T extends BaseModel> {
         case IMMsgType.gift:
         case IMMsgType.luckyGift:
           model.data = IMGiftModel.fromJson(jsonData) as T?;
+          break;
+        case IMMsgType.gif:
+          model.data = IMGifModel.fromJson(jsonData) as T?;
           break;
         case IMMsgType.joinRoom:
           model.data = IMLiveTextMsg.fromJson(jsonData) as T?;
@@ -97,6 +101,9 @@ class IMCustomMessageModel<T extends BaseModel> {
       case IMMsgType.gift:
       case IMMsgType.luckyGift:
         jsonMap['data'] = (data as IMGiftModel).toJson();
+        break;
+      case IMMsgType.gif:
+        jsonMap['data'] = (data as IMGifModel).toJson();
         break;
       case IMMsgType.joinRoom:
         jsonMap['data'] = (data as IMLiveTextMsg).toJson();

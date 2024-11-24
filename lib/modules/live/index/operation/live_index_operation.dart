@@ -920,12 +920,14 @@ class LiveIndexOperation {
               Get.back();
             },
             onClickGif: (AppCustomEmojiItem item) {
-              //TODO:test
+              LiveIndexLogic.to.notification?.sendMsg.onSendGifMessage(item);
+              Get.back();
             },
           );
         });
     isShowEmoji = false;
   }
+
 
   ///关闭输入相关
   onOperateDismissInputAndEmoji() {

@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:youyu/modules/live/index/live_index_logic.dart';
+import 'package:youyu/services/im/model/ext/im_gif_model.dart';
+import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_item.dart';
 import 'package:youyu/widgets/gift/model/common_gift_pop_model.dart';
 import 'package:youyu/controllers/gift_controller.dart';
 import 'package:youyu/controllers/user/user_controller.dart';
@@ -50,6 +54,37 @@ class LiveIndexSendMsg {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  ///发送gif消息
+  onSendGifMessage(AppCustomEmojiItem item) async {
+    IMMsgType imMsgType = IMMsgType.gif;
+
+    String gifName = item.name;
+    if (item.isRandom) {
+      Random random = Random();
+      int randomIndex = random.nextInt(item.emojis?.length ?? 0);
+      String randomData = item.emojis![randomIndex];
+      gifName = randomData;
+    }
+
+    IMGifModel gifModel = IMGifModel(name: gifName, isShowEnd: item.isShowEnd);
+    IMCustomMessageModel<IMGifModel> model = IMCustomMessageModel(
+        userInfo: UserController.imUserInfo(),
+        data: gifModel,
+        timestamp: DateTime.now().millisecondsSinceEpoch);
+    try {
+      var msg = await IMService().sendGroupCustomMsg(
+        model,
+        imMsgType.type,
+        groupID: LiveIndexLogic.to.imGroupId,
+      );
+      if (sendMessageSuc != null && msg.data != null) {
+        sendMessageSuc!(imMsgType, msg.data!);
+      }
+    } catch (e) {
+      //...
     }
   }
 

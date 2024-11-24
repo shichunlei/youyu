@@ -197,6 +197,13 @@ class LiveIndexNotification extends LiveNotification
             LiveIndexLogic.to
                 .onManagerById(FormatUtil.getRealId(message.sender ?? "")));
         break;
+      case IMMsgType.gif:
+        //gif消息
+        screenNotify.insertGifMessage(
+            message,
+            LiveIndexLogic.to
+                .onManagerById(FormatUtil.getRealId(message.sender ?? "")));
+        break;
       case IMMsgType.groupAt:
         //群at消息
         screenNotify.insertAtTextMessage(
@@ -236,69 +243,7 @@ class LiveIndexNotification extends LiveNotification
         // refreshHeat();
         break;
       case IMMsgType.luckyGift:
-        //福袋礼物消息
-        if (message.customElem?.data != null) {
-          //1.先获取福袋消息
-          IMCustomMessageModel<IMGiftModel> tImModel =
-              IMCustomMessageModel<IMGiftModel>.fromJson(
-                  IMMsgType.getTypeByType(message.customElem?.desc ?? ""),
-                  jsonDecode(message.customElem?.data ?? ""));
-          //2.拿到子列表
-          List<Gift> childList = [];
-          childList.addAll(tImModel.data?.gift?.childList ?? []);
-          //2.去除福袋中的礼物列表
-          for (var element in childList) {
-            IMCustomMessageModel<IMGiftModel> tempImModel =
-                IMCustomMessageModel<IMGiftModel>.fromJson(
-                    IMMsgType.getTypeByType(message.customElem?.desc ?? ""),
-                    jsonDecode(message.customElem?.data ?? ""));
-            //礼物处理
-            tempImModel.data?.gift?.childList?.clear();
-            tempImModel.data?.gift?.childList?.add(element);
-
-            IMCustomMessageModel<IMGiftModel> giftImModel =
-                IMCustomMessageModel(
-                    userInfo: tempImModel.userInfo,
-                    data: IMGiftModel(
-                        gift: tempImModel.data?.gift,
-                        receiver: tempImModel.data?.receiver),
-                    timestamp: tempImModel.timestamp,
-                    loss_time: tempImModel.loss_time);
-
-            LiveMessageModel<LiveGiftMsg> giftModel =
-                screenNotify.insertGiftMessage(
-                    giftImModel,
-                    LiveIndexLogic.to.onManagerById(
-                        FormatUtil.getRealId(message.sender ?? "")),
-                    true);
-
-            //2.礼物动画相关
-            giftSlideNotify.insertGiftModel(giftModel);
-          }
-          // LiveMessageModel<LiveGiftMsg> giftModel =
-          //     screenNotify.insertGiftMessage(
-          //         imModel,
-          //         logic.business?.onManagerById(
-          //                 FormatUtil.getRealId(message.sender ?? "")) ??
-          //             false,
-          //         true);
-          //3.添加礼物记录
-          // _insertGiftNotice(tImModel.userInfo?.nickname ?? "", tImModel.data,
-          //     tImModel.timestamp ?? 0,
-          //     isSend: isSend);
-          if (!isSend) {
-            //4.播放礼物动效
-            for (Gift subGift in tImModel.data?.gift?.childList ?? []) {
-              if (subGift.playSvg == 1) {
-                if (!LiveIndexLogic.to.isCloseAni.value) {
-                  AsyncDownService().addTask(
-                      DownType.bigGifAni, DownModel(url: (subGift.svg ?? "")));
-                }
-              }
-            }
-          }
-        }
-        // refreshHeat();
+        _newLuckGift(message, isSend: isSend);
         break;
       case IMMsgType.joinRoom:
         //加入房间消息
@@ -462,10 +407,127 @@ class LiveIndexNotification extends LiveNotification
               DownModel(
                   url: '${UserController.to.userInfo.value?.dressCar()?.res}'));
         }
+        break;
 
       default:
         break;
     }
+  }
+
+  _newLuckGift(V2TimMessage message, {bool isSend = false}) {
+    //福袋礼物消息
+    if (message.customElem?.data != null) {
+      //1.先获取福袋消息
+      IMCustomMessageModel<IMGiftModel> tImModel =
+          IMCustomMessageModel<IMGiftModel>.fromJson(
+              IMMsgType.getTypeByType(message.customElem?.desc ?? ""),
+              jsonDecode(message.customElem?.data ?? ""));
+      //2.发送福袋消息
+      screenNotify.insertGiftMessage(
+          tImModel,
+          LiveIndexLogic.to
+              .onManagerById(FormatUtil.getRealId(message.sender ?? "")),
+          true);
+
+      //3.拿到子列表
+      List<Gift> childList = tImModel.data?.gift?.childList ?? [];
+      //4.遍历发送几x几
+      for (var element in childList) {
+        IMCustomMessageModel<IMGiftModel> giftImModel = IMCustomMessageModel(
+            userInfo: tImModel.userInfo,
+            data: IMGiftModel(gift: element, receiver: tImModel.data?.receiver),
+            timestamp: tImModel.timestamp,
+            loss_time: tImModel.loss_time);
+        LiveMessageModel<LiveGiftMsg> giftModel = LiveMessageModel(
+            isManager: LiveIndexLogic.to
+                .onManagerById(FormatUtil.getRealId(message.sender ?? "")),
+            type: LiveMessageType.luckGift,
+            userInfo: giftImModel.userInfo,
+            timestamp: giftImModel.timestamp,
+            data: LiveGiftMsg(
+                sender: giftImModel.userInfo,
+                receiver: giftImModel.data?.receiver,
+                gift: giftImModel.data?.gift));
+        //5.礼物动画相关
+        giftSlideNotify.insertGiftModel(giftModel);
+      }
+      if (!isSend) {
+        //4.播放礼物动效
+        for (Gift subGift in tImModel.data?.gift?.childList ?? []) {
+          if (subGift.playSvg == 1) {
+            if (!LiveIndexLogic.to.isCloseAni.value) {
+              AsyncDownService().addTask(
+                  DownType.bigGifAni, DownModel(url: (subGift.svg ?? "")));
+            }
+          }
+        }
+      }
+    }
+  }
+
+  _oldLuckGift(V2TimMessage message, {bool isSend = false}) {
+    //福袋礼物消息
+    if (message.customElem?.data != null) {
+      //1.先获取福袋消息
+      IMCustomMessageModel<IMGiftModel> tImModel =
+          IMCustomMessageModel<IMGiftModel>.fromJson(
+              IMMsgType.getTypeByType(message.customElem?.desc ?? ""),
+              jsonDecode(message.customElem?.data ?? ""));
+      //2.拿到子列表
+      List<Gift> childList = [];
+      childList.addAll(tImModel.data?.gift?.childList ?? []);
+      //3.去除福袋中的礼物列表
+      for (var element in childList) {
+        IMCustomMessageModel<IMGiftModel> tempImModel =
+            IMCustomMessageModel<IMGiftModel>.fromJson(
+                IMMsgType.getTypeByType(message.customElem?.desc ?? ""),
+                jsonDecode(message.customElem?.data ?? ""));
+        //礼物处理
+        tempImModel.data?.gift?.childList?.clear();
+        tempImModel.data?.gift?.childList?.add(element);
+
+        IMCustomMessageModel<IMGiftModel> giftImModel = IMCustomMessageModel(
+            userInfo: tempImModel.userInfo,
+            data: IMGiftModel(
+                gift: tempImModel.data?.gift,
+                receiver: tempImModel.data?.receiver),
+            timestamp: tempImModel.timestamp,
+            loss_time: tempImModel.loss_time);
+
+        LiveMessageModel<LiveGiftMsg> giftModel =
+            screenNotify.insertGiftMessage(
+                giftImModel,
+                LiveIndexLogic.to
+                    .onManagerById(FormatUtil.getRealId(message.sender ?? "")),
+                true);
+
+        //2.礼物动画相关
+        giftSlideNotify.insertGiftModel(giftModel);
+      }
+      // LiveMessageModel<LiveGiftMsg> giftModel =
+      //     screenNotify.insertGiftMessage(
+      //         imModel,
+      //         logic.business?.onManagerById(
+      //                 FormatUtil.getRealId(message.sender ?? "")) ??
+      //             false,
+      //         true);
+      //3.添加礼物记录
+      // _insertGiftNotice(tImModel.userInfo?.nickname ?? "", tImModel.data,
+      //     tImModel.timestamp ?? 0,
+      //     isSend: isSend);
+      if (!isSend) {
+        //4.播放礼物动效
+        for (Gift subGift in tImModel.data?.gift?.childList ?? []) {
+          if (subGift.playSvg == 1) {
+            if (!LiveIndexLogic.to.isCloseAni.value) {
+              AsyncDownService().addTask(
+                  DownType.bigGifAni, DownModel(url: (subGift.svg ?? "")));
+            }
+          }
+        }
+      }
+    }
+    // refreshHeat();
   }
 
   ///声音监听
