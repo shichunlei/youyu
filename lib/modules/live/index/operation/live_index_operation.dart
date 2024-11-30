@@ -657,10 +657,15 @@ class LiveIndexOperation {
 
   //
   onOperateWheelGame(CommonGiftSendModel model) {
+
     LiveIndexLogic.to.showCommit();
     LiveIndexLogic.to.request(AppApi.wheelGameUrl).then((value) {
       Get.bottomSheet(
-        WheelGameViewPage(),
+        WheelGameViewPage(
+          sendModel: model,
+          images: [],
+          prices: [],
+        ),
         isScrollControlled: true,
       );
     });

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/utils/screen_utils.dart';
-import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'dart:ui' as ui;
 import 'dart:math';
 import 'dart:typed_data';
@@ -11,7 +10,11 @@ import 'dart:typed_data';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
 
 class WheelTurnWidget extends StatefulWidget {
-  const WheelTurnWidget({super.key});
+  const WheelTurnWidget(
+      {super.key, required this.images, required this.prices});
+
+  final List<ui.Image> images;
+  final List<String> prices;
 
   @override
   State<WheelTurnWidget> createState() => _WheelTurnWidgetState();
@@ -22,10 +25,7 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
   late AnimationController _controller;
   late Animation<double> _animation;
 
-  final List<ui.Image> _images = [];
-  List<String> titles = [];
-  List<String> prices = [];
-
+  ui.Image? paoBgImg;
   double angle = 0;
 
   @override
@@ -49,13 +49,7 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
   }
 
   void _loadImage() async {
-    ui.Image? img =
-        await loadImageFromAssets('assets/game/wheel/ic_wheel_pao.png');
-    for (int x = 0; x < 8; x++) {
-      titles.add('T_$x');
-      prices.add('P_$x');
-      _images.add(img!);
-    }
+    paoBgImg = await loadImageFromAssets('assets/game/wheel/ic_wheel_pao.png');
     setState(() {});
   }
 
@@ -67,14 +61,14 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
 
   void drawClick() async {
     int res = Random().nextInt(8);
-    angle = res * 360 / _images.length;
+    angle = res * 360 / widget.prices.length;
     _controller.forward();
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_images.isEmpty) return Container();
+    if (widget.images.isEmpty) return Container();
     double width = ScreenUtils.screenWidth - 28.w;
     return Material(
       color: Colors.transparent,
@@ -86,7 +80,13 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
         child: Stack(
           alignment: Alignment.center,
           children: [
-            _bgWidget(width),
+            Container(
+              padding: EdgeInsets.only(bottom: 4.5.w),
+              child: AppLocalImage(
+                path: AppResource().gameWheelCircle1,
+                width: width,
+              ),
+            ),
             _rotationTransition(width),
             AppLocalImage(
               path: AppResource().gameWheelCenter,
@@ -101,18 +101,6 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
     );
   }
 
-  _bgWidget(double width) {
-    return AppStack(
-      alignment: Alignment.center,
-      children: [
-        AppLocalImage(
-          path: AppResource().gameWheelCircle1,
-          width: width,
-        ),
-      ],
-    );
-  }
-
   Widget _rotationTransition(double width) {
     return RotationTransition(
       turns: Tween(begin: 0.0, end: 5.0).animate(
@@ -122,23 +110,20 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
         ),
       ),
       // turns: _animation,
-      child: Transform.rotate(
-        angle: angle * -(3.141592653589793 / 180), // 将角度转换为弧度
-        child: Center(
-          child: AppStack(
-            alignment: Alignment.center,
-            children: [
-              AppLocalImage(
-                path: AppResource().gameWheelInnerCircle1,
-                width: width - 35.5 * 2.w,
-              ),
-              CustomPaint(
-                size: Size(width - 35.5 * 2.w, width - 35.5 * 2.w),
-                painter: SpinWheelPainter(
-                    titles: titles, images: _images, prices: prices),
-              )
-            ],
-          ),
+      child: Center(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            AppLocalImage(
+              path: AppResource().gameWheelInnerCircle1,
+              width: width - 35.w * 2,
+            ),
+            CustomPaint(
+              size: Size(width - 35.5 * 2.w, width - 35.5 * 2.w),
+              painter: SpinWheelPainter(
+                  paoBgImg: paoBgImg!, images: widget.images, prices: widget.prices),
+            )
+          ],
         ),
       ),
     );
@@ -152,12 +137,12 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
 }
 
 class SpinWheelPainter extends CustomPainter {
-  List<String> titles;
+  ui.Image paoBgImg;
   List<ui.Image> images;
   List<String> prices;
 
   SpinWheelPainter(
-      {required this.titles, required this.images, required this.prices});
+      {required this.paoBgImg, required this.images, required this.prices});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -167,24 +152,27 @@ class SpinWheelPainter extends CustomPainter {
     final double centerX = size.width / 2;
     final double centerY = size.height / 2;
 
-    final int numSectors = titles.length; // 扇形数量
+    final int numSectors = prices.length; // 扇形数量
     final double sectorAngle = 2 * pi / numSectors; // 每个扇形的角度
 
-    TextStyle textStyle = const TextStyle(
-      color: Colors.red,
-      fontSize: 12,
+    TextStyle textStyle = TextStyle(
+      color: Colors.white,
+      fontSize: 11.sp,
     );
 
-    const double startAngle = 197 * pi / 180; // 15度的弧度值
+    //1度
+    const double oneAngle = pi / 180;
+    const double startAngle = -pi / 2 - oneAngle * 2; // -90 度就在最上面
 
-    for (int i = 0; i < titles.length; i++) {
-      final double currentStartAngle = startAngle + i * sectorAngle + 1;
+    for (int i = 0; i < prices.length; i++) {
+      final double currentStartAngle = startAngle + i * sectorAngle;
       final double currentSweepAngle = sectorAngle;
       paint.color = Colors.transparent; // 循环使用颜色数组
-      // i % 2 == 0
-      //     ? Colors.blue
-      //     : const Color.fromRGBO(251, 232, 192, 1)
+      // paint.color =
+      //     i % 2 == 0 ? Colors.blue : const Color.fromRGBO(251, 232, 192, 1);
+
       canvas.drawArc(
+        //center 中心点  radius 半径
         Rect.fromCircle(center: Offset(centerX, centerY), radius: radius),
         currentStartAngle,
         currentSweepAngle,
@@ -198,15 +186,35 @@ class SpinWheelPainter extends CustomPainter {
       canvas
           .rotate(currentStartAngle + currentSweepAngle / 2 + pi / 2); // 旋转45度
       canvas.translate(-centerX, -centerY);
-      double img_width = 40;
+
+      ///图片
+      double imgWidth = 50.w;
+      double imgHeight = 55.w;
+      //气泡背景图
+      final imageRect = Rect.fromLTWH(
+        centerX - imgWidth / 2,
+        centerY - radius * 0.7 - imgHeight + 12.w,
+        imgWidth,
+        imgHeight,
+      );
+      paintImage(
+        canvas: canvas,
+        rect: imageRect,
+        image: paoBgImg,
+        fit: BoxFit.fill,
+        alignment: Alignment.center,
+        repeat: ImageRepeat.noRepeat,
+        flipHorizontally: false,
+        filterQuality: FilterQuality.low,
+      );
+
       if (images.isNotEmpty) {
         final imageRect = Rect.fromLTWH(
-          centerX - img_width / 2,
-          centerY - radius * 0.7 - img_width,
-          img_width,
-          img_width,
+          centerX - imgWidth / 2,
+          centerY - radius * 0.7 - imgHeight + 12.w,
+          imgWidth,
+          imgHeight,
         );
-
         paintImage(
           canvas: canvas,
           rect: imageRect,
@@ -219,28 +227,25 @@ class SpinWheelPainter extends CustomPainter {
         );
       }
 
-      // 添加文字
-      final String text = titles[i];
-      final TextPainter textPainter = TextPainter(
-        text: TextSpan(
-          text: text,
-          style: textStyle,
-        ),
-        textAlign: TextAlign.center,
-        textDirection: TextDirection.ltr,
-      );
+      // ///名称
+      // final String text = titles[i];
+      // final TextPainter textPainter = TextPainter(
+      //   text: TextSpan(
+      //     text: text,
+      //     style: textStyle,
+      //   ),
+      //   textAlign: TextAlign.center,
+      //   textDirection: TextDirection.ltr,
+      // );
+      // textPainter.layout();
+      // // 计算文字位置
+      // final double textX = centerX - textPainter.width / 2;
+      // final double textY = centerY - radius * 0.6;
+      // // 绘制文字
+      // textPainter.paint(canvas, Offset(textX, textY));
 
-      textPainter.layout();
-
-      // 计算文字位置
-      final double textX = centerX - textPainter.width / 2;
-      final double textY = centerY - radius * 0.6;
-
-      // 绘制文字
-      textPainter.paint(canvas, Offset(textX, textY));
-
+      ///价格
       final String text1 = prices[i];
-
       final TextPainter priceTextPainter = TextPainter(
         text: TextSpan(
           text: text1,
@@ -249,17 +254,14 @@ class SpinWheelPainter extends CustomPainter {
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr,
       );
-
       priceTextPainter.layout();
-
       // 计算文字位置
       final double priceTextX = centerX - priceTextPainter.width / 2;
-      final double priceTextY = centerY - radius * 0.5;
-
+      final double priceTextY = centerY - radius * 0.6;
       // 绘制文字
       priceTextPainter.paint(canvas, Offset(priceTextX, priceTextY));
-
-      canvas.restore(); // 恢复画布状态
+      // 恢复画布状态
+      canvas.restore();
     }
   }
 

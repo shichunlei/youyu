@@ -4,16 +4,24 @@ import 'package:youyu/config/resource.dart';
 import 'package:youyu/modules/live/game/wheel/index/widget/wheel_ani_widget.dart';
 import 'package:youyu/modules/live/game/wheel/index/widget/wheel_coin_widget.dart';
 import 'package:youyu/modules/live/game/wheel/index/widget/wheel_nav_widget.dart';
-import 'package:youyu/services/live/live_service.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
-
+import 'package:youyu/widgets/gift/model/common_gift_pop_model.dart';
+import 'dart:ui' as ui;
 import 'wheel_game_view_logic.dart';
 import 'widget/wheel_turn_widget.dart';
 
 class WheelGameViewPage extends StatefulWidget {
-  WheelGameViewPage({Key? key}) : super(key: key);
+  WheelGameViewPage(
+      {Key? key,
+      required this.sendModel,
+      required this.images,
+      required this.prices})
+      : super(key: key);
+  final CommonGiftSendModel sendModel;
+  final List<ui.Image> images;
+  final List<String> prices;
 
   @override
   State<WheelGameViewPage> createState() => _WheelGameViewPageState();
@@ -85,7 +93,12 @@ class _WheelGameViewPageState extends State<WheelGameViewPage>
     return AppColumn(
       margin: EdgeInsets.only(top: 18.w),
       children: [
-        Expanded(child: WheelTurnWidget()),
+        Expanded(
+            child: WheelTurnWidget(
+          images: widget.images,
+          prices: widget.prices,
+        )),
+
         ///底部
         Obx(() => AppRow(
               padding: EdgeInsets.symmetric(horizontal: 18.w),

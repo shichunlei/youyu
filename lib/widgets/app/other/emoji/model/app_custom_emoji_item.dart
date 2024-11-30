@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'app_custom_emoji_category_type.dart';
-
 /// A class to store data for each individual emoji
 @immutable
 class AppCustomEmojiItem {

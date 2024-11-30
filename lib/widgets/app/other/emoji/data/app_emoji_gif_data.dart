@@ -1,4 +1,3 @@
-import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_category_type.dart';
 import '../model/app_custom_emoji_item.dart';
 
 class AppEmojiGifData {

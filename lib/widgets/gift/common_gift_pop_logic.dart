@@ -153,8 +153,9 @@ class CommonGiftPopLogic extends AppBaseController {
     _giftTypeId = giftTypeId;
     if (gift?.id == AppConfig.gameWheelId) {
       if (isShowUserList && selectedUsers.isEmpty) {
-        ToastUtils.show("请选择用户");
-        return;
+        //TODO:test
+        // ToastUtils.show("请选择用户");
+        // return;
       }
       CommonGiftSendModel sendModel = CommonGiftSendModel(
           gift: _curGift!,

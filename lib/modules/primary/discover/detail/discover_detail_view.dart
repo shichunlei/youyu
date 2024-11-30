@@ -1,6 +1,4 @@
 import 'package:youyu/utils/screen_utils.dart';
-import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_item.dart';
-
 import 'package:youyu/widgets/discover/discover_item.dart';
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/controllers/dynamic_controller.dart';

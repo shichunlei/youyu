@@ -4,7 +4,6 @@ import 'package:flutter/src/material/tabs.dart';
 import 'package:gif/gif.dart';
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/utils/screen_utils.dart';
-import 'package:youyu/widgets/app/image/app_local_image.dart';
 import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_category_type.dart';
 import 'package:youyu/widgets/app/other/emoji/view/app_emoji_sub_view.dart';
 import '../../model/app_custom_emoji_category.dart';

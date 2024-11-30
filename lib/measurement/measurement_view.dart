@@ -17,12 +17,12 @@ class MeasurementPage extends StatelessWidget {
       ),
       child: ListView(
         children: [
-          testItem("转盘", () {
-            Get.bottomSheet(
-              WheelGameViewPage(),
-              isScrollControlled: true,
-            );
-          }),
+          // testItem("转盘", () {
+          //   Get.bottomSheet(
+          //     WheelGameViewPage(),
+          //     isScrollControlled: true,
+          //   );
+          // }),
         ],
       ),
     );
