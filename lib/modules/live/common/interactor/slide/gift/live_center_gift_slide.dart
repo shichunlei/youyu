@@ -33,7 +33,7 @@ class LiveCenterGiftSlideState extends State<LiveCenterGiftSlide>
   late Animation<Offset> _animationOne;
   late Animation<double> _animationTwo;
   bool isFirstAniEnd = false;
-  bool isEnd = false;
+  bool isTwoEnd = false;
   Timer? _endTimer;
 
   //总礼物数量放在这里
@@ -49,7 +49,7 @@ class LiveCenterGiftSlideState extends State<LiveCenterGiftSlide>
         duration: const Duration(milliseconds: 500), vsync: this);
     //第二个动画：消失动画
     rollController2 = AnimationController(
-        duration: const Duration(milliseconds: 150), vsync: this);
+        duration: const Duration(milliseconds: 120), vsync: this);
     _animationOne = Tween(begin: const Offset(-2, 0), end: const Offset(0, 0))
         .animate(rollController);
 
@@ -61,7 +61,7 @@ class LiveCenterGiftSlideState extends State<LiveCenterGiftSlide>
         isFirstAniEnd = true;
         _endTimer = Timer(const Duration(milliseconds: 1100), () {
           if (mounted) {
-            isEnd = true;
+            isTwoEnd = true;
             setState(() {
               rollController2.forward();
             });
@@ -100,23 +100,41 @@ class LiveCenterGiftSlideState extends State<LiveCenterGiftSlide>
     );
   }
 
-  addCount(LiveGiftMsg? newMsg, Function(int allGiftCount) onAddCount) {
+  addCount(LiveGiftMsg? newMsg,int position, Function(int allGiftCount,int position) onAddCount) {
     ///设置新的数量
     _allGiftCount = _allGiftCount + (newMsg?.gift?.count ?? 0);
-    if (newMsg != null && !isEnd) {
+    //判断是否消失动画
+    if (newMsg != null && !isTwoEnd) {
       if (isFirstAniEnd) {
-        onAddCount(_allGiftCount);
+        onAddCount(_allGiftCount,position);
         _endTimer?.cancel();
-        _endTimer = Timer(const Duration(seconds: 4), () {
+        _endTimer = Timer(const Duration(milliseconds: 1100), () {
           if (mounted) {
-            isEnd = true;
+            isTwoEnd = true;
             setState(() {
               rollController2.forward();
             });
           }
         });
       } else {
-        onAddCount(_allGiftCount);
+        onAddCount(_allGiftCount,position);
+      }
+    }
+  }
+
+  forceEnd(LiveGiftMsg? newMsg) {
+    ///设置新的数量
+    if (newMsg != null && !isTwoEnd) {
+      if (isFirstAniEnd) {
+        _endTimer?.cancel();
+        _endTimer = Timer(const Duration(milliseconds: 1), () {
+          if (mounted) {
+            isTwoEnd = true;
+            setState(() {
+              rollController2.forward();
+            });
+          }
+        });
       }
     }
   }

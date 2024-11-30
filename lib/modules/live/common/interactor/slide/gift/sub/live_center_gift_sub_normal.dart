@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/config/theme.dart';
@@ -11,9 +12,7 @@ import '../live_center_gift_slide.dart';
 
 class LiveCenterGiftSubNormal extends StatefulWidget {
   const LiveCenterGiftSubNormal(
-      {super.key,
-      required this.model,
-      required this.allGiftCount});
+      {super.key, required this.model, required this.allGiftCount});
 
   final int allGiftCount;
   final LiveMessageModel<LiveGiftMsg> model;
@@ -34,19 +33,22 @@ class LiveCenterGiftSubNormalState extends State<LiveCenterGiftSubNormal>
   bool _firstAniEnd = false;
   bool twoAniEnd = true;
 
+  var allGiftCount = 0.obs;
+
   @override
   void initState() {
     super.initState();
+    allGiftCount.value = widget.allGiftCount;
     //放大
     _scaleAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 250),
     );
     _scaleAni = Tween(begin: 1.0, end: 1.7).animate(_scaleAnimationController);
     //缩小
     _scaleAnimationController2 = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 180),
     );
     _scaleAni2 = Tween(begin: 1.7, end: 1.0).animate(_scaleAnimationController);
 
@@ -54,6 +56,7 @@ class LiveCenterGiftSubNormalState extends State<LiveCenterGiftSubNormal>
     _scaleAnimationController.addListener(() {
       if (_scaleAni.isCompleted) {
         _firstAniEnd = true;
+        _scaleAnimationController2.reset();
         _scaleAnimationController2.forward();
       }
     });
@@ -68,9 +71,7 @@ class LiveCenterGiftSubNormalState extends State<LiveCenterGiftSubNormal>
 
   @override
   Widget build(BuildContext context) {
-    if (_scaleAni.isCompleted) {
-      _scaleAnimationController.forward();
-    }
+
     return Container(
       margin: EdgeInsets.only(left: 12.w, right: 12.w),
       alignment: Alignment.centerLeft,
@@ -120,8 +121,7 @@ class LiveCenterGiftSubNormalState extends State<LiveCenterGiftSubNormal>
                       TextSpan(
                           text: widget.model.data?.receiver?.nickname ?? "",
                           style: AppTheme().textStyle(
-                              color: AppTheme.colorMain,
-                              fontSize: 12.sp))
+                              color: AppTheme.colorMain, fontSize: 12.sp))
                     ],
                   )),
                 ],
@@ -141,12 +141,12 @@ class LiveCenterGiftSubNormalState extends State<LiveCenterGiftSubNormal>
             Flexible(
                 child: ScaleTransition(
                     scale: _firstAniEnd ? _scaleAni2 : _scaleAni,
-                    child: Text('x${widget.allGiftCount}',
+                    child: Obx(() => Text('x${allGiftCount.value}',
                         style: AppTheme().textStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18.sp,
-                            fontFamily: AppResource().bdt.name,
-                            color: const Color(0xFFFFBB00))))),
+                            fontFamily: AppResource().nunito.name,
+                            color: const Color(0xFFFFBB00)))))),
             SizedBox(
               width: 8.w,
             ),
@@ -154,6 +154,18 @@ class LiveCenterGiftSubNormalState extends State<LiveCenterGiftSubNormal>
         ),
       ),
     );
+  }
+
+  updateCount(int count) {
+    allGiftCount.value = count;
+    if (twoAniEnd == true) {
+      _firstAniEnd = false;
+      twoAniEnd = false;
+      setState(() {
+        _scaleAnimationController.reset();
+        _scaleAnimationController.forward();
+      });
+    }
   }
 
   @override

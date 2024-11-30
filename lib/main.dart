@@ -20,6 +20,7 @@ import 'package:youyu/controllers/gift_controller.dart';
 import 'package:youyu/controllers/user/user_controller.dart';
 import 'package:youyu/widgets/app/app_system_style.dart';
 import 'package:youyu/widgets/page_life_state.dart';
+import 'config/env.dart';
 import 'router/router.dart';
 
 Future<void> main() async {
@@ -88,14 +89,29 @@ class _MyAppState extends State<MyApp> {
                 systemNavigationBarColor: AppTheme.colorNavBar,
                 statusBarIconBrightness: Brightness.light,
               ),
-              child: AppKeyboardDismiss(
-                child: FloatController.to.liveFloat(child: child!),
-              ),
+              child: _appIndex(child),
             ),
           ),
         );
       },
     );
+  }
+
+  _appIndex(Widget? child) {
+    if (EvnConfig.appFlag == FlagValue.debug) {
+      return Stack(
+        children: [
+          AppKeyboardDismiss(
+            child: FloatController.to.liveFloat(child: child!),
+          ),
+          FloatController.to.testFloat()
+        ],
+      );
+    } else {
+      return AppKeyboardDismiss(
+        child: FloatController.to.liveFloat(child: child!),
+      );
+    }
   }
 }
 

@@ -1,3 +1,5 @@
+import 'package:youyu/measurement/measurement_binding.dart';
+import 'package:youyu/measurement/measurement_view.dart';
 import 'package:youyu/modules/index/index_binding.dart';
 import 'package:youyu/modules/index/index_view.dart';
 import 'package:youyu/modules/launch/launch_binding.dart';
@@ -65,10 +67,20 @@ class AppRouter {
     transition: Transition.fadeIn,
   );
 
+  ///测试页面
+  GetPage testRoute = GetPage(
+    name: '/test',
+    bindings: [
+      MeasurementBinding(),
+    ],
+    page: () => const MeasurementPage(),
+  );
+
   List<GetPage> routes() {
     return [
       initialRoute,
       indexRoute,
+      testRoute,
       //login
       loginPages.loginIndexRoute,
       loginPages.loginAccountRoute,

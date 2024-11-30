@@ -1,3 +1,4 @@
+import 'package:youyu/config/config.dart';
 import 'package:youyu/utils/toast_utils.dart';
 import 'package:youyu/models/localmodel/tab_model.dart';
 import 'package:youyu/widgets/gift/sheet/common_gift_custom_count.dart';
@@ -150,6 +151,20 @@ class CommonGiftPopLogic extends AppBaseController {
   updateGiftInfo(Gift? gift, int giftTypeId) {
     _curGift = gift;
     _giftTypeId = giftTypeId;
+    if (gift?.id == AppConfig.gameWheelId) {
+      if (isShowUserList && selectedUsers.isEmpty) {
+        ToastUtils.show("请选择用户");
+        return;
+      }
+      CommonGiftSendModel sendModel = CommonGiftSendModel(
+          gift: _curGift!,
+          giftCount: giftCount.value,
+          giftTypeId: _giftTypeId,
+          roomId: roomId,
+          receiver: receiver);
+       return sendModel;
+    }
+    return null;
   }
 
   ///赠送礼物
@@ -169,7 +184,7 @@ class CommonGiftPopLogic extends AppBaseController {
       sendModel.selUserPosInfo = [];
       for (var userId in selectedUsers) {
         GiftUserPositionInfo userInfo =
-            giftUserList.firstWhere((element) => element.user.id == userId);
+        giftUserList.firstWhere((element) => element.user.id == userId);
         sendModel.selUserPosInfo?.add(userInfo);
       }
       return sendModel;

@@ -378,4 +378,7 @@ class AppApi {
 
   //退出公共
   static const String leaveConferenceUrl = "/user/exitUnion";
+
+  ///游戏相关
+  static const String wheelGameUrl = "/common/turntableInfo";
 }

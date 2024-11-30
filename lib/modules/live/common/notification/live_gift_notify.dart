@@ -70,7 +70,7 @@ class LiveGiftNotify extends LiveNotificationDispatch with AsyncDownListener {
       height: 37.h,
       onFetchNewMsg: () {
         //获取最新的一条
-        return _giftCacheSlideQue.lastOrNull;
+        return _giftCacheSlideQue.firstOrNull;
       },
       onClickItem: () {
         Get.toNamed(AppRouter().livePages.liveGiftNoticeRoute.name,
@@ -127,29 +127,18 @@ class LiveGiftNotify extends LiveNotificationDispatch with AsyncDownListener {
   ///继续处理gift漂屏
   continueGiftScreen() async {
     _playTimer?.cancel();
-    _playTimer = Timer(const Duration(milliseconds: 10), () {
+    _playTimer = Timer(const Duration(milliseconds: 5), () {
       ///根据展示的总数量
       for (int i = 0; i < _subWidgetSlideList.length; i++) {
-        LiveMessageModel<LiveGiftMsg>? model = _giftSlideQue.lastOrNull;
-        ///判断数量增加
-        if (model != null && _equalSameGiftDataWithCount(
-                _subWidgetSlideList[i].value?.model.data, model.data)) {
 
-          _subWidgetSlideKeyList[i].currentState?.addCount(model.data,
-              (allGiftCount) {
-            //更新数量
-            if ((_subWidgetSlideList[i].value?.key
-                        as GlobalKey<LiveCenterGiftSubNormalState>)
-                    .currentState
-                    ?.twoAniEnd ==
-                true) {
-              _subWidgetSlideList[i].value = _createSubWidget(
-                  LiveMessageModel(
-                      isManager: false, type: model.type, data: model.data),
-                  allGiftCount);
-            }
+        LiveMessageModel<LiveGiftMsg>? model = _giftSlideQue.firstOrNull;
+        ///判断相同的数量增加
+        if (model != null && _equalSameGiftDataWithCount(_subWidgetSlideList[i].value?.model.data, model.data)) {
+          _subWidgetSlideKeyList[i].currentState?.addCount(model.data,i, (allGiftCount,position) {
+            //数字变化完成之后更新数量
+            (_subWidgetSlideList[position].value?.key as GlobalKey<LiveCenterGiftSubNormalState>).currentState?.updateCount(allGiftCount);
           });
-          _giftSlideQue.removeLast();
+          _giftSlideQue.removeFirst();
           continue;
         }
 
@@ -164,13 +153,13 @@ class LiveGiftNotify extends LiveNotificationDispatch with AsyncDownListener {
               _createSubWidget(model, model?.data?.gift?.count ?? 0);
           if (subWidget != null) {
             _subWidgetSlideList[i].value = subWidget;
-            _giftSlideQue.removeLast();
+            _giftSlideQue.removeFirst();
             continue;
           }
+        } else {
+          _subWidgetSlideKeyList[i].currentState?.forceEnd(model?.data);
         }
       }
-
-
       _judgmentShow();
     });
   }
@@ -287,7 +276,7 @@ class LiveGiftNotify extends LiveNotificationDispatch with AsyncDownListener {
 
   _continueGiftBigAni() async {
     if (_bigAniFile.value == null) {
-      File? bigAniFile = _bigAniQue.lastOrNull;
+      File? bigAniFile = _bigAniQue.removeFirst();
       if (bigAniFile != null) {
         _bigAniFile.value = bigAniFile;
         final videoItem = await SVGAParser.shared
@@ -297,7 +286,6 @@ class LiveGiftNotify extends LiveNotificationDispatch with AsyncDownListener {
           svgPlayer.setAudioSource(AudioSource.uri(Uri.dataFromBytes(result!)));
           svgPlayer.play();
         }
-        _bigAniQue.removeLast();
       }
     }
   }

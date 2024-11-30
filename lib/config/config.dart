@@ -43,4 +43,9 @@ class AppConfig {
 
   static const String aliKeyAndroid =
       '+/KU2J9Mv2EfridLxWLc+Gj+JiD3MMlPFfuNjrmfIC3okorQ+9tVWmmtvGzj7RVnYPFSuNrbwG+2kjlWM8E90UVXXgAV7pNeGWiq0McKRKMc2MpTWR0+se8xknz+lTS9zxoC/QpynxXESv9xWYGEuJgLQe3ErygLPUxLe/nrsg7U4x8CJAU3mNmobCw9gTpoaMNYMfrpXSJB21ykik1v+3y14l1UbASLCbx7RmSE03SXbl/ZsXObuJUqUJIojcyW/+owZ5lYO28+HyII5RUsmVNPmBqrtDpRjL6MUmHnWPE=';
+
+
+  ///游戏id
+  //转盘游戏
+  static const int gameWheelId = 254;
 }

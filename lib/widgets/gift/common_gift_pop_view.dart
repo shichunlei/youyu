@@ -29,6 +29,7 @@ class CommonGiftPopPage extends StatefulWidget {
     this.receiver,
     required this.isSeatUsers,
     required this.onSend,
+     this.onGame,
   }) : super(key: key);
 
   ///直播间使用
@@ -48,6 +49,8 @@ class CommonGiftPopPage extends StatefulWidget {
   final UserInfo? receiver;
 
   final Function(CommonGiftSendModel? model) onSend;
+
+  final Function(CommonGiftSendModel model)? onGame;
 
   @override
   State<CommonGiftPopPage> createState() => _CommonGiftPopPageState();
@@ -268,7 +271,13 @@ class _CommonGiftPopPageState extends State<CommonGiftPopPage>
                     tabIndex: index,
                     tab: e,
                     onTap: (Gift gift, int giftTypeId) {
-                      logic.updateGiftInfo(gift, giftTypeId);
+                      CommonGiftSendModel? sendModel = logic.updateGiftInfo(gift, giftTypeId);
+                      if (sendModel != null) {
+                        //TODO:点击了游戏
+                        if (widget.onGame != null) {
+                          widget.onGame!(sendModel);
+                        }
+                      }
                     },
                   );
                 }).toList()),

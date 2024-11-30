@@ -432,6 +432,7 @@ class LiveIndexNotification extends LiveNotification
       //3.拿到子列表
       List<Gift> childList = tImModel.data?.gift?.childList ?? [];
       //4.遍历发送几x几
+      LiveMessageModel<LiveGiftMsg>? maxGiftModel = null;
       for (var element in childList) {
         IMCustomMessageModel<IMGiftModel> giftImModel = IMCustomMessageModel(
             userInfo: tImModel.userInfo,
@@ -448,8 +449,17 @@ class LiveIndexNotification extends LiveNotification
                 sender: giftImModel.userInfo,
                 receiver: giftImModel.data?.receiver,
                 gift: giftImModel.data?.gift));
-        //5.礼物动画相关
-        giftSlideNotify.insertGiftModel(giftModel);
+        if (maxGiftModel == null) {
+          maxGiftModel = giftModel;
+        } else {
+          if (element.unitPrice > (maxGiftModel.data?.gift?.unitPrice ?? 0)) {
+            maxGiftModel = giftModel;
+          }
+        }
+      }
+      if (maxGiftModel != null) {
+        //5.礼物动画相关 (取最大的播放)
+        giftSlideNotify.insertGiftModel(maxGiftModel);
       }
       if (!isSend) {
         //4.播放礼物动效

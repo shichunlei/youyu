@@ -193,6 +193,7 @@ flutter:
     - assets/svga/
     - assets/live/
     - assets/gif/
+    - assets/game/wheel/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -228,5 +229,8 @@ flutter:
     - family: bdt
       fonts:
         - asset: fonts/bdt.ttf
+    - family: nunito
+      fonts:
+        - asset: fonts/nunito.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

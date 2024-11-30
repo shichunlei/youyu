@@ -1,7 +1,7 @@
 enum AppFontType {
   ys(name: "ys"),
-  bdt(name: "bdt");
-
+  bdt(name: "bdt"),
+  nunito(name:"nunito");
   const AppFontType({required this.name});
 
   final String name;
@@ -30,10 +30,16 @@ class AppResource {
     return 'assets/gif/$name.$format';
   }
 
+  static String _getGameWheel(String name, {String format = 'png'}) {
+    return 'assets/game/wheel/$name.$format';
+  }
+
   ///font
   AppFontType ys = AppFontType.ys;
 
   AppFontType bdt = AppFontType.bdt;
+
+  AppFontType nunito = AppFontType.nunito;
 
   ///common
   //启动图
@@ -583,4 +589,34 @@ class AppResource {
   String get msgOfficialNotice => _getCommon("ic_official_notice");
 
   String get msgOfficialSystem => _getCommon("ic_official_system");
+
+  ///游戏 - 转盘
+  String get gameWheelTab1 => _getGameWheel("ic_wheel_tab_1");
+  String get gameWheelTab2 => _getGameWheel("ic_wheel_tab_2");
+
+  String get gameWheelAniOpen => _getGameWheel("ic_wheel_ani_open");
+  String get gameWheelAniClose => _getGameWheel("ic_wheel_ani_close");
+  String get gameWheelBg => _getGameWheel("ic_wheel_bg");
+  String get gameWheelCoinBg => _getGameWheel("ic_wheel_coin_bg");
+  String get gameWheelRight => _getGameWheel("ic_wheel_right");
+  String get gameWheelCenter => _getGameWheel("ic_wheel_center");
+
+  String get gameWheelCircle1 => _getGameWheel("ic_wheel_circle_1");
+  String get gameWheelCircle2 => _getGameWheel("ic_wheel_circle_2");
+
+  String get gameWheelInnerCircle1 => _getGameWheel("ic_wheel_inner_circle_1");
+  String get gameWheelInnerCircle2 => _getGameWheel("ic_wheel_inner_circle_2");
+
+  String get gameWheelPao => _getGameWheel("ic_wheel_pao");
+  String get gameWheelRule => _getGameWheel("ic_wheel_rule");
+
+  String get gameWheelCoinLeft1 => _getGameWheel("ic_wheel_coin_left_1");
+  String get gameWheelCoinLeft2 => _getGameWheel("ic_wheel_coin_left_2");
+
+  String get gameWheelCoinCenter1 => _getGameWheel("ic_wheel_coin_center_1");
+  String get gameWheelCoinCenter2 => _getGameWheel("ic_wheel_coin_center_2");
+
+  String get gameWheelCoinRight1 => _getGameWheel("ic_wheel_coin_right_1");
+  String get gameWheelCoinRight2 => _getGameWheel("ic_wheel_coin_right_2");
+
 }

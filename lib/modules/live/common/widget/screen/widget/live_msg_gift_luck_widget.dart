@@ -150,10 +150,29 @@ class LiveMsgLuckGiftWidget extends StatelessWidget {
       list.add(
         // ${gift.name}(${gift.unitPrice})
         TextSpan(
+          text: " ${gift.count ?? 0}个",
+          style: TextStyle(
+            fontSize: 12.sp,
+            color: AppTheme.colorMain,
+          ),
+        ),
+      );
+      list.add(
+        // ${gift.name}(${gift.unitPrice})
+        TextSpan(
           text: gift.name,
           style: TextStyle(
             fontSize: 12.sp,
             color: Colors.white,
+          ),
+        ),
+      );
+      list.add(
+        TextSpan(
+          text: "(${gift.unitPrice})",
+          style: TextStyle(
+            fontSize: 12.sp,
+            color: AppTheme.colorMain,
           ),
         ),
       );
@@ -167,20 +186,11 @@ class LiveMsgLuckGiftWidget extends StatelessWidget {
           ),
         ),
       );
-      list.add(
-        // ${gift.name}(${gift.unitPrice})
-        TextSpan(
-          text: " x${gift.count ?? 0}",
-          style: TextStyle(
-            fontSize: 12.sp,
-            color: const Color(0xFF9E9E9E),
-          ),
-        ),
-      );
+
       if (i < giftList.length - 1) {
         list.add(
           TextSpan(
-            text: "、",
+            text: "，",
             style: TextStyle(
               fontSize: 12.sp,
               color: const Color(0xFF9E9E9E),

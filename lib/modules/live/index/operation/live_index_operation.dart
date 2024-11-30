@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:youyu/config/config.dart';
 import 'package:youyu/modules/live/common/interactor/pop/gift/give/live_pop_give_gift_index.dart';
 import 'package:youyu/modules/live/common/interactor/pop/headline/live_pop_world_msg.dart';
 import 'package:youyu/modules/live/common/interactor/pop/link/user/live_link_user_widget.dart';
 import 'package:youyu/modules/live/common/interactor/pop/relation/live_pop_relation_index.dart';
 import 'package:youyu/modules/live/common/model/mic_seat_state.dart';
+import 'package:youyu/modules/live/game/wheel/index/wheel_game_view_view.dart';
 import 'package:youyu/modules/live/index/live_index_logic.dart';
 import 'package:youyu/utils/toast_utils.dart';
 import 'package:youyu/controllers/user/user_controller.dart';
@@ -651,6 +653,19 @@ class LiveIndexOperation {
         });
   }
 
+  /************** 游戏相关 *******************/
+
+  //
+  onOperateWheelGame(CommonGiftSendModel model) {
+    LiveIndexLogic.to.showCommit();
+    LiveIndexLogic.to.request(AppApi.wheelGameUrl).then((value) {
+      Get.bottomSheet(
+        WheelGameViewPage(),
+        isScrollControlled: true,
+      );
+    });
+  }
+
   /************** 底部区域点击 *******************/
 
   ///静音
@@ -711,6 +726,15 @@ class LiveIndexOperation {
               isShowGiftPop = false;
               LiveIndexLogic.to.notification?.sendMsg
                   .sendGift(model, isSupportGift);
+            },
+            //点击游戏
+            onGame: (CommonGiftSendModel model) {
+              Get.back();
+              switch (model.gift.id) {
+                case AppConfig.gameWheelId:
+                  onOperateWheelGame(model);
+                  break;
+              }
             },
           );
         });
@@ -927,7 +951,6 @@ class LiveIndexOperation {
         });
     isShowEmoji = false;
   }
-
 
   ///关闭输入相关
   onOperateDismissInputAndEmoji() {
