@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youyu/config/resource.dart';
+import 'package:youyu/models/gift_game.dart';
 import 'package:youyu/modules/live/game/wheel/index/widget/wheel_ani_widget.dart';
 import 'package:youyu/modules/live/game/wheel/index/widget/wheel_coin_widget.dart';
 import 'package:youyu/modules/live/game/wheel/index/widget/wheel_nav_widget.dart';
@@ -8,20 +9,19 @@ import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
 import 'package:youyu/widgets/gift/model/common_gift_pop_model.dart';
-import 'dart:ui' as ui;
 import 'wheel_game_view_logic.dart';
 import 'widget/wheel_turn_widget.dart';
 
 class WheelGameViewPage extends StatefulWidget {
-  WheelGameViewPage(
-      {Key? key,
-      required this.sendModel,
-      required this.images,
-      required this.prices})
-      : super(key: key);
+  const WheelGameViewPage({
+    Key? key,
+    required this.sendModel,
+    required this.primaryModel,
+    required this.advancedModel,
+  }) : super(key: key);
   final CommonGiftSendModel sendModel;
-  final List<ui.Image> images;
-  final List<String> prices;
+  final GiftGame primaryModel;
+  final GiftGame advancedModel;
 
   @override
   State<WheelGameViewPage> createState() => _WheelGameViewPageState();
@@ -90,17 +90,18 @@ class _WheelGameViewPageState extends State<WheelGameViewPage>
 
   ///内容
   _content() {
-    return AppColumn(
-      margin: EdgeInsets.only(top: 18.w),
-      children: [
-        Expanded(
-            child: WheelTurnWidget(
-          images: widget.images,
-          prices: widget.prices,
-        )),
+    return Obx(() => AppColumn(
+          margin: EdgeInsets.only(top: 18.w),
+          children: [
+            Expanded(
+                child: WheelTurnWidget(
+              gameModel: logic.viewType.value == WheelGameViewType.primary
+                  ? widget.primaryModel
+                  : widget.advancedModel,
+            )),
 
-        ///底部
-        Obx(() => AppRow(
+            ///底部
+            AppRow(
               padding: EdgeInsets.symmetric(horizontal: 18.w),
               height: 69.h,
               children: [
@@ -132,11 +133,11 @@ class _WheelGameViewPageState extends State<WheelGameViewPage>
                           : AppResource().gameWheelCoinRight2),
                 )
               ],
-            )),
-        SizedBox(
-          height: 17.h,
-        ),
-      ],
-    );
+            ),
+            SizedBox(
+              height: 17.h,
+            ),
+          ],
+        ));
   }
 }

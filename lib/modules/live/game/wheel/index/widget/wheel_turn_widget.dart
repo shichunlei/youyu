@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:youyu/config/resource.dart';
+import 'package:youyu/models/gift_game.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'dart:ui' as ui;
 import 'dart:math';
@@ -10,11 +11,12 @@ import 'dart:typed_data';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
 
 class WheelTurnWidget extends StatefulWidget {
-  const WheelTurnWidget(
-      {super.key, required this.images, required this.prices});
+  const WheelTurnWidget({
+    super.key,
+    required this.gameModel,
+  });
 
-  final List<ui.Image> images;
-  final List<String> prices;
+  final GiftGame gameModel;
 
   @override
   State<WheelTurnWidget> createState() => _WheelTurnWidgetState();
@@ -26,6 +28,8 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
   late Animation<double> _animation;
 
   ui.Image? paoBgImg;
+  List<ui.Image> images = [];
+  List<String> prices = [];
   double angle = 0;
 
   @override
@@ -61,14 +65,14 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
 
   void drawClick() async {
     int res = Random().nextInt(8);
-    angle = res * 360 / widget.prices.length;
+    angle = res * 360 / prices.length;
     _controller.forward();
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.images.isEmpty) return Container();
+    if (images.isEmpty) return Container();
     double width = ScreenUtils.screenWidth - 28.w;
     return Material(
       color: Colors.transparent,
@@ -121,7 +125,9 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
             CustomPaint(
               size: Size(width - 35.5 * 2.w, width - 35.5 * 2.w),
               painter: SpinWheelPainter(
-                  paoBgImg: paoBgImg!, images: widget.images, prices: widget.prices),
+                  paoBgImg: paoBgImg!,
+                  images: images,
+                  prices: prices),
             )
           ],
         ),

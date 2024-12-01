@@ -116,7 +116,7 @@ class _CommonGiftPopSubPageState extends State<CommonGiftPopSubPage>
                           ? AppTheme.colorMain
                           : Colors.transparent,
                       onTap: () {
-                        logic.selectedGiftId.value = gift.id;
+                        logic.selectedGiftId.value = gift.id ?? 0;
                         widget.onTap(gift, widget.tab.id);
                       },
                       children: [

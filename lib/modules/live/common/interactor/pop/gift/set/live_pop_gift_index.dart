@@ -109,7 +109,7 @@ class LivePopGiftState extends State<LivePopGift>
               // height: 41.h,
               color: Colors.black.withOpacity(0.4),
               onTap: () {
-                logic.selectIndex.value = list[index]!.id;
+                logic.selectIndex.value = list[index]!.id ?? 0;
               },
               radius: 7.w,
               child: Column(

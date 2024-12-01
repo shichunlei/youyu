@@ -402,6 +402,7 @@ class _CommonGiftPopPageState extends State<CommonGiftPopPage>
 
   @override
   void dispose() {
+    tabController?.dispose();
     Get.delete<CommonGiftPopLogic>();
     super.dispose();
   }

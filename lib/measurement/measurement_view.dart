@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/live/game/wheel/index/wheel_game_view_view.dart';
 import 'package:youyu/widgets/app/app_page.dart';
 import 'package:youyu/widgets/app/app_top_bar.dart';
 import 'measurement_logic.dart';
@@ -17,12 +16,7 @@ class MeasurementPage extends StatelessWidget {
       ),
       child: ListView(
         children: [
-          // testItem("转盘", () {
-          //   Get.bottomSheet(
-          //     WheelGameViewPage(),
-          //     isScrollControlled: true,
-          //   );
-          // }),
+          testItem("转盘", () {}),
         ],
       ),
     );

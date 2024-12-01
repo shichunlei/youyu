@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youyu/config/config.dart';
+import 'package:youyu/models/gift_game.dart';
 import 'package:youyu/modules/live/common/interactor/pop/gift/give/live_pop_give_gift_index.dart';
 import 'package:youyu/modules/live/common/interactor/pop/headline/live_pop_world_msg.dart';
 import 'package:youyu/modules/live/common/interactor/pop/link/user/live_link_user_widget.dart';
@@ -655,19 +656,29 @@ class LiveIndexOperation {
 
   /************** 游戏相关 *******************/
 
-  //
-  onOperateWheelGame(CommonGiftSendModel model) {
-
+  onOperateWheelGame(CommonGiftSendModel model) async {
     LiveIndexLogic.to.showCommit();
     LiveIndexLogic.to.request(AppApi.wheelGameUrl).then((value) {
-      Get.bottomSheet(
-        WheelGameViewPage(
-          sendModel: model,
-          images: [],
-          prices: [],
-        ),
-        isScrollControlled: true,
-      );
+      List<dynamic> list = value.data;
+      GiftGame? primaryModel;
+      GiftGame? advancedModel;
+      for (Map<String, dynamic> map in list) {
+        GiftGame entity = GiftGame.fromJson(map);
+        if (entity.name == "初级转盘") {
+          primaryModel = entity;
+        } else if (entity.name == "高级转盘") {
+          advancedModel = entity;
+        }
+      }
+      if (primaryModel != null && advancedModel != null) {
+        Get.bottomSheet(
+          WheelGameViewPage(
+              sendModel: model,
+              primaryModel: primaryModel,
+              advancedModel: advancedModel),
+          isScrollControlled: true,
+        );
+      }
     });
   }
 
@@ -735,11 +746,13 @@ class LiveIndexOperation {
             //点击游戏
             onGame: (CommonGiftSendModel model) {
               Get.back();
-              switch (model.gift.id) {
-                case AppConfig.gameWheelId:
-                  onOperateWheelGame(model);
-                  break;
-              }
+              Future.delayed(const Duration(milliseconds: 10), () {
+                switch (model.gift.id) {
+                  case AppConfig.gameWheelId:
+                    onOperateWheelGame(model);
+                    break;
+                }
+              });
             },
           );
         });

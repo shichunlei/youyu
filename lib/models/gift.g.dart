@@ -9,7 +9,8 @@ part of 'gift.dart';
 Gift _$GiftFromJson(Map<String, dynamic> json) => Gift(
       id: json['id'] as int? ?? 0,
       name: json['name'] as String,
-      image: json['image'] as String,
+      image: json['image'] as String?,
+      img: json['img'] as String?,
       unitPrice: json['unit_price'] as int,
       playSvg: json['play_svg'] as int?,
       svg: json['svg'] as String?,
@@ -27,6 +28,7 @@ Map<String, dynamic> _$GiftToJson(Gift instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'image': instance.image,
+      'img':instance.img,
       'unit_price': instance.unitPrice,
       'play_svg': instance.playSvg,
       'svg': instance.svg,

@@ -47,7 +47,7 @@ class CommonGiftPopSubLogic extends AppBaseController {
 
       ///默认选中第一个
       if (giftList.isNotEmpty) {
-        selectedGiftId.value = giftList.first.first.id;
+        selectedGiftId.value = giftList.first.first.id ?? 0;
         onCallBack(giftList.first.first);
       }
       setSuccessType();

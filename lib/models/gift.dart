@@ -6,9 +6,10 @@ part 'gift.g.dart';
 
 @JsonSerializable()
 class Gift implements BaseModel {
-  final int id;
+  final int? id;
   final String name;
-  final String image;
+  String? image;
+  String? img;
 
   @JsonKey(name: 'unit_price')
   final int unitPrice;
@@ -28,18 +29,18 @@ class Gift implements BaseModel {
   @JsonKey(name: 'child_list')
   List<Gift>? childList;
 
-  Gift({
-    required this.id,
-    required this.name,
-    required this.image,
-    required this.unitPrice,
-    this.playSvg,
-    this.svg,
-    this.chat,
-    this.scrolling,
-    this.count,
-    this.childList
-  });
+  Gift(
+      {required this.id,
+      required this.name,
+      required this.unitPrice,
+      this.image,
+      this.img,
+      this.playSvg,
+      this.svg,
+      this.chat,
+      this.scrolling,
+      this.count,
+      this.childList});
 
   @override
   factory Gift.fromJson(Map<String, dynamic> json) => _$GiftFromJson(json);
