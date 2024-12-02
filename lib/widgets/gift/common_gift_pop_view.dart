@@ -379,7 +379,9 @@ class _CommonGiftPopPageState extends State<CommonGiftPopPage>
                   onTap: () async {
                     //发送礼物
                     CommonGiftSendModel? sendModel = await logic.onSendGift();
-                    widget.onSend(sendModel);
+                    if (sendModel != null) {
+                      widget.onSend(sendModel);
+                    }
                     // if (sendModel != null) {
                     //   Get.back(result: sendModel);
                     // }

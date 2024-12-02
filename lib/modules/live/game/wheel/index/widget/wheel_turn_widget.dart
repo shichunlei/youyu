@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:youyu/config/resource.dart';
-import 'package:youyu/models/gift_game.dart';
+import 'package:youyu/modules/live/game/wheel/index/wheel_game_view_logic.dart';
+import 'package:youyu/services/game/game_service.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'dart:ui' as ui;
 import 'dart:math';
@@ -13,24 +14,34 @@ import 'package:youyu/widgets/app/image/app_local_image.dart';
 class WheelTurnWidget extends StatefulWidget {
   const WheelTurnWidget({
     super.key,
-    required this.gameModel,
+    required this.images,
+    required this.prices,
+    required this.logic,
   });
 
-  final GiftGame gameModel;
+  final WheelGameViewLogic logic;
+  final List<ui.Image> images;
+  final List<String> prices;
 
   @override
-  State<WheelTurnWidget> createState() => _WheelTurnWidgetState();
+  State<WheelTurnWidget> createState() => WheelTurnWidgetState();
 }
 
-class _WheelTurnWidgetState extends State<WheelTurnWidget>
+class WheelTurnWidgetState extends State<WheelTurnWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
   ui.Image? paoBgImg;
-  List<ui.Image> images = [];
-  List<String> prices = [];
   double angle = 0;
+
+  int _prizeResult = 0;
+
+  double get _prizeResultPi {
+    if (_prizeResult == 0) return 0;
+    return pi / widget.prices.length +
+        _prizeResult * (pi / (widget.prices.length / 2));
+  }
 
   @override
   void initState() {
@@ -41,13 +52,14 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
 
   void initConfig() {
     _controller = AnimationController(
-      duration: const Duration(seconds: 3), // 定义动画持续时间
+      duration: const Duration(seconds: 4), // 定义动画持续时间
       vsync: this,
     );
     _animation = CurvedAnimation(parent: _controller, curve: Curves.decelerate);
     _animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _controller.reset(); // 重置动画
+        widget.logic.onStop();
       }
     });
   }
@@ -63,16 +75,17 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
     return decodeImageFromList(data.buffer.asUint8List());
   }
 
-  void drawClick() async {
-    int res = Random().nextInt(8);
-    angle = res * 360 / prices.length;
-    _controller.forward();
+  void drawClick(int prizeResult) async {
+    _prizeResult = prizeResult * -1;
+    if (GameService().isWheelGameAniOpen.value) {
+      _controller.forward(from: 0);
+    }
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    if (images.isEmpty) return Container();
+    if (widget.images.isEmpty) return Container();
     double width = ScreenUtils.screenWidth - 28.w;
     return Material(
       color: Colors.transparent,
@@ -84,21 +97,17 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Container(
-              padding: EdgeInsets.only(bottom: 4.5.w),
-              child: AppLocalImage(
-                path: AppResource().gameWheelCircle1,
-                width: width,
-              ),
-            ),
+            Obx(() => Container(
+                  padding: EdgeInsets.only(bottom: widget.logic.viewType.value == GameSubViewType.primary ? 4.5.w: 8.w),
+                  child: AppLocalImage(
+                    path: widget.logic.viewType.value == GameSubViewType.primary
+                        ? AppResource().gameWheelCircle1
+                        : AppResource().gameWheelCircle2,
+                    width: width,
+                  ),
+                )),
             _rotationTransition(width),
-            AppLocalImage(
-              path: AppResource().gameWheelCenter,
-              width: 140.w,
-              onTap: () {
-                drawClick();
-              },
-            )
+            AppLocalImage(path: AppResource().gameWheelCenter, width: 140.w)
           ],
         ),
       ),
@@ -106,33 +115,39 @@ class _WheelTurnWidgetState extends State<WheelTurnWidget>
   }
 
   Widget _rotationTransition(double width) {
-    return RotationTransition(
-      turns: Tween(begin: 0.0, end: 5.0).animate(
+    //1.0就是一圈
+    return paoBgImg != null ? RotationTransition(
+      turns: Tween(begin: 0.0, end: 8.0).animate(
         CurvedAnimation(
           parent: _controller,
           curve: Curves.ease,
         ),
       ),
       // turns: _animation,
-      child: Center(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            AppLocalImage(
-              path: AppResource().gameWheelInnerCircle1,
-              width: width - 35.w * 2,
-            ),
-            CustomPaint(
-              size: Size(width - 35.5 * 2.w, width - 35.5 * 2.w),
-              painter: SpinWheelPainter(
-                  paoBgImg: paoBgImg!,
-                  images: images,
-                  prices: prices),
-            )
-          ],
+      child: Transform.rotate(
+        angle: _prizeResultPi,
+        child: Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Obx(() => AppLocalImage(
+                    path: widget.logic.viewType.value == GameSubViewType.primary
+                        ? AppResource().gameWheelInnerCircle1
+                        : AppResource().gameWheelInnerCircle2,
+                    width: width - 35.w * 2,
+                  )),
+              CustomPaint(
+                size: Size(width - 35.5 * 2.w, width - 35.5 * 2.w),
+                painter: SpinWheelPainter(
+                    paoBgImg: paoBgImg!,
+                    images: widget.images,
+                    prices: widget.prices),
+              )
+            ],
+          ),
         ),
       ),
-    );
+    ) : SizedBox.shrink();
   }
 
   @override
@@ -215,9 +230,11 @@ class SpinWheelPainter extends CustomPainter {
       );
 
       if (images.isNotEmpty) {
+        double imgWidth = 35.w;
+        double imgHeight = 35.w;
         final imageRect = Rect.fromLTWH(
           centerX - imgWidth / 2,
-          centerY - radius * 0.7 - imgHeight + 12.w,
+          centerY - radius * 0.7 - imgHeight + 4.w,
           imgWidth,
           imgHeight,
         );

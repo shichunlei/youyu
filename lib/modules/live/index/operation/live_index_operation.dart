@@ -8,6 +8,7 @@ import 'package:youyu/modules/live/common/interactor/pop/relation/live_pop_relat
 import 'package:youyu/modules/live/common/model/mic_seat_state.dart';
 import 'package:youyu/modules/live/game/wheel/index/wheel_game_view_view.dart';
 import 'package:youyu/modules/live/index/live_index_logic.dart';
+import 'package:youyu/services/game/game_service.dart';
 import 'package:youyu/utils/toast_utils.dart';
 import 'package:youyu/controllers/user/user_controller.dart';
 import 'package:youyu/services/trtc/trtc_service.dart';
@@ -657,29 +658,35 @@ class LiveIndexOperation {
   /************** 游戏相关 *******************/
 
   onOperateWheelGame(CommonGiftSendModel model) async {
-    LiveIndexLogic.to.showCommit();
-    LiveIndexLogic.to.request(AppApi.wheelGameUrl).then((value) {
-      List<dynamic> list = value.data;
-      GiftGame? primaryModel;
-      GiftGame? advancedModel;
-      for (Map<String, dynamic> map in list) {
-        GiftGame entity = GiftGame.fromJson(map);
-        if (entity.name == "初级转盘") {
-          primaryModel = entity;
-        } else if (entity.name == "高级转盘") {
-          advancedModel = entity;
+    if (GameService().primaryModel != null &&
+        GameService().advancedModel != null) {
+      Get.bottomSheet(
+        WheelGameViewPage(
+          sendModel: model,
+          sendMsg: LiveIndexLogic.to.notification!.sendMsg,
+        ),
+        isScrollControlled: true,
+      );
+    } else {
+      LiveIndexLogic.to.showCommit();
+      LiveIndexLogic.to.request(AppApi.wheelGameUrl).then((value) {
+        List<dynamic> list = value.data;
+        for (Map<String, dynamic> map in list) {
+          GiftGame entity = GiftGame.fromJson(map);
+          if (entity.name == "初级转盘") {
+            GameService().primaryModel = entity;
+          } else if (entity.name == "高级转盘") {
+            GameService().advancedModel = entity;
+          }
         }
-      }
-      if (primaryModel != null && advancedModel != null) {
         Get.bottomSheet(
           WheelGameViewPage(
               sendModel: model,
-              primaryModel: primaryModel,
-              advancedModel: advancedModel),
+              sendMsg: LiveIndexLogic.to.notification!.sendMsg),
           isScrollControlled: true,
         );
-      }
-    });
+      });
+    }
   }
 
   /************** 底部区域点击 *******************/

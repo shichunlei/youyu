@@ -7,11 +7,14 @@ import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
 
 class WheelCoinWidget extends StatelessWidget {
-  const WheelCoinWidget({super.key});
+  const WheelCoinWidget({super.key, required this.onTap});
+
+  final GestureTapCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return AppStack(
+      onTap: onTap,
       alignment: Alignment.centerLeft,
       height: 86 / 2.h,
       children: [

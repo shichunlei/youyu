@@ -151,7 +151,7 @@ class GiftController extends AppBaseController {
   liveSendLuckyGift(
       CommonGiftSendModel? sendModel,
       Function(IMCustomMessageModel<IMGiftModel> model, bool isLast) onSend,
-      bool isSupportGift) async {
+      bool isSupportGift,Function() onError) async {
     if (sendModel != null) {
       // showCommit();
       try {
@@ -172,7 +172,6 @@ class GiftController extends AppBaseController {
               .toList()
               .join(",");
         }
-
         var value = await request(AppApi.liveGiftSendUrl, params: params);
         //更新用户信息
         UserController.to.updateMyInfo();
@@ -202,6 +201,7 @@ class GiftController extends AppBaseController {
         }
       } catch (e) {
         //...
+        onError();
       }
     }
   }

@@ -78,10 +78,6 @@ class LiveService extends AppBaseController {
   List<TabModel> liveClassList = [];
   List<String> liveClassNameList = [];
 
-  ///游戏相关
-  //转盘动画
-  var isWheelGameAniOpen = true.obs;
-
   ///获取分类列表
   fetchLiveClsList() async {
     if (liveClassNameList.isEmpty) {

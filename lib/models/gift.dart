@@ -6,7 +6,7 @@ part 'gift.g.dart';
 
 @JsonSerializable()
 class Gift implements BaseModel {
-  final int? id;
+   int? id;
   final String name;
   String? image;
   String? img;

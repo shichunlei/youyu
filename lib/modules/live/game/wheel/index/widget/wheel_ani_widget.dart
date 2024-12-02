@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youyu/config/resource.dart';
-import 'package:youyu/services/live/live_service.dart';
+import 'package:youyu/services/game/game_service.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
@@ -21,7 +21,7 @@ class WheelAniWidget extends StatelessWidget {
       width: 78.w,
       children: [
         Obx(() => AppLocalImage(
-              path: LiveService().isWheelGameAniOpen.value
+              path: GameService().isWheelGameAniOpen.value
                   ? AppResource().gameWheelAniOpen
                   : AppResource().gameWheelAniClose,
               width: 78.w,

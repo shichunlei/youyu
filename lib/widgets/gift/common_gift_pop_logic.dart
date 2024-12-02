@@ -151,11 +151,12 @@ class CommonGiftPopLogic extends AppBaseController {
   updateGiftInfo(Gift? gift, int giftTypeId) {
     _curGift = gift;
     _giftTypeId = giftTypeId;
+
+    ///判断是否是游戏
     if (gift?.id == AppConfig.gameWheelId) {
       if (isShowUserList && selectedUsers.isEmpty) {
-        //TODO:test
-        // ToastUtils.show("请选择用户");
-        // return;
+        ToastUtils.show("请选择用户");
+        return;
       }
       CommonGiftSendModel sendModel = CommonGiftSendModel(
           gift: _curGift!,
@@ -163,6 +164,13 @@ class CommonGiftPopLogic extends AppBaseController {
           giftTypeId: _giftTypeId,
           roomId: roomId,
           receiver: receiver);
+      //选择的用户
+      sendModel.selUserPosInfo = [];
+      for (var userId in selectedUsers) {
+        GiftUserPositionInfo userInfo =
+        giftUserList.firstWhere((element) => element.user.id == userId);
+        sendModel.selUserPosInfo?.add(userInfo);
+      }
        return sendModel;
     }
     return null;

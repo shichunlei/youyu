@@ -47,12 +47,12 @@ class CommonGiftSendModel {
 
   ///公用
   //礼物模型
-  final Gift gift;
+  Gift gift;
 
   //礼物类型id
   final int giftTypeId;
 
   //礼物的数量
-  final int giftCount;
+  int giftCount;
 
 }

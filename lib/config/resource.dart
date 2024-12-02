@@ -619,4 +619,11 @@ class AppResource {
   String get gameWheelCoinRight1 => _getGameWheel("ic_wheel_coin_right_1");
   String get gameWheelCoinRight2 => _getGameWheel("ic_wheel_coin_right_2");
 
+  String get gameWheelRuleBg => _getGameWheel("ic_wheel_rule_bg");
+
+  String get gameWheelCountBg => _getGameWheel("ic_wheel_count_bg");
+  String get gameWheelTaBg => _getGameWheel("ic_wheel_ta_bg");
+  String get gameWheelBtn => _getGameWheel("ic_wheel_btn");
+  String get gameWheelItemBg => _getGameWheel("ic_wheel_item_bg");
+
 }

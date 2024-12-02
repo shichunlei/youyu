@@ -144,7 +144,8 @@ class LiveIndexSendMsg {
   }
 
   /// 送礼物
-  sendGift(CommonGiftSendModel? sendModel, bool isSupportGift) async {
+  sendGift(CommonGiftSendModel? sendModel, bool isSupportGift,
+      {Function(IMCustomMessageModel<IMGiftModel>? model)? callBack}) async {
     if (sendModel?.giftTypeId == GiftController.ftId) {
       ///福袋礼物
       IMMsgType imMsgType = IMMsgType.luckyGift;
@@ -155,6 +156,9 @@ class LiveIndexSendMsg {
             priority: MessagePriorityEnum.V2TIM_PRIORITY_HIGH);
         if (sendMessageSuc != null && msg.data != null) {
           sendMessageSuc!(imMsgType, msg.data!);
+        }
+        if (callBack != null) {
+          callBack(model);
         }
         if (isLast) {
           //播放礼物动效
@@ -168,7 +172,12 @@ class LiveIndexSendMsg {
             }
           }
         }
-      }, isSupportGift);
+      }, isSupportGift, () {
+        //error
+            if (callBack != null) {
+              callBack(null);
+            }
+          });
     } else {
       ///普通礼物
       IMMsgType imMsgType = IMMsgType.gift;
