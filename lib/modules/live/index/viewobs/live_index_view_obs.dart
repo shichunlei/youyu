@@ -63,13 +63,6 @@ class LiveIndexViewObs {
   /// 在线用户
   RxList<UserInfo> onlineUserList = <UserInfo>[].obs;
 
-  LiveBaseViewObs() {
-    giftSlideTop.value = seatAllHeight +
-        ScreenUtils.navbarHeight +
-        ScreenUtils.statusBarHeight +
-        48.h +
-        38.h;
-  }
 
   onClose() {}
 }

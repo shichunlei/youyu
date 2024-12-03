@@ -79,6 +79,8 @@ class WheelTurnWidgetState extends State<WheelTurnWidget>
     _prizeResult = prizeResult * -1;
     if (GameService().isWheelGameAniOpen.value) {
       _controller.forward(from: 0);
+    } else {
+      widget.logic.onStop();
     }
     setState(() {});
   }

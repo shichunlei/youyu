@@ -134,7 +134,6 @@ class LiveIndexLogic extends AppBaseController
       isCloseScreen.value = true;
     }
     isMute = (roomInfoObs.value?.isMute == 1);
-
     ///进房记录
     _addLiveAccess();
   }
@@ -189,6 +188,10 @@ class LiveIndexLogic extends AppBaseController
     Future.delayed(const Duration(milliseconds: 100), () {
       onOnlineUserUpdateTimerStart();
     });
+
+    //14.2 礼物飘屏top
+    viewObs.giftSlideTop.value = viewObs.giftNormalSlideTop;
+
     //15.交友房获取邂逅信息
     getFriendInfo();
 

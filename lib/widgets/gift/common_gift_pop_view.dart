@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:youyu/config/config.dart';
 import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/widgets/gift/sub/common_gift_pop_sub_view.dart';
@@ -380,7 +381,13 @@ class _CommonGiftPopPageState extends State<CommonGiftPopPage>
                     //发送礼物
                     CommonGiftSendModel? sendModel = await logic.onSendGift();
                     if (sendModel != null) {
-                      widget.onSend(sendModel);
+                      if (sendModel.gift.id == AppConfig.gameWheelId) {
+                        if (widget.onGame != null) {
+                          widget.onGame!(sendModel);
+                        }
+                      } else {
+                        widget.onSend(sendModel);
+                      }
                     }
                     // if (sendModel != null) {
                     //   Get.back(result: sendModel);

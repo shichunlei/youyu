@@ -275,7 +275,7 @@ class LiveGiftNotify extends LiveNotificationDispatch with AsyncDownListener {
   }
 
   _continueGiftBigAni() async {
-    if (_bigAniFile.value == null) {
+    if (_bigAniFile.value == null && _bigAniQue.isNotEmpty) {
       File? bigAniFile = _bigAniQue.removeFirst();
       if (bigAniFile != null) {
         _bigAniFile.value = bigAniFile;

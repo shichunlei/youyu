@@ -78,10 +78,10 @@ class _WheelGameViewPageState extends State<WheelGameViewPage>
                 ),
 
                 ///动画开关
-                WheelAniWidget(
-                  margin: EdgeInsets.only(top: 6.h, left: 5.w),
-                  onTap: logic.openOrCloseAni,
-                )
+                // WheelAniWidget(
+                //   margin: EdgeInsets.only(top: 6.h, left: 5.w),
+                //   onTap: logic.openOrCloseAni,
+                // )
               ],
             )),
 

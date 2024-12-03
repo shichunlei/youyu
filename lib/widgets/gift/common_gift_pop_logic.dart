@@ -196,6 +196,7 @@ class CommonGiftPopLogic extends AppBaseController {
         giftUserList.firstWhere((element) => element.user.id == userId);
         sendModel.selUserPosInfo?.add(userInfo);
       }
+
       return sendModel;
     } else {
       ToastUtils.show("请选择礼物");

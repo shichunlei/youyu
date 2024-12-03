@@ -83,8 +83,7 @@ class WheelGameViewLogic extends AppBaseController {
   onSend(int giftCount) async {
     if (isOpenTurn) return;
     tempList = null;
-    int index = Random().nextInt(GameService().primaryPrices.length);
-    if (index == 0) index = 1;
+    /*
     Gift? gift;
     switch (viewType.value) {
       case GameSubViewType.primary:
@@ -98,6 +97,25 @@ class WheelGameViewLogic extends AppBaseController {
     if (sendModel.gift.id == null || sendModel.gift.id == 0) {
       sendModel.gift.id = 207;
     }
+     */
+    List<Gift> showList = [];
+    switch (viewType.value) {
+      case GameSubViewType.primary:
+        sendModel.gift = Gift(
+            id: GameService().primaryModel?.giftId,
+            name: GameService().primaryModel?.name ?? "",
+            unitPrice: GameService().primaryModel?.unitPrice ?? 0);
+        showList.addAll(GameService().primaryModel?.showList ?? []);
+        break;
+      case GameSubViewType.advanced:
+        sendModel.gift = Gift(
+            id: GameService().advancedModel?.giftId,
+            name: GameService().advancedModel?.name ?? "",
+            unitPrice: GameService().advancedModel?.unitPrice ?? 0);
+        showList.addAll(GameService().advancedModel?.showList ?? []);
+        break;
+    }
+
     sendModel.giftCount = giftCount;
     showCommit();
     sendMsg.sendGift(sendModel, true,
@@ -106,6 +124,16 @@ class WheelGameViewLogic extends AppBaseController {
       if (model != null) {
         tempList = model.data?.gift?.childList;
         isOpenTurn = true;
+        tempList?.sort((a, b) => b.unitPrice.compareTo(a.unitPrice));
+        int? bigId = tempList?[0].id;
+        int index = 1;
+        for (int i = 0; i < showList.length; i++) {
+          Gift temp = showList[i];
+          if (temp.id == bigId) {
+            index = i+1;
+            break;
+          }
+        }
         turnKey.currentState?.drawClick(index);
       }
     });
@@ -119,6 +147,7 @@ class WheelGameViewLogic extends AppBaseController {
           giftList: tempList ?? [],
           onReSend: () {
             Get.back();
+
             ///重新送
             onSend(sendModel.giftCount);
           },
