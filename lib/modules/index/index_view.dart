@@ -42,14 +42,14 @@ class _IndexPageState extends State<IndexPage> {
                     logic.selectedTabBarIndex(index);
                   },
                   elevation: 1,
-                  backgroundColor: const Color(0xFF000000),
+                  backgroundColor: const Color(0xFFFFFFFF),
                   type: BottomNavigationBarType.fixed,
                   //样式
                   selectedFontSize: 12,
                   unselectedFontSize: 12,
                   //选中颜色
-                  selectedItemColor: AppTheme.colorTextWhite,
-                  unselectedItemColor: AppTheme.colorTextSecond,
+                  selectedItemColor: AppTheme.colorTextPrimary,
+                  unselectedItemColor: AppTheme.colorTextPrimary,
                   items: logic.getBarItem(),
                   useLegacyColorScheme: false,
                   enableFeedback: false,
