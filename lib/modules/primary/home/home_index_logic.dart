@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:youyu/models/localmodel/tab_model.dart';
 import 'package:youyu/config/api.dart';
@@ -9,7 +10,6 @@ import 'package:get/get.dart';
 
 class HomeIndexLogic extends AppBaseController
     with GetSingleTickerProviderStateMixin {
-
   ///tab
   late TabController homeTabController;
   RxList<TabModel> tabs = <TabModel>[].obs;

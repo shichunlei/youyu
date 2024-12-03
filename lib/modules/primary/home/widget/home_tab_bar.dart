@@ -14,22 +14,26 @@ class HomeTabBar extends StatefulWidget implements PreferredSizeWidget {
   const HomeTabBar(
       {super.key,
       required this.extraHeight,
-      required this.extraWidget,
+      // required this.extraWidget,
       required this.onClickRank,
       required this.onClickCreate,
+      required this.onClickSearch,
       this.onTap,
       required this.logic});
 
   final HomeIndexLogic logic;
   final ValueChanged<int>? onTap;
   final double extraHeight;
-  final Widget extraWidget;
+  // final Widget extraWidget;
 
   //点击排行榜
   final Function onClickRank;
 
   //点击创建直播间
   final Function onClickCreate;
+
+  // 点击搜索
+  final Function onClickSearch;
 
   @override
   State<HomeTabBar> createState() => HomeTabBarState();
@@ -53,7 +57,7 @@ class HomeTabBarState extends State<HomeTabBar> {
     return SafeArea(
         child: Container(
       padding: EdgeInsets.only(left: 14.w, right: 14.w),
-      color: AppTheme.colorNavBar,
+      color: Colors.transparent,
       width: double.infinity,
       height: widget.preferredSize.height,
       child: Obx(() {
@@ -68,14 +72,15 @@ class HomeTabBarState extends State<HomeTabBar> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(child: TabBar(
+                  Expanded(
+                      child: TabBar(
                     tabAlignment: TabAlignment.start,
                     onTap: (int index) {
                       if (widget.onTap != null) {
                         widget.onTap!(index);
                       }
                     },
-                    dividerColor:Colors.transparent,
+                    dividerColor: Colors.transparent,
                     automaticIndicatorColorAdjustment: false,
                     tabs: widget.logic.tabs.mapIndexed((index, e) {
                       return _animatedTab(index, e.name);
@@ -95,6 +100,13 @@ class HomeTabBarState extends State<HomeTabBar> {
                   Row(
                     children: [
                       AppImageButton(
+                          path: AppResource().homeLiveCreateLogo,
+                          width: 28.w,
+                          onClick: widget.onClickCreate),
+                      SizedBox(
+                        width: 17.w,
+                      ),
+                      AppImageButton(
                           path: AppResource().homeRankLogo,
                           width: 28.w,
                           onClick: widget.onClickRank),
@@ -102,14 +114,14 @@ class HomeTabBarState extends State<HomeTabBar> {
                         width: 17.w,
                       ),
                       AppImageButton(
-                          path: AppResource().homeLiveCreateLogo,
+                          path: AppResource().homeSearchLogo,
                           width: 28.w,
-                          onClick: widget.onClickCreate)
+                          onClick: widget.onClickSearch),
                     ],
                   )
                 ],
               ),
-              widget.extraWidget
+              // widget.extraWidget
             ],
           );
         }
@@ -128,11 +140,12 @@ class HomeTabBarState extends State<HomeTabBar> {
 
   Widget _animatedTab(int index, String text) {
     TextStyle normalStyle = TextStyle(
-      color: AppTheme.colorTextDark,
+      color: AppTheme.colorTextThird,
       fontSize: 16.sp,
     );
     TextStyle selectedStyle = TextStyle(
-      color: AppTheme.colorTextWhite,
+      color: AppTheme.colorTextDarkSecond,
+      fontWeight: FontWeight.w700,
       fontSize: 22.sp,
     );
     return Tab(

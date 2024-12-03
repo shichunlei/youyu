@@ -1,13 +1,14 @@
 import 'package:youyu/modules/primary/home/list/type/home_type_sub_list_view.dart';
 import 'package:youyu/utils/screen_utils.dart';
 
-import 'package:youyu/widgets/search/search_input_widget.dart';
+// import 'package:youyu/widgets/search/search_input_widget.dart';
 import 'package:youyu/modules/index/widget/index_page_widget.dart';
 import 'package:youyu/modules/primary/home/list/recommend/recommend_list_view.dart';
 import 'package:youyu/modules/primary/home/widget/home_tab_bar.dart';
 import 'package:youyu/widgets/app/app_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youyu/widgets/top_bg/top_ba.dart';
 import 'home_index_logic.dart';
 import 'package:youyu/widgets/page_life_state.dart';
 
@@ -30,24 +31,26 @@ class _HomeIndexPageState extends PageLifeState<HomeIndexPage>
   Widget build(BuildContext context) {
     super.build(context);
     return AppPage<HomeIndexLogic>(
+      topBg: const TopBgCommon(),
+      backgroundColor: Colors.transparent,
       appBar: HomeTabBar(
         logic: logic,
         key: tabBarKey,
-        extraHeight: 49.h,
-        extraWidget: Container(
-          padding: EdgeInsets.only(top: 8.h, bottom: 0.5.h),
-          child: Center(
-            child: SearchInputWidget(
-              height: 38.h,
-              placeHolder: '搜索房间名称，用户昵称或ID',
-              enabled: false,
-              onClick: () {
-                //点击搜索
-                logic.onClickSearch();
-              },
-            ),
-          ),
-        ),
+        extraHeight: 0.h,
+        // extraWidget: Container(
+        //   padding: EdgeInsets.only(top: 8.h, bottom: 0.5.h),
+        //   child: Center(
+        //     child: SearchInputWidget(
+        //       height: 38.h,
+        //       placeHolder: '搜索房间名称，用户昵称或ID',
+        //       enabled: false,
+        //       onClick: () {
+        //         //点击搜索
+        //         logic.onClickSearch();
+        //       },
+        //     ),
+        //   ),
+        // ),
         onClickRank: () {
           //点击排行榜
           logic.onClickRank();
@@ -55,6 +58,10 @@ class _HomeIndexPageState extends PageLifeState<HomeIndexPage>
         onClickCreate: () {
           //点击创建直播间
           logic.onClickCreate();
+        },
+        onClickSearch: () {
+          // 点击搜索
+          logic.onClickSearch();
         },
       ),
       childBuilder: (s) {

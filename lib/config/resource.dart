@@ -218,6 +218,8 @@ class AppResource {
 
   String get homeRankLogo => _getCommon("ic_rank_logo");
 
+  String get homeSearchLogo => _getCommon("ic_home_search_logo");
+
   String get homeLock => _getCommon("ic_home_lock");
 
   String get homeAmusementLogo => _getCommon("ic_amusement_logo");
@@ -233,6 +235,10 @@ class AppResource {
   String get homeRecommendTag => _getCommon("ic_home_recommend_tag");
 
   String get homeFirstTag => _getCommon("ic_home_first_tag");
+
+  String get homeRoomUser => _getCommon("ic_room_user");
+
+  String get homeRoomHeat => _getCommon("ic_home_room_heat");
 
   ///rank
   String get rankTopBg => _getCommon("ic_rank_top_bg");

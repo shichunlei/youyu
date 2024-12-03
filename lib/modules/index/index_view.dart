@@ -25,37 +25,38 @@ class _IndexPageState extends State<IndexPage> {
 
     ///加载试图
     return WillPopScope(
-        onWillPop: () => logic.exitVerify(),
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            backgroundColor: const Color(0xFF000000),
-            body: PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: logic.pageController,
-              children: logic.pages,
-            ),
-            bottomNavigationBar: GetBuilder<IndexLogic>(
-              id: IndexLogic.tabId,
-              builder: (s) {
-                return BottomNavigationBar(
-                  onTap: (index) {
-                    logic.selectedTabBarIndex(index);
-                  },
-                  elevation: 1,
-                  backgroundColor: const Color(0xFFFFFFFF),
-                  type: BottomNavigationBarType.fixed,
-                  //样式
-                  selectedFontSize: 12,
-                  unselectedFontSize: 12,
-                  //选中颜色
-                  selectedItemColor: AppTheme.colorTextPrimary,
-                  unselectedItemColor: AppTheme.colorTextPrimary,
-                  items: logic.getBarItem(),
-                  useLegacyColorScheme: false,
-                  enableFeedback: false,
-                  currentIndex: logic.currentIndex,
-                );
+      onWillPop: () => logic.exitVerify(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: logic.pageController,
+          children: logic.pages,
+        ),
+        bottomNavigationBar: GetBuilder<IndexLogic>(
+          id: IndexLogic.tabId,
+          builder: (s) {
+            return BottomNavigationBar(
+              onTap: (index) {
+                logic.selectedTabBarIndex(index);
               },
-            )));
+              elevation: 1,
+              backgroundColor: const Color(0xFFFFFFFF),
+              type: BottomNavigationBarType.fixed,
+              //样式
+              selectedFontSize: 12,
+              unselectedFontSize: 12,
+              //选中颜色
+              selectedItemColor: AppTheme.colorTextPrimary,
+              unselectedItemColor: AppTheme.colorTextPrimary,
+              items: logic.getBarItem(),
+              useLegacyColorScheme: false,
+              enableFeedback: false,
+              currentIndex: logic.currentIndex,
+            );
+          },
+        ),
+      ),
+    );
   }
 }

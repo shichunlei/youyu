@@ -45,6 +45,7 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
   Widget build(BuildContext context) {
     super.build(context);
     return AppPage<RecommendListLogic>(
+      backgroundColor: const Color(0xFFF9F6F9),
       childBuilder: (s) {
         return AppListSeparatedView(
           padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
@@ -130,11 +131,10 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
   ///推荐房间
   _recommendWidget(RecommendHomeModel model) {
     return Container(
-      margin: EdgeInsets.only(left: 14.w, right: 14.w),
+      margin: EdgeInsets.only(left: 12.w, right: 12.w),
       decoration: BoxDecoration(
-          color: AppTheme.colorDarkBg,
-          borderRadius: BorderRadius.circular(7.w)),
-      padding: EdgeInsets.only(left: 10.w, right: 10.w),
+          color: Colors.transparent, borderRadius: BorderRadius.circular(7.w)),
+      padding: EdgeInsets.only(left: 0.w, right: 0.w),
       child: Column(
         children: [
           RecommendTitleWidget(
@@ -150,13 +150,13 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
               padding: EdgeInsets.zero,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 //水平子Widget之间间距
-                crossAxisSpacing: 8.w,
+                crossAxisSpacing: 10.w,
                 //垂直子Widget之间间距
-                mainAxisSpacing: 8.w,
+                mainAxisSpacing: 11.w,
                 //一行的Widget数量
                 crossAxisCount: 2,
                 //子Widget宽高比例
-                childAspectRatio: 160 / 202,
+                childAspectRatio: 171 / 194,
               ),
               itemCount: model.list.length,
               itemBuilder: (BuildContext context, int index) {
@@ -176,11 +176,10 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
   ///热门房间
   _hotWidget(RecommendHotModel model) {
     return Container(
-      margin: EdgeInsets.only(left: 14.w, right: 14.w),
+      margin: EdgeInsets.only(left: 12.w, right: 12.w),
       decoration: BoxDecoration(
-          color: AppTheme.colorDarkBg,
-          borderRadius: BorderRadius.circular(7.w)),
-      padding: EdgeInsets.only(left: 10.w, right: 10.w),
+          color: Colors.transparent, borderRadius: BorderRadius.circular(7.w)),
+      padding: EdgeInsets.only(left: 0.w, right: 0.w),
       child: Column(
         children: [
           RecommendTitleWidget(
@@ -202,7 +201,7 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
                 //一行的Widget数量
                 crossAxisCount: 3,
                 //子Widget宽高比例
-                childAspectRatio: 104 / 146,
+                childAspectRatio: 171 / 194,
               ),
               itemCount: model.list.length,
               itemBuilder: (BuildContext context, int index) {

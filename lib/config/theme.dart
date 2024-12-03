@@ -45,6 +45,12 @@ class AppTheme {
   //文字颜色4
   static const Color colorTextSecond = Color(0xFF999999);
 
+  // 文字颜色5
+  static const Color colorTextThird = Color(0xFF615383);
+
+  // 文字颜色5
+  static const Color colorTextDarkSecond = Color(0xFF18103E);
+
   //分割线1
   static const Color colorLine = Color(0xFF262626);
 
@@ -87,6 +93,43 @@ class AppTheme {
       end: Alignment.centerRight,
       stops: [0.0, 0.7],
       colors: [Color(0xFF3FFEDC), Color(0xFF34FF8F)],
+    );
+  }
+
+  /// 房间标签渐变
+  LinearGradient get roomTagGradient {
+    return const LinearGradient(
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+      stops: [0.0, 0.7],
+      colors: [Color(0xFF3FC6EF), Color(0xFF9FA6FE)],
+    );
+  }
+
+  /// 房间在线人数渐变
+  LinearGradient get roomUserGradient {
+    return LinearGradient(
+      begin: Alignment.bottomLeft,
+      end: Alignment.topRight,
+      stops: const [0.0, 1.0],
+      colors: [
+        const Color(0xFF000000).withOpacity(0),
+        const Color(0xFF000000).withOpacity(0.6)
+      ],
+    );
+  }
+
+  /// 房间标签渐变
+  LinearGradient get roomHeatGradient {
+    return LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      stops: const [0.0, 0.7, 1.0],
+      colors: [
+        const Color(0xFF000000).withOpacity(0),
+        const Color(0xFF000000).withOpacity(0.4),
+        const Color(0xFF000000).withOpacity(0.6),
+      ],
     );
   }
 
