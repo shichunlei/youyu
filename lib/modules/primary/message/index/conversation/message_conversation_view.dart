@@ -30,11 +30,12 @@ class _MessageConversationPageState extends State<MessageConversationPage>
   Widget build(BuildContext context) {
     super.build(context);
     return AppPage<MessageConversationLogic>(
+      backgroundColor: Colors.transparent,
       childBuilder: (s) {
         return AppContainer(
           radius: 6.w,
           margin: EdgeInsets.only(left: 14.w, right: 14.w, top: 14.h),
-          color: AppTheme.colorDarkBg,
+          color: Colors.transparent,
           child: SlidableAutoCloseBehavior(
             child: AppListSeparatedView(
               padding: EdgeInsets.only(bottom: ScreenUtils.safeBottomHeight),
@@ -43,12 +44,15 @@ class _MessageConversationPageState extends State<MessageConversationPage>
               isOpenLoadMore: false,
               isOpenRefresh: true,
               onRefresh: s.pullRefresh,
+              // separatorBuilder: (_, int index) {
+              //   return AppSegmentation(
+              //     margin: EdgeInsets.only(left: 13.w, right: 9.w),
+              //     height: 1.h,
+              //     backgroundColor: AppTheme.colorLine,
+              //   );
+              // },
               separatorBuilder: (_, int index) {
-                return AppSegmentation(
-                  margin: EdgeInsets.only(left: 13.w, right: 9.w),
-                  height: 1.h,
-                  backgroundColor: AppTheme.colorLine,
-                );
+                return const SizedBox();
               },
               itemBuilder: (_, int index) {
                 if (index == 0) {

@@ -1,14 +1,16 @@
-
+import 'package:youyu/config/theme.dart';
 import 'package:youyu/controllers/conversation_controller.dart';
 import 'package:youyu/modules/index/widget/index_page_widget.dart';
 import 'package:youyu/modules/primary/message/index/widget/message_tab_bar.dart';
 import 'package:youyu/widgets/app/app_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youyu/widgets/top_bg/top_ba.dart';
 import 'contact/message_contact_view.dart';
 import 'conversation/message_conversation_view.dart';
 import 'message_index_logic.dart';
 import 'package:youyu/widgets/page_life_state.dart';
+
 class MessageIndexPage extends IndexWidget {
   const MessageIndexPage({Key? key}) : super(key: key);
 
@@ -30,6 +32,8 @@ class _MessageIndexPageState extends PageLifeState<MessageIndexPage>
   Widget build(BuildContext context) {
     super.build(context);
     return AppPage<MessageIndexLogic>(
+      topBg: const TopBgCommon(),
+      backgroundColor: AppTheme.colorPinkWhiteBg,
       resizeToAvoidBottomInset: false,
       appBar: MessageTabBar(
         logic: logic,

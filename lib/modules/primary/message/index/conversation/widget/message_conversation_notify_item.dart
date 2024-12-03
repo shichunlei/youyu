@@ -79,7 +79,9 @@ class MessageConversationNotifyItem extends StatelessWidget {
                     msgType == IMMsgType.officialNotice ? "官方公告" : "系统通知",
                     textAlign: TextAlign.left,
                     style: AppTheme().textStyle(
-                        fontSize: 14.sp, color: AppTheme.colorTextWhite),
+                        fontSize: 14.sp,
+                        color: AppTheme.colorTextDarkSecond,
+                        fontWeight: FontWeight.w700),
                   )),
               // 时间
               Text(
@@ -97,8 +99,8 @@ class MessageConversationNotifyItem extends StatelessWidget {
               maxLines: 1,
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
-              style: AppTheme().textStyle(
-                  fontSize: 12.sp, color: AppTheme.colorTextSecond)),
+              style: AppTheme()
+                  .textStyle(fontSize: 12.sp, color: AppTheme.colorTextSecond)),
         ],
       ),
     );

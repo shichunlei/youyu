@@ -43,7 +43,7 @@ class MessageTabBarState extends State<MessageTabBar> {
     return SafeArea(
         child: AppRow(
       padding: EdgeInsets.only(left: 14.w, right: 14.w),
-      color: AppTheme.colorNavBar,
+      color: Colors.transparent,
       width: double.infinity,
       height: widget.preferredSize.height,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,7 +94,8 @@ class MessageTabBarState extends State<MessageTabBar> {
       fontSize: 16.sp,
     );
     TextStyle selectedStyle = TextStyle(
-      color: AppTheme.colorTextWhite,
+      color: AppTheme.colorTextDarkSecond,
+      fontWeight: FontWeight.w700,
       fontSize: 22.sp,
     );
     return Tab(

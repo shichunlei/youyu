@@ -101,7 +101,7 @@ class _InputWidgetState extends State<SearchInputWidget> {
         padding: EdgeInsets.only(left: 15.w, right: 10.w),
         height: widget.height ?? 37.h,
         decoration: BoxDecoration(
-          color: widget.backgroundColor ?? const Color(0xFF1E1E1E),
+          color: widget.backgroundColor ?? const Color(0xFFFFFFFF),
           borderRadius: BorderRadius.circular((widget.radius ?? 36.w)),
         ),
         child: Row(
@@ -135,8 +135,8 @@ class _InputWidgetState extends State<SearchInputWidget> {
               decoration: AppTheme().inputDecoration(
                   hintText: widget.placeHolder,
                   hintSize: widget.fontSize ?? 15.sp,
-                  hintColor: widget.placeHolderColor ??
-                      AppTheme.colorTextSecond),
+                  hintColor:
+                      widget.placeHolderColor ?? AppTheme.colorTextSecond),
             )),
             //clear
             InkWell(

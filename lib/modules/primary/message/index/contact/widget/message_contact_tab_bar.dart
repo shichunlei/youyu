@@ -9,7 +9,10 @@ import 'package:collection/collection.dart';
 
 class MessageContactTabBar extends StatefulWidget {
   const MessageContactTabBar(
-      {super.key, required this.tabs, required this.controller, required this.onClickTab});
+      {super.key,
+      required this.tabs,
+      required this.controller,
+      required this.onClickTab});
 
   final List<TabModel> tabs;
   final TabController controller;
@@ -33,7 +36,7 @@ class MessageContactState extends State<MessageContactTabBar> {
       margin: EdgeInsets.only(left: 4.w),
       crossAxisAlignment: CrossAxisAlignment.center,
       alignment: Alignment.centerLeft,
-      color: AppTheme.colorBg,
+      color: Colors.transparent,
       width: double.infinity,
       height: 44.h,
       children: widget.tabs.mapIndexed((index, e) {
@@ -61,8 +64,8 @@ class MessageContactState extends State<MessageContactTabBar> {
         child: Center(
           child: Text(
             text,
-            style: AppTheme().textStyle(
-                fontSize: 14.sp, color: AppTheme.colorTextWhite),
+            style: AppTheme()
+                .textStyle(fontSize: 14.sp, color: AppTheme.colorTextWhite),
           ),
         ),
       );
@@ -76,7 +79,7 @@ class MessageContactState extends State<MessageContactTabBar> {
         height: 24.h,
         margin: EdgeInsets.symmetric(horizontal: 10.sp),
         radius: 99.h,
-        color: const Color(0xFf283110),
+        color: const Color(0xFFFFFFFF),
         strokeColor: PlatformUtils.isAndroid
             ? Colors.transparent
             : const Color(0xFF2A5200),
@@ -84,8 +87,8 @@ class MessageContactState extends State<MessageContactTabBar> {
         child: Center(
           child: Text(
             text,
-            style: AppTheme().textStyle(
-                fontSize: 14.sp, color: AppTheme.colorTextWhite),
+            style: AppTheme()
+                .textStyle(fontSize: 14.sp, color: AppTheme.colorTextSecond),
           ),
         ),
       );

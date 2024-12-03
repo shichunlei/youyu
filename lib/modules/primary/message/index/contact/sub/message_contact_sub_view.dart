@@ -57,7 +57,7 @@ class _MessageContactSubPageState extends State<MessageContactSubPage>
           childBuilder: (s) {
             return AppContainer(
               radius: 6.w,
-              color: AppTheme.colorDarkBg,
+              color: Colors.transparent,
               margin: EdgeInsets.symmetric(horizontal: 14.w),
               child: AppListSeparatedView(
                 padding: EdgeInsets.zero,
@@ -65,11 +65,14 @@ class _MessageContactSubPageState extends State<MessageContactSubPage>
                 itemCount: s.dataList.length,
                 isOpenLoadMore: true,
                 isOpenRefresh: true,
+                // separatorBuilder: (_, int index) {
+                //   return AppSegmentation(
+                //     height: 0.5.h,
+                //     backgroundColor: AppTheme.colorLine,
+                //   );
+                // },
                 separatorBuilder: (_, int index) {
-                  return AppSegmentation(
-                    height: 0.5.h,
-                    backgroundColor: AppTheme.colorLine,
-                  );
+                  return const SizedBox();
                 },
                 itemBuilder: (_, int index) {
                   UserInfo userInfo = s.dataList[index];
