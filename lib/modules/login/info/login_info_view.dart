@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/widgets/selected/selected_widget.dart';
 import 'package:youyu/config/resource.dart';
@@ -12,6 +13,7 @@ import 'package:youyu/widgets/app/app_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
+import 'package:youyu/widgets/top_bg/top_ba.dart';
 
 import 'login_info_logic.dart';
 
@@ -23,11 +25,14 @@ class LoginInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppPage<LoginInfoLogic>(
-      appBar: const AppTopBar(
-        backgroundColor: AppTheme.colorDarkBg,
+      uiOverlayStyle: SystemUiOverlayStyle.dark,
+      topBg: const TopBgLogin(),
+      appBar: AppTopBar(
+        backgroundColor: Colors.transparent,
         title: "",
+        backImg: AppResource().blackBack,
       ),
-      backgroundColor: AppTheme.colorDarkBg,
+      backgroundColor: AppTheme.colorWhiteBg,
       resizeToAvoidBottomInset: false,
       childBuilder: (s) {
         return KeyboardActions(
@@ -95,7 +100,7 @@ class LoginInfoPage extends StatelessWidget {
       margin: EdgeInsets.only(left: 38.w, right: 38.w),
       children: [
         AppNormalInput(
-            backgroundColor: AppTheme.colorTextWhite,
+            backgroundColor: AppTheme.inputBg,
             height: 50.h,
             controller: logic.nameController,
             focusNode: logic.nameFocusNode,
@@ -105,7 +110,7 @@ class LoginInfoPage extends StatelessWidget {
           height: 20.h,
         ),
         SelectedWidget(
-          backgroundColor: AppTheme.colorTextWhite,
+          backgroundColor: AppTheme.inputBg,
           height: 50.h,
           controller: logic.sexController,
           placeHolder: "请选择性别（选择后不可更改）",
@@ -117,7 +122,7 @@ class LoginInfoPage extends StatelessWidget {
           height: 20.h,
         ),
         SelectedWidget(
-          backgroundColor: AppTheme.colorTextWhite,
+          backgroundColor: AppTheme.inputBg,
           height: 50.h,
           controller: logic.birthDayController,
           placeHolder: "请选择生日",
@@ -130,8 +135,8 @@ class LoginInfoPage extends StatelessWidget {
         ),
         Text(
           '未满18岁不可以注册哦',
-          style: AppTheme().textStyle(
-              fontSize: 14.sp, color: const Color(0xFF9CA3AF)),
+          style: AppTheme()
+              .textStyle(fontSize: 14.sp, color: const Color(0xFF9CA3AF)),
         ),
         SizedBox(
           height: 51.h,

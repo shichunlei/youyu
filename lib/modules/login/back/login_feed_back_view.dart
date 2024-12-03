@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+import 'package:youyu/config/resource.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/config/theme.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
@@ -9,7 +11,7 @@ import 'package:youyu/widgets/app/app_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
-
+import 'package:youyu/widgets/top_bg/top_ba.dart';
 
 import 'login_feed_back_logic.dart';
 
@@ -21,11 +23,15 @@ class LoginFeedBackPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppPage<LoginFeedBackLogic>(
-        appBar: const AppTopBar(
-          backgroundColor: AppTheme.colorDarkBg,
+        uiOverlayStyle: SystemUiOverlayStyle.dark,
+        topBg: const TopBgLogin(),
+        appBar: AppTopBar(
+          backgroundColor: Colors.transparent,
           title: "登录反馈",
+          titleColor: AppTheme.colorTextPrimary,
+          backImg: AppResource().blackBack,
         ),
-        backgroundColor: AppTheme.colorDarkBg,
+        backgroundColor: AppTheme.colorWhiteBg,
         childBuilder: (s) {
           return KeyboardActions(
               config: AppTheme().keyboardActions([
@@ -136,8 +142,8 @@ class LoginFeedBackPage extends StatelessWidget {
                       color: AppTheme.colorRed),
                   text: "* "),
             TextSpan(
-              style: AppTheme().textStyle(
-                  color: AppTheme.colorTextWhite, fontSize: 14),
+              style: AppTheme()
+                  .textStyle(color: AppTheme.colorTextPrimary, fontSize: 14),
               text: title,
             ),
           ],
@@ -152,13 +158,14 @@ class LoginFeedBackPage extends StatelessWidget {
               maxLength: 200,
               height: 145.h,
               focusNode: focusNode,
+              bgColor: AppTheme.inputBg,
               onChanged: onChanged,
               placeHolder: placeHolder)
         else
           AppNormalInput(
               enabled: isEnable,
               controller: controller,
-              backgroundColor: AppTheme.colorTextWhite,
+              backgroundColor: AppTheme.inputBg,
               height: 52.h,
               focusNode: focusNode,
               onChanged: onChanged,

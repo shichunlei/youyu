@@ -14,6 +14,7 @@ import 'package:youyu/widgets/app/image/app_net_image.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youyu/widgets/top_bg/top_ba.dart';
 import 'user_detail_logic.dart';
 
 class UserDetailPage extends StatelessWidget {
@@ -24,6 +25,7 @@ class UserDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppPage<UserDetailLogic>(
+      topBg: const TopBgMe(),
       childBuilder: (s) {
         return Stack(
           children: [

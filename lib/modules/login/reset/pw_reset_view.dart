@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/config/theme.dart';
@@ -14,6 +15,7 @@ import 'package:youyu/widgets/app/input/app_verify_input.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youyu/widgets/top_bg/top_ba.dart';
 
 import 'pw_reset_logic.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
@@ -26,11 +28,15 @@ class PwResetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppPage<PwResetLogic>(
-      appBar: const AppTopBar(
-        backgroundColor: AppTheme.colorDarkBg,
+      uiOverlayStyle: SystemUiOverlayStyle.dark,
+      topBg: const TopBgLogin(),
+      appBar: AppTopBar(
+        backgroundColor: Colors.transparent,
         title: "重置密码",
+        titleColor: AppTheme.colorTextPrimary,
+        backImg: AppResource().blackBack,
       ),
-      backgroundColor: AppTheme.colorDarkBg,
+      backgroundColor: AppTheme.colorWhiteBg,
       resizeToAvoidBottomInset: false,
       childBuilder: (s) {
         return KeyboardActions(
@@ -53,7 +59,7 @@ class PwResetPage extends StatelessWidget {
                     ),
                     AppLocalImage(
                       path: AppResource().bigLogo,
-                      width: 75.w,
+                      width: 103.w,
                     ),
                     SizedBox(
                       height: 52.h,
@@ -75,7 +81,7 @@ class PwResetPage extends StatelessWidget {
       child: Column(
         children: [
           AppNormalInput(
-              backgroundColor: AppTheme.colorTextWhite,
+              backgroundColor: AppTheme.inputBg,
               height: 50.h,
               controller: logic.mobileController,
               focusNode: logic.mobileFocusNode,
@@ -86,7 +92,7 @@ class PwResetPage extends StatelessWidget {
           ),
           AppVerifyInput(
               key: logic.loginVerifyKey,
-              backgroundColor: AppTheme.colorTextWhite,
+              backgroundColor: AppTheme.inputBg,
               height: 50.h,
               controller: logic.verifyController,
               focusNode: logic.verifyFocusNode,
@@ -98,7 +104,7 @@ class PwResetPage extends StatelessWidget {
             height: 20.h,
           ),
           AppNormalInput(
-              backgroundColor: AppTheme.colorTextWhite,
+              backgroundColor: AppTheme.inputBg,
               height: 50.h,
               controller: logic.pwdController,
               focusNode: logic.pwFocusNode,
@@ -110,8 +116,8 @@ class PwResetPage extends StatelessWidget {
           ),
           Text(
             '密码必须是6~16字符内数字英文组合哦！',
-            style: AppTheme().textStyle(
-                fontSize: 14.sp, color: const Color(0xFF9CA3AF)),
+            style: AppTheme()
+                .textStyle(fontSize: 14.sp, color: const Color(0xFF9CA3AF)),
           ),
           SizedBox(
             height: 46.h,
@@ -151,8 +157,8 @@ class PwResetPage extends StatelessWidget {
             RichText(
                 text: TextSpan(
               text: "",
-              style: AppTheme().textStyle(
-                  color: AppTheme.colorTextPrimary, fontSize: 13),
+              style: AppTheme()
+                  .textStyle(color: AppTheme.colorTextPrimary, fontSize: 13),
               children: <TextSpan>[
                 TextSpan(
                   style: AppTheme().textStyle(
@@ -164,8 +170,8 @@ class PwResetPage extends StatelessWidget {
                     },
                 ),
                 TextSpan(
-                  style: AppTheme().textStyle(
-                      color: AppTheme.colorMain, fontSize: 13),
+                  style: AppTheme()
+                      .textStyle(color: AppTheme.colorPrivacy, fontSize: 13),
                   text: "《隐私政策》",
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
@@ -180,8 +186,8 @@ class PwResetPage extends StatelessWidget {
                         color: AppTheme.colorTextPrimary, fontSize: 13),
                     text: " 和 "),
                 TextSpan(
-                  style: AppTheme().textStyle(
-                      color: AppTheme.colorMain, fontSize: 13),
+                  style: AppTheme()
+                      .textStyle(color: AppTheme.colorPrivacy, fontSize: 13),
                   text: "《用户协议》",
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {

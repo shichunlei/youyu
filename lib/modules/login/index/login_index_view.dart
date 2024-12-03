@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/utils/toast_utils.dart';
 
@@ -14,6 +15,7 @@ import 'package:youyu/widgets/app/app_top_bar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youyu/widgets/top_bg/top_ba.dart';
 import 'login_index_logic.dart';
 
 class LoginIndexPage extends StatelessWidget {
@@ -24,36 +26,45 @@ class LoginIndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppPage<LoginIndexLogic>(
+      uiOverlayStyle: SystemUiOverlayStyle.dark,
+      topBg: const TopBgLogin(),
       resizeToAvoidBottomInset: false,
       appBar: const AppTopBar(
-        backgroundColor: AppTheme.colorDarkBg,
+        backgroundColor: Colors.transparent,
         title: "",
+        height: 0,
         hideBackArrow: true,
       ),
-      backgroundColor: AppTheme.colorDarkBg,
+      backgroundColor: AppTheme.colorWhiteBg,
       childBuilder: (s) {
-        return AppColumn(
-          width: double.infinity,
-          margin: EdgeInsets.only(bottom: ScreenUtils.safeBottomHeight + 20.h),
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        return Stack(
+          alignment: Alignment.topCenter,
           children: [
-            Column(
+            AppColumn(
+              width: double.infinity,
+              margin:
+                  EdgeInsets.only(bottom: ScreenUtils.safeBottomHeight + 20.h),
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 50.h,
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 186.h,
+                    ),
+                    AppLocalImage(
+                      path: AppResource().bigLogo,
+                      width: 103.w,
+                    ),
+                    SizedBox(
+                      height: 80.h,
+                    ),
+                    _centerWidget(),
+                  ],
                 ),
-                AppLocalImage(
-                  path: AppResource().bigLogo,
-                  width: 75.w,
-                ),
-                SizedBox(
-                  height: 100.h,
-                ),
-                _centerWidget(),
+                _bottomWidget(),
               ],
             ),
-            _bottomWidget(),
           ],
         );
       },
@@ -93,36 +104,38 @@ class LoginIndexPage extends StatelessWidget {
         SizedBox(
           height: 33.h,
         ),
-        Offstage(child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //TODO:微信登录
-            AppLocalImage(
-              onTap: () {
-                if (logic.isAgree.value) {
-                } else {
-                  ToastUtils.show("请先勾选同意隐私政策与用户协议");
-                }
-              },
-              path: AppResource().wx,
-              width: 52.w,
-            ),
-            SizedBox(
-              width: 70.w,
-            ),
-            //TODO:qq登录
-            AppLocalImage(
-              onTap: () {
-                if (logic.isAgree.value) {
-                } else {
-                  ToastUtils.show("请先勾选同意隐私政策与用户协议");
-                }
-              },
-              path: AppResource().qq,
-              width: 52.w,
-            )
-          ],
-        ),),
+        Offstage(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //TODO:微信登录
+              AppLocalImage(
+                onTap: () {
+                  if (logic.isAgree.value) {
+                  } else {
+                    ToastUtils.show("请先勾选同意隐私政策与用户协议");
+                  }
+                },
+                path: AppResource().wx,
+                width: 52.w,
+              ),
+              SizedBox(
+                width: 70.w,
+              ),
+              //TODO:qq登录
+              AppLocalImage(
+                onTap: () {
+                  if (logic.isAgree.value) {
+                  } else {
+                    ToastUtils.show("请先勾选同意隐私政策与用户协议");
+                  }
+                },
+                path: AppResource().qq,
+                width: 52.w,
+              )
+            ],
+          ),
+        ),
         SizedBox(
           height: 40.h,
         ),
@@ -165,8 +178,8 @@ class LoginIndexPage extends StatelessWidget {
             RichText(
                 text: TextSpan(
               text: "",
-              style: AppTheme().textStyle(
-                  color: AppTheme.colorTextPrimary, fontSize: 13),
+              style: AppTheme()
+                  .textStyle(color: AppTheme.colorTextPrimary, fontSize: 13),
               children: <TextSpan>[
                 TextSpan(
                   style: AppTheme().textStyle(
@@ -178,8 +191,8 @@ class LoginIndexPage extends StatelessWidget {
                     },
                 ),
                 TextSpan(
-                  style: AppTheme().textStyle(
-                      color: AppTheme.colorMain, fontSize: 13),
+                  style: AppTheme()
+                      .textStyle(color: AppTheme.colorPrivacy, fontSize: 13),
                   text: "《隐私政策》",
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
@@ -194,8 +207,8 @@ class LoginIndexPage extends StatelessWidget {
                         color: AppTheme.colorTextPrimary, fontSize: 13),
                     text: " 和 "),
                 TextSpan(
-                  style: AppTheme().textStyle(
-                      color: AppTheme.colorMain, fontSize: 13),
+                  style: AppTheme()
+                      .textStyle(color: AppTheme.colorPrivacy, fontSize: 13),
                   text: "《用户协议》",
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {

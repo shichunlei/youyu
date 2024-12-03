@@ -28,6 +28,7 @@ class AppPage<T extends AppBaseController> extends StatelessWidget {
     this.bottomBar,
     this.isUseScaffold = true,
     this.bodyHeight,
+    this.topBg,
   }) : super(key: key);
 
   //导航栏
@@ -50,6 +51,9 @@ class AppPage<T extends AppBaseController> extends StatelessWidget {
   //背景颜色
   final Color? backgroundColor;
 
+  //顶部背景
+  final Widget? topBg;
+
   //是否显示Loading可以点击
   final bool isLoadingCanTouch;
 
@@ -67,12 +71,25 @@ class AppPage<T extends AppBaseController> extends StatelessWidget {
     if (isUseScaffold) {
       return AnnotatedRegion<SystemUiOverlayStyle>(
         value: uiOverlayStyle,
-        child: Scaffold(
-            appBar: appBar,
-            bottomNavigationBar: bottomBar,
-            resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-            backgroundColor: backgroundColor ?? AppTheme.colorBg,
-            body: _body()),
+        child: Container(
+          width: ScreenUtils.screenWidth,
+          height: ScreenUtils.screenHeight,
+          color: backgroundColor ?? AppTheme.colorBg,
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              topBg ?? const SizedBox(),
+              Scaffold(
+                appBar: appBar,
+                bottomNavigationBar: bottomBar,
+                resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+                // backgroundColor: backgroundColor ?? AppTheme.colorBg,
+                backgroundColor: Colors.transparent,
+                body: _body(),
+              ),
+            ],
+          ),
+        ),
       );
     } else {
       return _body();

@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/config/theme.dart';
@@ -14,6 +15,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
+import 'package:youyu/widgets/top_bg/top_ba.dart';
 
 import 'login_account_logic.dart';
 
@@ -25,11 +27,15 @@ class LoginAccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppPage<LoginAccountLogic>(
-      appBar: const AppTopBar(
-        backgroundColor: AppTheme.colorDarkBg,
+      uiOverlayStyle: SystemUiOverlayStyle.dark,
+      topBg: const TopBgLogin(),
+      appBar: AppTopBar(
+        backgroundColor: Colors.transparent,
         title: "账号登录",
+        titleColor: AppTheme.colorTextPrimary,
+        backImg: AppResource().blackBack,
       ),
-      backgroundColor: AppTheme.colorDarkBg,
+      backgroundColor: AppTheme.colorWhiteBg,
       resizeToAvoidBottomInset: false,
       childBuilder: (s) {
         return KeyboardActions(
@@ -51,7 +57,7 @@ class LoginAccountPage extends StatelessWidget {
                     ),
                     AppLocalImage(
                       path: AppResource().bigLogo,
-                      width: 75.w,
+                      width: 103.w,
                     ),
                     SizedBox(
                       height: 52.h,
@@ -72,7 +78,7 @@ class LoginAccountPage extends StatelessWidget {
       margin: EdgeInsets.only(left: 38.w, right: 38.w),
       children: [
         AppNormalInput(
-            backgroundColor: AppTheme.colorTextWhite,
+            backgroundColor: AppTheme.inputBg,
             height: 50.h,
             controller: logic.accountController,
             focusNode: logic.accountFocusNode,
@@ -82,7 +88,7 @@ class LoginAccountPage extends StatelessWidget {
           height: 20.h,
         ),
         AppNormalInput(
-            backgroundColor: AppTheme.colorTextWhite,
+            backgroundColor: AppTheme.inputBg,
             height: 50.h,
             controller: logic.pwdController,
             focusNode: logic.pwFocusNode,
@@ -102,8 +108,7 @@ class LoginAccountPage extends StatelessWidget {
                 child: Text(
                   '忘记密码',
                   style: AppTheme().textStyle(
-                      fontSize: 14.sp,
-                      color: const Color(0xFF9CA3AF)),
+                      fontSize: 14.sp, color: const Color(0xFF9CA3AF)),
                 ),
               ),
               InkWell(
@@ -113,8 +118,7 @@ class LoginAccountPage extends StatelessWidget {
                 child: Text(
                   '验证码登录/注册',
                   style: AppTheme().textStyle(
-                      fontSize: 14.sp,
-                      color: const Color(0xFF9CA3AF)),
+                      fontSize: 14.sp, color: const Color(0xFF9CA3AF)),
                 ),
               )
             ],
@@ -157,8 +161,8 @@ class LoginAccountPage extends StatelessWidget {
             RichText(
                 text: TextSpan(
               text: "",
-              style: AppTheme().textStyle(
-                  color: AppTheme.colorTextPrimary, fontSize: 13),
+              style: AppTheme()
+                  .textStyle(color: AppTheme.colorTextPrimary, fontSize: 13),
               children: <TextSpan>[
                 TextSpan(
                   style: AppTheme().textStyle(
@@ -170,8 +174,8 @@ class LoginAccountPage extends StatelessWidget {
                     },
                 ),
                 TextSpan(
-                  style: AppTheme().textStyle(
-                      color: AppTheme.colorMain, fontSize: 13),
+                  style: AppTheme()
+                      .textStyle(color: AppTheme.colorPrivacy, fontSize: 13),
                   text: "《隐私政策》",
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
@@ -186,8 +190,8 @@ class LoginAccountPage extends StatelessWidget {
                         color: AppTheme.colorTextPrimary, fontSize: 13),
                     text: " 和 "),
                 TextSpan(
-                  style: AppTheme().textStyle(
-                      color: AppTheme.colorMain, fontSize: 13),
+                  style: AppTheme()
+                      .textStyle(color: AppTheme.colorPrivacy, fontSize: 13),
                   text: "《用户协议》",
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {

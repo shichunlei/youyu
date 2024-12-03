@@ -1,7 +1,8 @@
 enum AppFontType {
   ys(name: "ys"),
   bdt(name: "bdt"),
-  nunito(name:"nunito");
+  nunito(name: "nunito");
+
   const AppFontType({required this.name});
 
   final String name;
@@ -63,6 +64,13 @@ class AppResource {
   String get aliBg => _getCommon("ic_ali_bg");
 
   String get aliBtn => _getCommon("ic_ali_btn");
+
+  // 登录页面顶部背景
+  String get loginTopBg => _getCommon("ic_login_top_bg");
+
+  String get commonTopBg => _getCommon("ic_common_top_bg");
+
+  String get meTopBg => _getCommon("ic_me_top_bg");
 
   //默认头像
   String get defaultHead => _getCommon("ic_defalut_head");
@@ -625,5 +633,4 @@ class AppResource {
   String get gameWheelTaBg => _getGameWheel("ic_wheel_ta_bg");
   String get gameWheelBtn => _getGameWheel("ic_wheel_btn");
   String get gameWheelItemBg => _getGameWheel("ic_wheel_item_bg");
-
 }

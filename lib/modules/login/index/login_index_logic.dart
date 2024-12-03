@@ -24,10 +24,11 @@ class LoginIndexLogic extends AppBaseController {
   AliAuthModel aliAuthModel = AliAuthModel(
       AppConfig.aliKeyAndroid, AppConfig.aliKeyIos,
       isDelay: false,
-      isDebug: false,
+      isDebug: true,
+
       ///页面方式
       pageType: PageType.fullPort,
-      navColor: '#FF1E1E1E',
+      navColor: '#FFFFFFFF',
       dialogHeight: -1,
       dialogBottom: false,
       dialogOffsetX: -1,
@@ -45,9 +46,9 @@ class LoginIndexLogic extends AppBaseController {
       ///导航
       navText: "一键登录",
       navHidden: false,
-      navTextColor: "#ffffff",
+      navTextColor: "#000000",
       navTextSize: 18,
-      navReturnImgPath: AppResource().back,
+      navReturnImgPath: AppResource().blackBack,
       navReturnImgWidth: 20 ~/ 2,
       navReturnImgHeight: 37 ~/ 2,
       navReturnHidden: false,
@@ -63,14 +64,14 @@ class LoginIndexLogic extends AppBaseController {
       ///logo
       logoImgPath: AppResource().bigLogo,
       logoHidden: false,
-      logoWidth: 75~/1.5,
-      logoHeight: 124~/1.5,
+      logoWidth: 103 ~/ 1.5,
+      logoHeight: 103 ~/ 1.5,
       logoOffsetY: 50,
       logoOffsetY_B: -1,
       logoScaleType: ScaleType.fitXy,
 
       ///手机号
-      numberColor: "#ffffff",
+      numberColor: "#000000",
       numberSize: 22,
       numFieldOffsetY: (73 + 50 + 36),
       numFieldOffsetY_B: -1,
@@ -115,13 +116,13 @@ class LoginIndexLogic extends AppBaseController {
       vendorPrivacySuffix: "》",
 
       ///IOS的颜色
-      protocolOwnColor: "#7ADA54",
-      protocolOwnOneColor: "#7ADA54",
-      protocolOwnTwoColor: "#7ADA54",
+      protocolOwnColor: "#2FE9FE",
+      protocolOwnOneColor: "#2FE9FE",
+      protocolOwnTwoColor: "#2FE9FE",
 
       ///android的颜色
       protocolColor: "#333333",
-      protocolCustomColor: "#7ADA54",
+      protocolCustomColor: "#2FE9FE",
       protocolLayoutGravity: Gravity.centerHorizntal,
       privacyOffsetY: -1,
       privacyOffsetY_B: 28,
@@ -140,12 +141,11 @@ class LoginIndexLogic extends AppBaseController {
 
       ///web
       webViewStatusBarColor: "#FF1E1E1E",
-      webNavColor: "#FF1E1E1E",
+      webNavColor: "#FFFFFFFF",
       webNavTextColor: "#FFFFFFFF",
       webNavTextSize: 18,
-      webNavReturnImgPath: PlatformUtils.isIOS
-          ? AppResource().smallBack
-          : AppResource().back,
+      webNavReturnImgPath:
+          PlatformUtils.isIOS ? AppResource().smallBack : AppResource().back,
       webSupportedJavascript: true,
       authPageActIn: "in_activity",
       activityOut: "out_activity",

@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/config/theme.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
+import 'package:youyu/widgets/top_bg/top_ba.dart';
 
 import 'login_quick_logic.dart';
 
@@ -26,11 +28,15 @@ class LoginQuickPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppPage<LoginQuickLogic>(
-      appBar: const AppTopBar(
-        backgroundColor: AppTheme.colorDarkBg,
+      uiOverlayStyle: SystemUiOverlayStyle.dark,
+      topBg: const TopBgLogin(),
+      appBar: AppTopBar(
+        backgroundColor: Colors.transparent,
         title: "验证码登录/注册",
+        backImg: AppResource().blackBack,
+        titleColor: AppTheme.colorTextPrimary,
       ),
-      backgroundColor: AppTheme.colorDarkBg,
+      backgroundColor: AppTheme.colorWhiteBg,
       resizeToAvoidBottomInset: false,
       childBuilder: (s) {
         return KeyboardActions(
@@ -41,7 +47,7 @@ class LoginQuickPage extends StatelessWidget {
             child: AppColumn(
               width: double.infinity,
               margin:
-              EdgeInsets.only(bottom: ScreenUtils.safeBottomHeight + 20.h),
+                  EdgeInsets.only(bottom: ScreenUtils.safeBottomHeight + 20.h),
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -52,7 +58,7 @@ class LoginQuickPage extends StatelessWidget {
                     ),
                     AppLocalImage(
                       path: AppResource().bigLogo,
-                      width: 75.w,
+                      width: 103.w,
                     ),
                     SizedBox(
                       height: 52.h,
@@ -73,7 +79,7 @@ class LoginQuickPage extends StatelessWidget {
         margin: EdgeInsets.only(left: 38.w, right: 38.w),
         children: [
           AppNormalInput(
-              backgroundColor: AppTheme.colorTextWhite,
+              backgroundColor: AppTheme.inputBg,
               height: 50.h,
               controller: logic.mobileController,
               focusNode: logic.mobileFocusNode,
@@ -84,7 +90,7 @@ class LoginQuickPage extends StatelessWidget {
           ),
           AppVerifyInput(
               key: logic.loginVerifyKey,
-              backgroundColor: AppTheme.colorTextWhite,
+              backgroundColor: AppTheme.inputBg,
               height: 50.h,
               controller: logic.verifyController,
               focusNode: logic.verifyFocusNode,
@@ -110,8 +116,7 @@ class LoginQuickPage extends StatelessWidget {
 
   ///底部
   _bottomWidget() {
-    return Obx(() =>
-        Row(
+    return Obx(() => Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AppLocalImage(
@@ -128,51 +133,49 @@ class LoginQuickPage extends StatelessWidget {
             ),
             RichText(
                 text: TextSpan(
-                  text: "",
+              text: "",
+              style: AppTheme()
+                  .textStyle(color: AppTheme.colorTextPrimary, fontSize: 13),
+              children: <TextSpan>[
+                TextSpan(
                   style: AppTheme().textStyle(
                       color: AppTheme.colorTextPrimary, fontSize: 13),
-                  children: <TextSpan>[
-                    TextSpan(
-                      style: AppTheme().textStyle(
-                          color: AppTheme.colorTextPrimary,
-                          fontSize: 13),
-                      text: "我已阅读并同意",
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          logic.isAgree.value = !logic.isAgree.value;
-                        },
-                    ),
-                    TextSpan(
-                      style: AppTheme().textStyle(
-                          color: AppTheme.colorMain, fontSize: 13),
-                      text: "《隐私政策》",
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Get.toNamed(AppRouter().otherPages.webRoute.name,
-                              arguments: WebParam(
-                                  url: AppController.to.privacyAgreement,
-                                  title: "隐私政策"));
-                        },
-                    ),
-                    TextSpan(
-                        style: AppTheme().textStyle(
-                            color: AppTheme.colorTextPrimary,
-                            fontSize: 13),
-                        text: " 和 "),
-                    TextSpan(
-                      style: AppTheme().textStyle(
-                          color: AppTheme.colorMain, fontSize: 13),
-                      text: "《用户协议》",
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Get.toNamed(AppRouter().otherPages.webRoute.name,
-                              arguments: WebParam(
-                                  url: AppController.to.userAgreement,
-                                  title: "用户协议"));
-                        },
-                    ),
-                  ],
-                ))
+                  text: "我已阅读并同意",
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      logic.isAgree.value = !logic.isAgree.value;
+                    },
+                ),
+                TextSpan(
+                  style: AppTheme()
+                      .textStyle(color: AppTheme.colorPrivacy, fontSize: 13),
+                  text: "《隐私政策》",
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Get.toNamed(AppRouter().otherPages.webRoute.name,
+                          arguments: WebParam(
+                              url: AppController.to.privacyAgreement,
+                              title: "隐私政策"));
+                    },
+                ),
+                TextSpan(
+                    style: AppTheme().textStyle(
+                        color: AppTheme.colorTextPrimary, fontSize: 13),
+                    text: " 和 "),
+                TextSpan(
+                  style: AppTheme()
+                      .textStyle(color: AppTheme.colorPrivacy, fontSize: 13),
+                  text: "《用户协议》",
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Get.toNamed(AppRouter().otherPages.webRoute.name,
+                          arguments: WebParam(
+                              url: AppController.to.userAgreement,
+                              title: "用户协议"));
+                    },
+                ),
+              ],
+            ))
           ],
         ));
   }

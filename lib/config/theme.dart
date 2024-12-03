@@ -9,7 +9,6 @@ import 'package:youyu/widgets/app/app_base_widget.dart';
 enum AppWidgetTheme { light, dark }
 
 class AppTheme {
-
   static AppTheme? _instance;
 
   factory AppTheme() => _instance ??= AppTheme._();
@@ -24,6 +23,9 @@ class AppTheme {
 
   //背景颜色 深色
   static const Color colorDarkBg = Color(0xFF1E1E1E);
+
+  //背景颜色 白色
+  static const Color colorWhiteBg = Color(0xFFFFFFFF);
 
   //背景颜色 深浅色
   static const Color colorDarkLightBg = Color(0xFF3d3d3d);
@@ -48,6 +50,11 @@ class AppTheme {
 
   //红色
   static const Color colorRed = Color(0xFFFF4949);
+
+  //隐私政策
+  static const Color colorPrivacy = Color(0xFF2FE9FE);
+
+  static Color inputBg = const Color(0xFFCCCCCC).withOpacity(0.2);
 
   ///指示器
   AssetImage indicatorImage = AssetImage(AppResource().homeTabLine);
@@ -76,10 +83,10 @@ class AppTheme {
   ///按钮渐变
   LinearGradient get btnGradient {
     return const LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      stops: [0.0, 1.0],
-      colors: [Color(0xFFC6E958), AppTheme.colorMain],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+      stops: [0.0, 0.7],
+      colors: [Color(0xFF3FFEDC), Color(0xFF34FF8F)],
     );
   }
 
