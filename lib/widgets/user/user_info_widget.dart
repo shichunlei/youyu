@@ -84,7 +84,11 @@ class UserInfoWidget extends StatelessWidget {
             name,
             textAlign: TextAlign.left,
             gradient: AppTheme().lhGradient,
-            style: AppTheme().textStyle(fontSize: nameFontSize ?? 14.sp),
+            style: AppTheme().textStyle(
+              fontSize: nameFontSize ?? 14.sp,
+              color: AppTheme.colorTextDarkSecond,
+              fontWeight: FontWeight.w700,
+            ),
           ));
     } else {
       return Flexible(
@@ -92,8 +96,10 @@ class UserInfoWidget extends StatelessWidget {
         child: Text(
           name,
           style: AppTheme().textStyle(
-              color: AppTheme.colorTextWhite,
-              fontSize: nameFontSize ?? 14.sp),
+            fontSize: nameFontSize ?? 14.sp,
+            color: AppTheme.colorTextDarkSecond,
+            fontWeight: FontWeight.w700,
+          ),
         ),
       );
     }

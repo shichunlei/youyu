@@ -52,7 +52,7 @@ class MineIndexDataWidget extends StatelessWidget {
                           _count(index),
                           style: AppTheme().textStyle(
                               fontSize: 20.sp,
-                              color: AppTheme.colorTextWhite,
+                              color: AppTheme.colorTextDarkSecond,
                               fontWeight: FontWeight.w500),
                         ),
                       ),
@@ -62,8 +62,7 @@ class MineIndexDataWidget extends StatelessWidget {
                       Text(
                         _title(index),
                         style: AppTheme().textStyle(
-                            fontSize: 14.sp,
-                            color: AppTheme.colorTextSecond),
+                            fontSize: 14.sp, color: AppTheme.colorTextSecond),
                       )
                     ],
                   )
@@ -98,7 +97,8 @@ class MineIndexDataWidget extends StatelessWidget {
       case 0:
         return (UserController.to.userInfo.value?.friendCount ?? 0).toString();
       case 1:
-        return (UserController.to.userInfo.value?.focusRoomCount ?? 0).toString();
+        return (UserController.to.userInfo.value?.focusRoomCount ?? 0)
+            .toString();
       case 2:
         return (UserController.to.userInfo.value?.accessCount ?? 0).toString();
     }

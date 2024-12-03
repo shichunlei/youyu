@@ -19,7 +19,7 @@ class MineIndexFuncWidget extends StatelessWidget {
         alignment: Alignment.center,
         height: 90.h,
         borderRadius: BorderRadius.all(Radius.circular(8.w)),
-        bgColor: AppTheme.colorDarkBg,
+        bgColor: AppTheme.colorWhiteBg,
         margin: EdgeInsets.only(top: 11.h, left: 14.w, right: 14.w),
         child: GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
@@ -33,7 +33,8 @@ class MineIndexFuncWidget extends StatelessWidget {
               //一行的Widget数量
               crossAxisCount: list.length,
               //子Widget宽高比例
-              childAspectRatio: ((ScreenUtils.screenWidth - 30.w) / list.length) / 77.h,
+              childAspectRatio:
+                  ((ScreenUtils.screenWidth - 30.w) / list.length) / 77.h,
             ),
             itemCount: list.length,
             itemBuilder: (BuildContext context, int index) {
@@ -57,8 +58,7 @@ class MineIndexFuncWidget extends StatelessWidget {
                     Text(
                       model.title,
                       style: AppTheme().textStyle(
-                          fontSize: 12.sp,
-                          color: AppTheme.colorTextWhite),
+                          fontSize: 12.sp, color: AppTheme.colorTextDarkSecond),
                     )
                   ],
                 ),

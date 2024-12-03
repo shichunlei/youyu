@@ -15,10 +15,12 @@ import 'package:youyu/widgets/app/app_page.dart';
 import 'package:youyu/widgets/app/image/app_net_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youyu/widgets/top_bg/top_ba.dart';
 import 'mine_index_logic.dart';
 import 'widget/mine_index_core_widget.dart';
 import 'widget/mine_index_header_widget.dart';
 import 'package:youyu/widgets/page_life_state.dart';
+
 class MineIndexPage extends IndexWidget {
   const MineIndexPage({Key? key}) : super(key: key);
 
@@ -42,6 +44,8 @@ class _MineIndexPageState extends PageLifeState<MineIndexPage>
   Widget build(BuildContext context) {
     super.build(context);
     return AppPage<MineIndexLogic>(
+      topBg: const TopBgMe(),
+      backgroundColor: AppTheme.colorPinkWhiteBg,
       childBuilder: (s) {
         return Container(
           padding: EdgeInsets.only(top: ScreenUtils.statusBarHeight),

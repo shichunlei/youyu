@@ -20,7 +20,7 @@ class MineIndexItemWidget extends StatelessWidget {
         alignment: Alignment.center,
         height: 51.h * list.length,
         borderRadius: BorderRadius.all(Radius.circular(8.w)),
-        bgColor: AppTheme.colorDarkBg,
+        bgColor: AppTheme.colorWhiteBg,
         margin: EdgeInsets.only(top: 11.h, left: 14.w, right: 14.w),
         child: ListView.builder(
             padding: EdgeInsets.zero,
@@ -64,8 +64,8 @@ class MineIndexItemWidget extends StatelessWidget {
         ),
         Text(
           model.title,
-          style: AppTheme().textStyle(
-              fontSize: 14.sp, color: AppTheme.colorTextSecond),
+          style: AppTheme()
+              .textStyle(fontSize: 14.sp, color: AppTheme.colorTextDarkSecond),
         )
       ],
     );

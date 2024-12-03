@@ -30,6 +30,9 @@ class AppTheme {
   //背景颜色 深浅色
   static const Color colorDarkLightBg = Color(0xFF3d3d3d);
 
+  //背景颜色 粉白色
+  static const Color colorPinkWhiteBg = Color(0xFFF9F6F9);
+
   //导航栏颜色
   static const Color colorNavBar = Color(0xFF090909);
 

@@ -1,3 +1,4 @@
+import 'package:youyu/config/theme.dart';
 import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/models/localmodel/tab_model.dart';
@@ -43,7 +44,7 @@ class _HomeTypeSubListPageState extends PageLifeState<HomeTypeSubListPage>
     super.build(context);
     return AppPage<HomeTypeSubListLogic>(
       tag: "${widget.tabModel.id}",
-      backgroundColor: const Color(0xFFF9F6F9),
+      backgroundColor: AppTheme.colorPinkWhiteBg,
       childBuilder: (s) {
         return AppGridSeparatedView(
           shrinkWrap: true,

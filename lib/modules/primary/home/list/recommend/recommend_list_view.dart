@@ -45,7 +45,7 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
   Widget build(BuildContext context) {
     super.build(context);
     return AppPage<RecommendListLogic>(
-      backgroundColor: const Color(0xFFF9F6F9),
+      backgroundColor: AppTheme.colorPinkWhiteBg,
       childBuilder: (s) {
         return AppListSeparatedView(
           padding: EdgeInsets.only(top: 10.h, bottom: 10.h),

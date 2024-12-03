@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 
 ///核心功能区
 class MineIndexCoreIndex extends StatelessWidget {
-  const MineIndexCoreIndex({super.key, required this.list, required this.onClick});
+  const MineIndexCoreIndex(
+      {super.key, required this.list, required this.onClick});
 
   final List<MenuModel> list;
   final Function(MenuModel model) onClick;
@@ -19,7 +20,7 @@ class MineIndexCoreIndex extends StatelessWidget {
         alignment: Alignment.center,
         height: 77.h,
         borderRadius: BorderRadius.all(Radius.circular(8.w)),
-        bgColor: AppTheme.colorDarkBg,
+        bgColor: AppTheme.colorWhiteBg,
         margin: EdgeInsets.only(left: 14.w, right: 14.w),
         child: GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
@@ -38,27 +39,29 @@ class MineIndexCoreIndex extends StatelessWidget {
             itemCount: list.length,
             itemBuilder: (BuildContext context, int index) {
               MenuModel model = list[index];
-              return InkWell(onTap: () {
-                onClick(model);
-              },child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  AppLocalImage(
-                    path: model.icon,
-                    width: 28.w,
-                    height: 28.w,
-                    fit: BoxFit.cover,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    model.title,
-                    style: AppTheme().textStyle(
-                        fontSize: 12.sp, color: AppTheme.colorTextWhite),
-                  )
-                ],
-              ),);
+              return InkWell(
+                onTap: () {
+                  onClick(model);
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppLocalImage(
+                      path: model.icon,
+                      width: 38.w,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(
+                      height: 0.h,
+                    ),
+                    Text(
+                      model.title,
+                      style: AppTheme().textStyle(
+                          fontSize: 12.sp, color: AppTheme.colorTextDarkSecond),
+                    )
+                  ],
+                ),
+              );
             }));
   }
 }
