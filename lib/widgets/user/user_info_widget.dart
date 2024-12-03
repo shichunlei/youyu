@@ -7,6 +7,8 @@ import 'package:youyu/widgets/app/image/app_local_image.dart';
 import 'package:youyu/widgets/app/other/app_gradient_text.dart';
 import 'package:flutter/material.dart';
 
+enum UserInfoViewType { light, dark }
+
 ///用户昵称信息
 class UserInfoWidget extends StatelessWidget {
   const UserInfoWidget(
@@ -15,7 +17,9 @@ class UserInfoWidget extends StatelessWidget {
       required this.name,
       this.sex,
       this.userType,
-      this.nameFontSize});
+      this.nameFontSize, this.viewType = UserInfoViewType.dark});
+
+  final UserInfoViewType viewType;
 
   //是否显示靓号
   final bool isHighFancyNum;
@@ -86,7 +90,9 @@ class UserInfoWidget extends StatelessWidget {
             gradient: AppTheme().lhGradient,
             style: AppTheme().textStyle(
               fontSize: nameFontSize ?? 14.sp,
-              color: AppTheme.colorTextDarkSecond,
+              color: viewType == UserInfoViewType.light
+                  ? Colors.white
+                  : Colors.black,
               fontWeight: FontWeight.w700,
             ),
           ));
@@ -97,7 +103,9 @@ class UserInfoWidget extends StatelessWidget {
           name,
           style: AppTheme().textStyle(
             fontSize: nameFontSize ?? 14.sp,
-            color: AppTheme.colorTextDarkSecond,
+            color: viewType == UserInfoViewType.light
+                ? Colors.white
+                : Colors.black,
             fontWeight: FontWeight.w700,
           ),
         ),

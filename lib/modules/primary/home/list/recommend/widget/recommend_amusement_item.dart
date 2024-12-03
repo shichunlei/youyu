@@ -163,7 +163,7 @@ class RecommendAmusementItem extends StatelessWidget {
               child: Text(
             model.name,
             style: AppTheme()
-                .textStyle(fontSize: 14.sp, color: AppTheme.colorTextDark),
+                .textStyle(fontSize: 14.sp, color: AppTheme.colorCardText),
           ))
         ],
       ),

@@ -61,6 +61,7 @@ class LiveMsgTextWidget extends StatelessWidget {
               ),
               WidgetSpan(
                   child: UserInfoWidget(
+                    viewType: UserInfoViewType.dark,
                 isHighFancyNum: (model.userInfo?.isHighFancyNum ?? false),
                 name: model.userInfo?.nickname ?? "",
                 nameFontSize: 13.sp,

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/config/theme.dart';
-
 import 'launch_logic.dart';
 
 class LaunchPage extends StatelessWidget {

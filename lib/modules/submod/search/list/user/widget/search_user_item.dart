@@ -50,7 +50,7 @@ class SearchUserItem extends StatelessWidget {
         UserInfoWidget(
           isHighFancyNum: model.isHighFancyNum,
           name: model.nickname ?? "",
-          sex: model.gender,
+          sex: model.gender, viewType: UserInfoViewType.dark,
         ),
         Text(
           "ID：${model.fancyNumber}",

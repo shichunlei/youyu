@@ -97,7 +97,7 @@ class HomeTypeSubItem extends StatelessWidget {
                 child: Text(
                   model.name,
                   style: AppTheme().textStyle(
-                      fontSize: 14.sp, color: AppTheme.colorTextDark),
+                      fontSize: 14.sp, color: AppTheme.colorCardText),
                 ),
               )
             ],

@@ -54,6 +54,9 @@ class AppTheme {
   // 文字颜色5
   static const Color colorTextDarkSecond = Color(0xFF18103E);
 
+  //卡片文字颜色
+  static const Color colorCardText = Color(0xFF270132);
+
   //分割线1
   static const Color colorLine = Color(0xFF262626);
 

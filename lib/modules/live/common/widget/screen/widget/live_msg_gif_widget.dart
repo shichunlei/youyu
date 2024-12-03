@@ -83,6 +83,7 @@ class _LiveMsgGifWidgetState extends State<LiveMsgGifWidget>
               ),
               WidgetSpan(
                   child: UserInfoWidget(
+                    viewType: UserInfoViewType.light,
                 isHighFancyNum:
                     (widget.model.userInfo?.isHighFancyNum ?? false),
                 name: widget.model.userInfo?.nickname ?? "",
