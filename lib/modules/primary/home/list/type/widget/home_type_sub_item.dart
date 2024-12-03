@@ -18,7 +18,7 @@ class HomeTypeSubItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppColumn(
-      color: AppTheme.colorDarkBg,
+      color: AppTheme.colorWhiteBg,
       radius: 10.w,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [_topWidget(), _bottomWidget()],
@@ -50,7 +50,7 @@ class HomeTypeSubItem extends StatelessWidget {
                 padding: EdgeInsets.only(left: 10.w, right: 10.w),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24.w),
-                  color: const Color(0x33FFFFFF),
+                  // color: const Color(0x33FFFFFF),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -58,8 +58,7 @@ class HomeTypeSubItem extends StatelessWidget {
                     Text(
                       model.typeName ?? "",
                       style: AppTheme().textStyle(
-                          fontSize: 14.sp,
-                          color: AppTheme.colorTextWhite),
+                          fontSize: 14.sp, color: AppTheme.colorTextWhite),
                     )
                   ],
                 ),
@@ -98,7 +97,7 @@ class HomeTypeSubItem extends StatelessWidget {
                 child: Text(
                   model.name,
                   style: AppTheme().textStyle(
-                      fontSize: 14.sp, color: AppTheme.colorTextWhite),
+                      fontSize: 14.sp, color: AppTheme.colorTextDark),
                 ),
               )
             ],
@@ -121,8 +120,8 @@ class HomeTypeSubItem extends StatelessWidget {
               ),
               Text(
                 (model.heat ?? 0).showNum(),
-                style: AppTheme().textStyle(
-                    fontSize: 12.sp, color: AppTheme.colorMain),
+                style: AppTheme()
+                    .textStyle(fontSize: 12.sp, color: AppTheme.colorMain),
               ),
             ],
           )
