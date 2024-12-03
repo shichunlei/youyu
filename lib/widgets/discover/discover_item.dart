@@ -71,11 +71,11 @@ class _DisCoverItemWidgetState extends State<DisCoverItemWidget> {
         }
       },
       radius: _uiConfig.radius ?? 0,
-      color: _uiConfig.bgColor,
+      color: Colors.transparent,
       children: [
         //头部
         DisCoverItemHeaderWidget(
-          padding: EdgeInsets.only(left: 11.w, right: 8.w),
+          padding: EdgeInsets.only(left: 0.w, right: 0.w),
           model: widget.model,
           index: widget.index,
           ref: widget.ref,

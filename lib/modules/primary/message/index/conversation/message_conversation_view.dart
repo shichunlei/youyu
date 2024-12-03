@@ -1,5 +1,5 @@
 import 'package:youyu/utils/screen_utils.dart';
-import 'package:youyu/config/theme.dart';
+// import 'package:youyu/config/theme.dart';
 import 'package:youyu/controllers/conversation_controller.dart';
 import 'package:youyu/modules/primary/message/index/conversation/widget/message_conversation_item.dart';
 import 'package:youyu/modules/primary/message/index/conversation/widget/message_conversation_notify_item.dart';
@@ -7,7 +7,7 @@ import 'package:youyu/services/im/model/im_msg_type.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/app_page.dart';
 import 'package:youyu/widgets/app/list/app_list_separated_view.dart';
-import 'package:youyu/widgets/app/other/app_segmentation.dart';
+// import 'package:youyu/widgets/app/other/app_segmentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';

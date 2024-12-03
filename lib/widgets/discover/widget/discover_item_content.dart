@@ -42,14 +42,16 @@ class DisCoverItemContentWidget extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
+
         ///语音
         if (model?.audio?.isNotEmpty == true)
-          DiscoverAudioUrlWidget(model:model),
+          DiscoverAudioUrlWidget(model: model),
         if (model?.images?.isNotEmpty == true)
           SizedBox(
             height: 10.h,
           ),
-        if (model?.images?.isNotEmpty == true) _imagesWidget(model?.images ?? [])
+        if (model?.images?.isNotEmpty == true)
+          _imagesWidget(model?.images ?? [])
       ],
     );
   }
@@ -59,22 +61,20 @@ class DisCoverItemContentWidget extends StatelessWidget {
     return Text(
       model?.content ?? "",
       maxLines: 1000,
-      style: AppTheme().textStyle(fontSize: 12.sp, color: AppTheme.colorTextWhite),
+      style: AppTheme()
+          .textStyle(fontSize: 12.sp, color: AppTheme.colorTextDarkSecond),
     );
   }
 
   ///图片
   _imagesWidget(List<String> list) {
     if (list.length == 1) {
-      return _heroImage(
-        list,
-        0,
-        fit: BoxFit.contain,
-        alignment: Alignment.topLeft,
-        width: 250.w,
-        height: 168.h,
-        radius: BorderRadius.zero
-      );
+      return _heroImage(list, 0,
+          fit: BoxFit.contain,
+          alignment: Alignment.topLeft,
+          width: 250.w,
+          height: 168.h,
+          radius: BorderRadius.zero);
     } else {
       double itemWidth =
           ScreenUtils.screenWidth - padding.horizontal - marginLR * 2;
@@ -86,18 +86,27 @@ class DisCoverItemContentWidget extends StatelessWidget {
         width: itemWidth,
         height: itemHeight,
         children: [
-          _heroImage(list, 0, width: leftWidth, height: itemHeight,radius: BorderRadius.circular(10.w)),
+          _heroImage(list, 0,
+              width: leftWidth,
+              height: itemHeight,
+              radius: BorderRadius.circular(10.w)),
           SizedBox(
             width: 10.w,
           ),
           AppColumn(
             children: [
-              _heroImage(list, 1, width: rightWidth, height: rightHeight,radius: BorderRadius.circular(10.w)),
+              _heroImage(list, 1,
+                  width: rightWidth,
+                  height: rightHeight,
+                  radius: BorderRadius.circular(10.w)),
               SizedBox(
                 height: 10.w,
               ),
               list.length > 2
-                  ? _heroImage(list, 2, width: rightWidth, height: rightHeight,radius: BorderRadius.circular(10.w))
+                  ? _heroImage(list, 2,
+                      width: rightWidth,
+                      height: rightHeight,
+                      radius: BorderRadius.circular(10.w))
                   : const Expanded(child: SizedBox.shrink()),
             ],
           )
@@ -128,8 +137,8 @@ class DisCoverItemContentWidget extends StatelessWidget {
           imageUrl: url,
           radius: radius,
           fit: fit ?? BoxFit.cover,
-          defaultWidget: AppTheme().defaultNewImage(
-              radius: 10.w, color: AppTheme.colorDarkLightBg),
+          defaultWidget: AppTheme()
+              .defaultNewImage(radius: 10.w, color: AppTheme.colorDarkLightBg),
         ));
   }
 }

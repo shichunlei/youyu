@@ -1,3 +1,4 @@
+import 'package:youyu/config/theme.dart';
 import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/config/resource.dart';
@@ -11,8 +12,10 @@ import 'package:youyu/widgets/app/icon/app_un_read_icon.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youyu/widgets/top_bg/top_ba.dart';
 import 'discover_index_logic.dart';
 import 'package:youyu/widgets/page_life_state.dart';
+
 class DiscoverIndexPage extends IndexWidget {
   const DiscoverIndexPage({Key? key}) : super(key: key);
 
@@ -33,6 +36,8 @@ class _DiscoverIndexPageState extends PageLifeState<DiscoverIndexPage>
   Widget build(BuildContext context) {
     super.build(context);
     return AppPage<DiscoverIndexLogic>(
+      topBg: const TopBgCommon(),
+      backgroundColor: AppTheme.colorPinkWhiteBg,
       appBar: DiscoverTabBar(
         logic: logic,
         key: tabBarKey,

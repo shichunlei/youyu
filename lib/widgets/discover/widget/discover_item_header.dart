@@ -58,7 +58,7 @@ class _DisCoverItemHeaderWidgetState extends State<DisCoverItemHeaderWidget> {
                 onClickUserHead: (userInfo) {
                   if ((userInfo?.onlineRoom ?? 0) > 0) {
                     //TODO:直播间内不能进入
-                    if(!LiveService().isInLive) {
+                    if (!LiveService().isInLive) {
                       if (widget.onClickLive != null) {
                         widget.onClickLive!(widget.model);
                       }
@@ -85,7 +85,8 @@ class _DisCoverItemHeaderWidgetState extends State<DisCoverItemHeaderWidget> {
                           widget.model?.userInfo?.nickname ?? "",
                           style: AppTheme().textStyle(
                               fontSize: 16.sp,
-                              color: AppTheme.colorTextWhite),
+                              color: AppTheme.colorTextDarkSecond,
+                              fontWeight: FontWeight.w700),
                         ),
                       ),
                       SizedBox(
@@ -103,8 +104,7 @@ class _DisCoverItemHeaderWidgetState extends State<DisCoverItemHeaderWidget> {
                   Text(
                     TimeUtils.displayTime(widget.model?.createTime ?? 0),
                     style: AppTheme().textStyle(
-                        fontSize: 12.sp,
-                        color: AppTheme.colorTextSecond),
+                        fontSize: 12.sp, color: AppTheme.colorTextSecond),
                   )
                 ],
               )),
@@ -148,7 +148,7 @@ class _DisCoverItemHeaderWidgetState extends State<DisCoverItemHeaderWidget> {
             titleColor: AppTheme.colorTextWhite,
             bgGradient: (widget.model?.userInfo?.isFocus ?? false)
                 ? AppTheme().btnLightGradient
-                : AppTheme().btnGradient,
+                : AppTheme().focusBtnGradient,
             onClick: () {
               if (widget.onClickFocus != null) {
                 widget.onClickFocus!(widget.model);
@@ -166,5 +166,4 @@ class _DisCoverItemHeaderWidgetState extends State<DisCoverItemHeaderWidget> {
           )
         : const SizedBox.shrink();
   }
-
 }

@@ -13,6 +13,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'discover_sub_list_logic.dart';
 import 'package:youyu/widgets/page_life_state.dart';
+
 class DiscoverSubListPage extends StatefulWidget {
   const DiscoverSubListPage({Key? key, required this.tabModel})
       : super(key: key);
@@ -43,6 +44,7 @@ class _DiscoverSubListPageState extends PageLifeState<DiscoverSubListPage>
     super.build(context);
     return AppPage<DiscoverSubListLogic>(
       tag: widget.tabModel.id.toString(),
+      backgroundColor: Colors.transparent,
       childBuilder: (s) {
         return _list();
       },
@@ -58,7 +60,8 @@ class _DiscoverSubListPageState extends PageLifeState<DiscoverSubListPage>
       isOpenRefresh: true,
       separatorBuilder: (_, int index) {
         return AppSegmentation(
-          height: 9.h,
+          height: 1.h,
+          backgroundColor: const Color(0xFFE6E6E6),
         );
       },
       footer: AppLoadMoreFooter.getFooter(isEmptyData: logic.isNoData),

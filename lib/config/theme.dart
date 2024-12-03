@@ -99,6 +99,16 @@ class AppTheme {
     );
   }
 
+  ///按钮渐变
+  LinearGradient get focusBtnGradient {
+    return const LinearGradient(
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+      stops: [0.0, 0.7],
+      colors: [Color(0xFF9A55FF), Color(0xFF9A55FF)],
+    );
+  }
+
   /// 房间标签渐变
   LinearGradient get roomTagGradient {
     return const LinearGradient(
