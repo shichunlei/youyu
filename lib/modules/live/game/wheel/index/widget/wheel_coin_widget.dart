@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/config/theme.dart';
 import 'package:youyu/controllers/user/user_controller.dart';
@@ -27,11 +28,11 @@ class WheelCoinWidget extends StatelessWidget {
           margin: EdgeInsets.only(left: 38.w),
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
+            Obx(() => Text(
               UserController.to.coins.toString(),
               style: AppTheme()
                   .textStyle(fontSize: 9.sp, color: const Color(0xFFFFF9C5)),
-            ),
+            )),
             SizedBox(width: 12.w,),
             AppLocalImage(
               path: AppResource().gameWheelRight,

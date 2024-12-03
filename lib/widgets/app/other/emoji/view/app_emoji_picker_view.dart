@@ -48,8 +48,9 @@ class _AppEmojiPickerViewState extends State<AppEmojiPickerView>
     List<AppCustomEmojiCategory> customCategoryEmoji =
         widget.customCategoryEmoji ?? _defaultCustomCategoryEmoji();
     categoryEmojiList = [];
-    categoryEmojiList.addAll(widget.state.categoryEmoji);
     categoryEmojiList.addAll(customCategoryEmoji);
+    categoryEmojiList.addAll(widget.state.categoryEmoji);
+
 
     //view
     normalView = AppEmojiNormalView(config: widget.config);
