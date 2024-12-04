@@ -152,7 +152,8 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
                   width: 174.w,
                 ),
               ),
-              Column(
+              Expanded(
+                  child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   // 酒吧
@@ -170,29 +171,33 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // 游戏
-                      AppContainer(
-                        onTap: () {
-                          widget.changeTabIndex(4);
-                        },
-                        child: AppLocalImage(
-                          path: AppResource().homeTabBarJumpGame,
-                          width: 90.w,
+                      Expanded(
+                        child: AppContainer(
+                          onTap: () {
+                            widget.changeTabIndex(4);
+                          },
+                          child: AppLocalImage(
+                            path: AppResource().homeTabBarJumpGame,
+                            width: 90.w,
+                          ),
                         ),
                       ),
                       // 娱乐
-                      AppContainer(
-                        onTap: () {
-                          widget.changeTabIndex(1);
-                        },
-                        child: AppLocalImage(
-                          path: AppResource().homeTabBarJumpRecreation,
-                          width: 90.w,
+                      Expanded(
+                        child: AppContainer(
+                          onTap: () {
+                            widget.changeTabIndex(1);
+                          },
+                          child: AppLocalImage(
+                            path: AppResource().homeTabBarJumpRecreation,
+                            width: 90.w,
+                          ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ],
-              )
+              ))
             ],
           ),
           Row(

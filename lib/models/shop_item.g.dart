@@ -21,6 +21,7 @@ ShopItem _$ShopItemFromJson(Map<String, dynamic> json) => ShopItem(
       res: json['res'] as String? ?? '',
       isSet: json['is_set'] as int? ?? 0,
       fancyNumber: json['fancy_number'] as String? ?? '',
+      endTime: json['end_time'] as int? ?? 0
     );
 
 Map<String, dynamic> _$ShopItemToJson(ShopItem instance) => <String, dynamic>{
@@ -32,5 +33,6 @@ Map<String, dynamic> _$ShopItemToJson(ShopItem instance) => <String, dynamic>{
       'img': instance.image,
       'res': instance.res,
       'price': instance.price,
+      'end_time':instance.endTime,
       'fancy_number': instance.fancyNumber,
     };

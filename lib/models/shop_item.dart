@@ -28,6 +28,9 @@ class ShopItem implements BaseModel {
   @JsonKey(name: 'fancy_number')
   final String? fancyNumber;
 
+  @JsonKey(name: 'end_time')
+  final int? endTime;
+
   ShopItem({
     this.id,
     this.type,
@@ -39,6 +42,7 @@ class ShopItem implements BaseModel {
     this.price,
     this.isSet,
     this.fancyNumber,
+    this.endTime
   });
 
   @override

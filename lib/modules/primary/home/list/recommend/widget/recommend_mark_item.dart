@@ -1,11 +1,13 @@
 import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/widgets/image/stack_lock_image.dart';
+
 // import 'package:youyu/widgets/svga/simple_player_ext.dart';
 import 'package:youyu/config/theme.dart';
 import 'package:youyu/models/room_list_item.dart';
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/utils/number_ext.dart';
+
 // import 'package:youyu/widgets/app/image/app_circle_net_image.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
 import 'package:flutter/material.dart';
@@ -105,7 +107,7 @@ class RecommendMarkItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 36.w,
+                      width: 80.w,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,

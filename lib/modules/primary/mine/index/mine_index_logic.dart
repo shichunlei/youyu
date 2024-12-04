@@ -8,6 +8,7 @@ import 'package:youyu/models/conference.dart';
 import 'package:youyu/router/router.dart';
 import 'package:youyu/services/live/live_service.dart';
 import 'package:get/get.dart';
+import 'package:youyu/utils/toast_utils.dart';
 
 enum MineIndexMenuType {
   friend, //好友
@@ -125,7 +126,8 @@ class MineIndexLogic extends AppBaseController {
         Get.toNamed(AppRouter().otherPages.levelRoute.name);
         break;
       case MineIndexMenuType.jw:
-        Get.toNamed(AppRouter().otherPages.nobilityRoute.name);
+        ToastUtils.show("暂无开放");
+        // Get.toNamed(AppRouter().otherPages.nobilityRoute.name);
         break;
       case MineIndexMenuType.wallet:
         Get.toNamed(AppRouter().walletPages.walletRoute.name);

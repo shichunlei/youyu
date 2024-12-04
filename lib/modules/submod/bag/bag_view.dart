@@ -1,5 +1,6 @@
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/utils/screen_utils.dart';
+import 'package:youyu/utils/time_utils.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
 
 import 'package:youyu/widgets/svga/simple_player_repeat.dart';
@@ -13,6 +14,7 @@ import 'package:youyu/widgets/app/app_top_bar.dart';
 import 'package:youyu/widgets/app/image/app_circle_net_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../utils/date_format.dart';
 import 'bag_logic.dart';
 
 class BagPage extends StatefulWidget {
@@ -99,9 +101,7 @@ class _BagPageState extends State<BagPage> {
             ],
           );
         }),
-        SizedBox(
-          height: 6.h,
-        ),
+
         Obx(() {
           return logic.index.value < 2
               ? Text(
@@ -110,9 +110,35 @@ class _BagPageState extends State<BagPage> {
                       fontSize: 14.sp, color: const Color(0xFF000000)),
                 )
               : const SizedBox.shrink();
-        })
+        }),
+        SizedBox(
+          height: 5.h,
+        ),
+        Obx(() => Container(
+              child: Center(
+                  child: Text(
+                _endTime(),
+                style: AppTheme()
+                    .textStyle(fontSize: 13.sp, color: const Color(0xFF000000)),
+              )),
+            ))
       ],
     );
+  }
+
+  _endTime() {
+    if (logic.curItem.value != null) {
+      if (logic.curItem.value?.endTime == -1) {
+        return "到期时间：永久不过期";
+      } else {
+        DateTime dateTime = DateTime.fromMillisecondsSinceEpoch((logic.curItem.value?.endTime ?? 0) * 1000);
+        // 使用intl库中的DateFormat类来格式化DateTime对象
+        DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+        String formattedDateTime = formatter.format(dateTime);
+        return "到期时间：${formattedDateTime}";
+      }
+    }
+    return '';
   }
 
   _tabBar() {

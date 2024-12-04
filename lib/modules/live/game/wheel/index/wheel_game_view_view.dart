@@ -134,7 +134,7 @@ class _WheelGameViewPageState extends State<WheelGameViewPage>
                 Expanded(
                   child: AppLocalImage(
                       onTap: () {
-                        logic.onSend(5);
+                        logic.onSend(10);
                       },
                       path: logic.viewType.value == GameSubViewType.primary
                           ? AppResource().gameWheelCoinCenter1
@@ -143,7 +143,7 @@ class _WheelGameViewPageState extends State<WheelGameViewPage>
                 Expanded(
                   child: AppLocalImage(
                       onTap: () {
-                        logic.onSend(10);
+                        logic.onSend(30);
                       },
                       path: logic.viewType.value == GameSubViewType.primary
                           ? AppResource().gameWheelCoinRight1

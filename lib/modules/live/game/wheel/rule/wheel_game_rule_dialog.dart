@@ -41,6 +41,7 @@ class WheelGameRuleDialog extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 25.w),
                         child: Text(
                           text,
+                          maxLines: 10000,
                           style: AppTheme()
                               .textStyle(fontSize: 13.sp, color: Colors.white),
                         ),

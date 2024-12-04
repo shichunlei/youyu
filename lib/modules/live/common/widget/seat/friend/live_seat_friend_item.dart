@@ -142,6 +142,7 @@ class _LiveSeatFriendItemState extends State<LiveSeatFriendItem> {
   /// 0：空位
   /// 1：上麦
   /// 2：锁麦
+  /// 3:离开
   _micSeatStatesBg() {
     switch (widget.micSeatState.state) {
       case 0:
@@ -259,6 +260,20 @@ class _LiveSeatFriendItemState extends State<LiveSeatFriendItem> {
                   ),
                 ),
               ),
+            if (widget.micSeatState.state == 3)
+              AppContainer(
+                radius: 99.h,
+                width: 48.w,
+                height: 48.w,
+                color: const Color(0xAA000000),
+                child: Center(
+                  child: Text(
+                    '离开',
+                    style: AppTheme()
+                        .textStyle(fontSize: 14.sp, color: Colors.white),
+                  ),
+                ),
+              )
           ],
         );
     }
