@@ -240,6 +240,21 @@ class AppResource {
 
   String get homeRoomHeat => _getCommon("ic_home_room_heat");
 
+  String get homeTabBarJumpFriendship =>
+      _getCommon("ic_home_tab_bar_jump_friendship");
+
+  String get homeTabBarJumpBar => _getCommon("ic_home_tab_bar_jump_bar");
+
+  String get homeTabBarJumpGame => _getCommon("ic_home_tab_bar_jump_game");
+
+  String get homeTabBarJumpRecreation =>
+      _getCommon("ic_home_tab_bar_jump_recreation");
+
+  String get homeTabBarJumpSing => _getCommon("ic_home_tab_bar_jump_Sing");
+
+  String get homeTabBarJumpBlingDate =>
+      _getCommon("ic_home_tab_bar_jump_bling_date");
+
   ///rank
   String get rankTopBg => _getCommon("ic_rank_top_bg");
 

@@ -44,7 +44,7 @@ class _HomeTypeSubListPageState extends PageLifeState<HomeTypeSubListPage>
     super.build(context);
     return AppPage<HomeTypeSubListLogic>(
       tag: "${widget.tabModel.id}",
-      backgroundColor: AppTheme.colorPinkWhiteBg,
+      backgroundColor: Colors.transparent,
       childBuilder: (s) {
         return AppGridSeparatedView(
           shrinkWrap: true,

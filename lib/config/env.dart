@@ -9,7 +9,8 @@ class EvnConfig {
   //环境key
   static const String _envKey = "ENV_FLAG";
   //app的环境
-  static const appFlag = String.fromEnvironment(_envKey,defaultValue: FlagValue.release);
+  static const appFlag =
+      String.fromEnvironment(_envKey, defaultValue: FlagValue.debug);
 
   EvnConfig._();
 }

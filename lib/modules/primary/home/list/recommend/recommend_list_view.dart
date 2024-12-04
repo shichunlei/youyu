@@ -1,3 +1,5 @@
+import 'package:youyu/config/resource.dart';
+import 'package:youyu/modules/primary/home/list/recommend/model/recommend_tabbar_jump_model.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:card_swiper/card_swiper.dart';
 
@@ -10,6 +12,7 @@ import 'package:youyu/modules/primary/home/list/recommend/widget/recommend_mark_
 import 'package:youyu/modules/primary/home/list/recommend/widget/recommend_title_widget.dart';
 import 'package:youyu/services/live/live_service.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
+import 'package:youyu/widgets/app/image/app_local_image.dart';
 import 'package:youyu/widgets/app/image/app_net_image.dart';
 import 'package:youyu/widgets/app/list/app_list_separated_view.dart';
 import 'package:youyu/widgets/app/app_page.dart';
@@ -45,7 +48,7 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
   Widget build(BuildContext context) {
     super.build(context);
     return AppPage<RecommendListLogic>(
-      backgroundColor: AppTheme.colorPinkWhiteBg,
+      backgroundColor: Colors.transparent,
       childBuilder: (s) {
         return AppListSeparatedView(
           padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
@@ -61,6 +64,8 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
             var item = s.allData[index];
             if (item is RecommendBannerModel) {
               return _bannerWidget(item.bannerList);
+            } else if (item is RecommendTabbarJumpModel) {
+              return _tabBarJump();
             } else if (item is RecommendHotModel) {
               return _hotWidget(item);
             } else if (item is RecommendHomeModel) {
@@ -128,6 +133,99 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
     );
   }
 
+  // tab bar 跳转
+  _tabBarJump() {
+    return Container(
+      margin: EdgeInsets.only(left: 14.w, right: 14.w),
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 交友
+              AppContainer(
+                onTap: () {
+                  widget.changeTabIndex(3);
+                },
+                child: AppLocalImage(
+                  path: AppResource().homeTabBarJumpFriendship,
+                  width: 174.w,
+                ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  // 酒吧
+                  AppContainer(
+                    onTap: () {
+                      widget.changeTabIndex(2);
+                    },
+                    child: AppLocalImage(
+                      path: AppResource().homeTabBarJumpBar,
+                      width: 170.w,
+                    ),
+                  ),
+                  SizedBox(height: 9.h),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // 游戏
+                      AppContainer(
+                        onTap: () {
+                          widget.changeTabIndex(4);
+                        },
+                        child: AppLocalImage(
+                          path: AppResource().homeTabBarJumpGame,
+                          width: 90.w,
+                        ),
+                      ),
+                      // 娱乐
+                      AppContainer(
+                        onTap: () {
+                          widget.changeTabIndex(1);
+                        },
+                        child: AppLocalImage(
+                          path: AppResource().homeTabBarJumpRecreation,
+                          width: 90.w,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 唱歌
+              AppContainer(
+                onTap: () {
+                  widget.changeTabIndex(5);
+                },
+                child: AppLocalImage(
+                  path: AppResource().homeTabBarJumpSing,
+                  width: 165.w,
+                ),
+              ),
+              // 相亲
+              AppContainer(
+                onTap: () {
+                  widget.changeTabIndex(6);
+                },
+                child: AppLocalImage(
+                  path: AppResource().homeTabBarJumpBlingDate,
+                  width: 181.w,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   ///推荐房间
   _recommendWidget(RecommendHomeModel model) {
     return Container(
@@ -141,7 +239,7 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
             title: model.title,
             image: model.image,
             onClick: () {
-              widget.changeTabIndex(1);
+              // widget.changeTabIndex(1);
             },
           ),
           GridView.builder(
@@ -186,7 +284,7 @@ class _RecommendListPageState extends PageLifeState<RecommendListPage>
             title: model.title,
             image: model.image,
             onClick: () {
-              widget.changeTabIndex(2);
+              // widget.changeTabIndex(2);
             },
           ),
           GridView.builder(

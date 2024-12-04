@@ -1,3 +1,4 @@
+import 'package:youyu/config/theme.dart';
 import 'package:youyu/modules/primary/home/list/type/home_type_sub_list_view.dart';
 import 'package:youyu/utils/screen_utils.dart';
 
@@ -32,7 +33,7 @@ class _HomeIndexPageState extends PageLifeState<HomeIndexPage>
     super.build(context);
     return AppPage<HomeIndexLogic>(
       topBg: const TopBgCommon(),
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppTheme.colorPinkWhiteBg,
       appBar: HomeTabBar(
         logic: logic,
         key: tabBarKey,

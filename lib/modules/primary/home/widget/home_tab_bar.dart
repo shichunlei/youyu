@@ -97,6 +97,7 @@ class HomeTabBarState extends State<HomeTabBar> {
                     isScrollable: true,
                     dragStartBehavior: DragStartBehavior.start,
                   )),
+                  SizedBox(width: 4.w),
                   Row(
                     children: [
                       AppImageButton(

@@ -7,6 +7,7 @@ import 'package:youyu/controllers/base/base_controller.dart';
 import 'package:youyu/models/banner_model.dart';
 import 'package:youyu/models/recommend_list_model.dart';
 import 'package:youyu/models/room_list_item.dart';
+import 'package:youyu/modules/primary/home/list/recommend/model/recommend_tabbar_jump_model.dart';
 import 'model/recommend_amusement_model.dart';
 import 'model/recommend_banner_model.dart';
 import 'model/recommend_making_model.dart';
@@ -32,6 +33,7 @@ class RecommendListLogic extends AppBaseController {
       if (model.banner != null && model.banner?.isNotEmpty == true) {
         fetchBanner(model.banner!);
       }
+      fetchTabBarJump();
       if (model.list != null) {
         List<RoomListItem> allList = model.list ?? [];
         List<RoomListItem> top3List = [];
@@ -69,6 +71,11 @@ class RecommendListLogic extends AppBaseController {
   fetchBanner(List<BannerModel> list) {
     RecommendBannerModel model = RecommendBannerModel(bannerList: list);
     AppController.to.bannerModel.value = model;
+    allData.add(model);
+  }
+
+  fetchTabBarJump() {
+    RecommendTabbarJumpModel model = RecommendTabbarJumpModel();
     allData.add(model);
   }
 
