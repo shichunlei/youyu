@@ -70,7 +70,7 @@ if [ $Platform == 'all'  ];then
 
 else
     #打包ios || android
-    fvm flutter build $Platform --dart-define=ENV_FLAG=$ENV
+    fvm flutter build $Platform --release --no-shrink --dart-define=ENV_FLAG=$ENV
     if [ $Platform == 'apk'  ];then
         echo "android:"$APP"-"$ENV
         cd build/app/outputs/flutter-apk/

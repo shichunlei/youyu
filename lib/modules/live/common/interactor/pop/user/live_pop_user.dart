@@ -268,6 +268,7 @@ class _LivePopUserState extends State<LivePopUser> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             UserInfoWidget(
+              viewType: UserInfoViewType.light,
               isHighFancyNum: widget.targetUserInfo?.isHighFancyNum ?? false,
               name: widget.targetUserInfo?.nickname ?? "",
               sex: widget.targetUserInfo?.gender,

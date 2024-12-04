@@ -77,6 +77,7 @@ class RankListItemWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         UserInfoWidget(
+          viewType: UserInfoViewType.light,
           isHighFancyNum: model.isHighFancyNum,
           name: model.nickname ?? "",
           sex: model.gender,

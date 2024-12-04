@@ -18,6 +18,22 @@ allprojects {
     }
 }
 
+subprojects { project ->
+    afterEvaluate {
+        if (project.hasProperty('android')) {
+            android {
+                buildTypes {
+                    release {
+                        // 统一关闭所有模块的混淆
+                        minifyEnabled false
+                        shrinkResources false
+                    }
+                }
+            }
+        }
+    }
+}
+
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"

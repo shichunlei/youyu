@@ -221,7 +221,7 @@ class LiveSeatFriendWidget extends StatelessWidget {
                     ),
 
                     //两人都在麦上开启连线
-                    if (mics[2].state == 1 && mics[3].state == 1)
+                    if ((mics[2].state == 1 || mics[2].state == 3) && (mics[3].state == 1 || mics[3].state == 3))
                       HeartLinkWidget(
                         charmSum: mics[2].heart + mics[3].heart,
                         imageWidth: 100.w,
@@ -265,7 +265,7 @@ class LiveSeatFriendWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    if (mics[4].state == 1 && mics[5].state == 1)
+                    if ((mics[4].state == 1 || mics[4].state == 3) && (mics[5].state == 1 || mics[5].state == 3))
                       HeartLinkWidget(
                         charmSum: mics[4].heart + mics[5].heart,
                         imageWidth: 225.w,
@@ -309,7 +309,7 @@ class LiveSeatFriendWidget extends StatelessWidget {
                             }),
                       ],
                     ),
-                    if (mics[6].state == 1 && mics[7].state == 1)
+                    if ((mics[6].state == 1 || mics[6].state == 3) && (mics[7].state == 1 || mics[7].state == 3))
                       HeartLinkWidget(
                           charmSum: mics[6].heart + mics[7].heart,
                           imageWidth: 100.w,
