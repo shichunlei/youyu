@@ -69,12 +69,6 @@ class ShopTabBarState extends State<ShopTabBar> {
       color: AppTheme.colorTextWhite,
       fontSize: 18.sp,
     );
-    return Tab(
-      child: AnimatedDefaultTextStyle(
-        style: _currentIndex == index ? selectedStyle : normalStyle,
-        duration: const Duration(milliseconds: 90),
-        child: Text(text),
-      ),
-    );
+    return AppTheme().animatedTab(index, text, currentIndex: _currentIndex, normalStyle: normalStyle, selectedStyle: selectedStyle);
   }
 }

@@ -50,4 +50,9 @@ class CommonGiftTabBarState extends State<CommonGiftTabBar> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }

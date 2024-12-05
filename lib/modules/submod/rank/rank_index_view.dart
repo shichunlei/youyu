@@ -113,13 +113,6 @@ class RankIndexPage extends StatelessWidget {
       color: AppTheme.colorTextWhite,
       fontSize: 20.sp,
     );
-    return Obx(() => Tab(
-          child: AnimatedDefaultTextStyle(
-            style:
-                logic.currentIndex.value == index ? selectedStyle : normalStyle,
-            duration: const Duration(milliseconds: 90),
-            child: Text(text),
-          ),
-        ));
+    return Obx(() => AppTheme().animatedTab(index, text, currentIndex: logic.currentIndex.value, normalStyle: normalStyle, selectedStyle: selectedStyle));
   }
 }

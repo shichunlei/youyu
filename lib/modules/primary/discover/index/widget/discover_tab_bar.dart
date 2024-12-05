@@ -79,7 +79,7 @@ class DiscoverTabBarState extends State<DiscoverTabBar> {
       });
     }
   }
-
+  // return Tab(text: e.name,);
   Widget _animatedTab(int index, String text) {
     TextStyle normalStyle = TextStyle(
       color: AppTheme.colorTextDark,
@@ -90,12 +90,7 @@ class DiscoverTabBarState extends State<DiscoverTabBar> {
       fontSize: 22.sp,
       fontWeight: FontWeight.w700,
     );
-    return Tab(
-      child: AnimatedDefaultTextStyle(
-        style: _currentIndex == index ? selectedStyle : normalStyle,
-        duration: const Duration(milliseconds: 90),
-        child: Text(text),
-      ),
-    );
+    return AppTheme().animatedTab(index, text, currentIndex: _currentIndex, normalStyle: normalStyle, selectedStyle: selectedStyle);
+
   }
 }

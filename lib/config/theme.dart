@@ -338,4 +338,21 @@ class AppTheme {
       height: double.infinity,
     );
   }
+
+  Widget animatedTab(
+    int index,
+    String text, {
+    required int currentIndex,
+    required TextStyle normalStyle,
+    required TextStyle selectedStyle,
+  }) {
+    // return Tab(text: text,);
+    return Tab(
+      child: AnimatedDefaultTextStyle(
+        style: currentIndex == index ? selectedStyle : normalStyle,
+        duration: const Duration(milliseconds: 90),
+        child: Text(text),
+      ),
+    );
+  }
 }

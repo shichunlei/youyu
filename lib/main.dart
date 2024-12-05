@@ -98,20 +98,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   _appIndex(Widget? child) {
-    if (EvnConfig.appFlag == FlagValue.debug) {
-      return Stack(
-        children: [
-          AppKeyboardDismiss(
-            child: FloatController.to.liveFloat(child: child!),
-          ),
-          FloatController.to.testFloat()
-        ],
-      );
-    } else {
-      return AppKeyboardDismiss(
-        child: FloatController.to.liveFloat(child: child!),
-      );
-    }
+    return AppKeyboardDismiss(
+      child: FloatController.to.liveFloat(child: child!),
+    );
   }
 }
 
