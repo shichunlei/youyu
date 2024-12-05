@@ -1,7 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 import 'dart:ui' as ui;
-import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 
 import 'package:youyu/models/gift_game.dart';
@@ -66,19 +66,34 @@ class GameService {
   }
 
   Future<ui.Image> _downloadAndDecodeImage(String url) async {
-    // 获取网络图片字节
-    final http.Response response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      final Uint8List imageBytes = response.bodyBytes;
-      // 使用 decodeImageFromList 解码为 ui.Image
-      final Completer<ui.Image> completer = Completer();
-      ui.decodeImageFromList(imageBytes, (ui.Image image) {
-        completer.complete(image);
-      });
-      // 返回解码后的 ui.Image
-      return completer.future;
-    } else {
-      throw Exception('Failed to load image: $url');
+    try {
+      final dio = Dio();
+      // 获取网络图片字节
+      final response = await dio.get<List<int>>(
+        url,
+        options: Options(
+          responseType: ResponseType.bytes,  // 直接获取字节数据
+          followRedirects: true,
+          validateStatus: (status) => status != null && status < 500,
+        ),
+      );
+
+      if (response.statusCode == 200 && response.data != null) {
+        // 使用 decodeImageFromList 解码为 ui.Image
+        final Completer<ui.Image> completer = Completer();
+        ui.decodeImageFromList(Uint8List.fromList(response.data!), (ui.Image image) {
+          completer.complete(image);
+        });
+        // 返回解码后的 ui.Image
+        return completer.future;
+      } else {
+        throw Exception('Failed to load image: $url, status: ${response.statusCode}');
+      }
+    } catch (e, stack) {
+      print('Error downloading image: $e\nStack: $stack');
+      throw Exception('Failed to load image: $url, error: $e');
+    } finally {
+      // 清理资源
     }
   }
 }
