@@ -58,6 +58,7 @@ class SearchTopBarState extends State<SearchTopBar> {
                 Expanded(
                     child: SearchInputWidget(
                         height: 38.h,
+                        textColor: AppTheme.colorMain,
                         onClickClear: widget.onClickClear,
                         onSubmitted: widget.onSubmitted,
                         placeHolder: widget.placeHolder ?? '搜索房间名称，用户昵称或ID',

@@ -9,6 +9,7 @@ import 'package:youyu/modules/live/common/model/mic_seat_state.dart';
 import 'package:youyu/modules/live/game/wheel/index/wheel_game_view_view.dart';
 import 'package:youyu/modules/live/index/live_index_logic.dart';
 import 'package:youyu/services/game/game_service.dart';
+import 'package:youyu/utils/sp_utils.dart';
 import 'package:youyu/utils/toast_utils.dart';
 import 'package:youyu/controllers/user/user_controller.dart';
 import 'package:youyu/services/trtc/trtc_service.dart';
@@ -801,9 +802,9 @@ class LiveIndexOperation {
 
           ///关闭动效
           if (LiveIndexLogic.to.isCloseAni.value) {
-            LiveIndexLogic.to.isCloseAni.value = false;
+            LiveIndexLogic.to.setCloseAni(false);
           } else {
-            LiveIndexLogic.to.isCloseAni.value = true;
+            LiveIndexLogic.to.setCloseAni(true);
             LiveIndexLogic.to.notification?.giftSlideNotify.clearBigAniQue();
           }
           break;

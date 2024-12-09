@@ -130,6 +130,7 @@ class _RankListTopItemWidget extends StatelessWidget {
               height: 8.h,
             ),
             UserInfoWidget(
+              viewType: UserInfoViewType.light,
               isHighFancyNum: model.isHighFancyNum,
               name: model.nickname ?? "",
               sex: model.gender,
@@ -232,11 +233,11 @@ class _RankListTopItemWidget extends StatelessWidget {
         SizedBox(
           width: 3.w,
         ),
-        Text(
+        Expanded(child: Text(
           model.numCoin ?? "0",
           style: AppTheme()
               .textStyle(fontSize: 12.sp, color: AppTheme.colorTextWhite),
-        )
+        ))
       ],
     );
   }

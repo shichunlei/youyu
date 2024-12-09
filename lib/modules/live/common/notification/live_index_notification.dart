@@ -341,6 +341,7 @@ class LiveIndexNotification extends LiveNotification
           AppTipDialog().showTipDialog("提示", AppWidgetTheme.dark,
               onWillPop: false, msg: "邀请你上麦，是否上麦？", onCommit: () {
             isShowHugUpMic = false;
+
             if (LiveIndexLogic.to.onSeatMics().isNotEmpty == true) {
               MicSeatState? micSeatState;
               if ((imModel.data?.position ?? -1) > -1) {
@@ -367,6 +368,7 @@ class LiveIndexNotification extends LiveNotification
                   state: 1,
                   userId: imModel.data?.userInfo.id ?? 0);
             }
+
           }, onCancel: () {
             isShowHugUpMic = false;
           });

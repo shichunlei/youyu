@@ -167,6 +167,7 @@ class LiveCompereWidgetState extends State<LiveCompereWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               UserInfoWidget(
+                viewType: UserInfoViewType.light,
                 isHighFancyNum: model.isHighFancyNum,
                 name: model.nickname ?? "",
                 sex: model.gender,

@@ -90,7 +90,7 @@ class HttpManager {
           errorMessage += "\n错误信息: ${e.message}";
 
           if (isShowToast) {
-            ToastUtils.show("$path\n$errorMessage");
+            // ToastUtils.show("$path\n$errorMessage");
           }
 
           throw HttpErrorException(
@@ -100,7 +100,7 @@ class HttpManager {
         errorMessage += "\n错误信息: ${e.toString()}";
 
         if (isShowToast) {
-          ToastUtils.show("$path\n$errorMessage");
+          // ToastUtils.show("$path\n$errorMessage");
         }
 
         throw HttpErrorException(errorType: HttpErrorType.web);
@@ -152,7 +152,7 @@ class HttpManager {
           errorMessage += "\n错误信息: ${e.message}";
 
           if (isShowToast) {
-            ToastUtils.show("$path\n$errorMessage");
+            // ToastUtils.show("$path\n$errorMessage");
           }
 
           throw HttpErrorException(
@@ -162,7 +162,7 @@ class HttpManager {
         errorMessage += "\n错误信息: ${e.toString()}";
 
         if (isShowToast) {
-          ToastUtils.show("$path\n$errorMessage");
+          // ToastUtils.show("$path\n$errorMessage");
         }
 
         throw HttpErrorException(errorType: HttpErrorType.web);
@@ -215,7 +215,7 @@ class HttpManager {
           errorMessage += "\n错误信息: ${e.message}";
 
           if (isShowToast) {
-            ToastUtils.show("$path\n$errorMessage");
+            // ToastUtils.show("$path\n$errorMessage");
           }
 
           throw HttpErrorException(
@@ -225,7 +225,7 @@ class HttpManager {
         errorMessage += "\n错误信息: ${e.toString()}";
 
         if (isShowToast) {
-          ToastUtils.show("$path\n$errorMessage");
+          // ToastUtils.show("$path\n$errorMessage");
         }
 
         throw HttpErrorException(errorType: HttpErrorType.web);

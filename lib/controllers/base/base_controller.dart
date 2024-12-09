@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:youyu/config/api.dart';
 import 'package:youyu/services/http/http_error.dart';
 import 'package:youyu/services/http/http_manager.dart';
 import 'package:youyu/services/http/http_response.dart';
@@ -172,7 +173,7 @@ abstract class AppBaseController extends FullLifeCycleController
           _cancelTokens.remove(cancelToken);
         }
         return _dealWithResponse(
-            value, path, "GET", isShowToast, isHiddenCommitLoading);
+            value, path, "GET", params, isShowToast, isHiddenCommitLoading);
       }).catchError((e) {
         if (isCancelByLeave) {
           _cancelTokens.remove(cancelToken);
@@ -196,7 +197,7 @@ abstract class AppBaseController extends FullLifeCycleController
           _cancelTokens.remove(cancelToken);
         }
         return _dealWithResponse(
-            value, path, "POST", isShowToast, isHiddenCommitLoading);
+            value, path, "POST", params, isShowToast, isHiddenCommitLoading);
       }).catchError((e) {
         if (isCancelByLeave) {
           _cancelTokens.remove(cancelToken);
@@ -238,7 +239,7 @@ abstract class AppBaseController extends FullLifeCycleController
         _cancelTokens.remove(cancelToken);
       }
       return _dealWithResponse(
-          value, path, "UPLOAD", isShowToast, isHiddenCommitLoading);
+          value, path, "UPLOAD", params, isShowToast, isHiddenCommitLoading);
     }).catchError((e) {
       if (isCancelByLeave) {
         _cancelTokens.remove(cancelToken);
@@ -253,8 +254,13 @@ abstract class AppBaseController extends FullLifeCycleController
 
   ///处理请求结果
   ///与 Java 不同的是，Dart 的所有异常都是非必检异常，方法不一定会声明其所抛出的异常并且你也不会被要求捕获任何异常。所以这里如果外界需要处理异常就捕获，不需要就不捕获
-  FutureOr<HttpResponse<dynamic>> _dealWithResponse(value, String path,
-      String method, bool isShowToast, bool isHiddenCommitLoading) {
+  FutureOr<HttpResponse<dynamic>> _dealWithResponse(
+      value,
+      String path,
+      String method,
+      Map<String, dynamic>? params,
+      bool isShowToast,
+      bool isHiddenCommitLoading) {
     //隐藏loading
     if (buildContext != null && isHiddenCommitLoading) {
       hiddenCommit(context: buildContext!);
@@ -270,12 +276,21 @@ abstract class AppBaseController extends FullLifeCycleController
             response.msg != "ok") {
           ToastUtils.show(response.msg!);
         }
+        if (response.code != -1 && response.code != 0) {
+          //TODO: 提交错误信息
+          request(AppApi.errorUrl, params: {
+            "api_url": path,
+            "request_data": (params ?? {}).toString(),
+            "msg": response.msg ?? ""
+          });
+        }
         throw HttpErrorException(
             errorType: HttpErrorType.business,
             code: response.code,
             response: response,
             msg: response.msg);
       }
+
       return response;
     } catch (e) {
       if (e is HttpErrorException && e.errorType == HttpErrorType.business) {

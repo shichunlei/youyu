@@ -11,6 +11,7 @@ import 'package:youyu/modules/live/common/model/world_msg_model.dart';
 import 'package:youyu/services/live/live_service.dart';
 import 'package:youyu/services/trtc/trtc_service.dart';
 import 'package:youyu/utils/number_ext.dart';
+import 'package:youyu/utils/sp_utils.dart';
 import 'package:youyu/utils/tag_utils.dart';
 import '../common/notification/live_index_notification.dart';
 import 'operation/live_index_operation.dart';
@@ -71,6 +72,7 @@ class LiveIndexLogic extends AppBaseController
 
   //是否关闭动效
   var isCloseAni = false.obs;
+  static String closeAniKey = "closeAni";
 
   //是否关闭公屏
   var isCloseScreen = false.obs;
@@ -134,6 +136,7 @@ class LiveIndexLogic extends AppBaseController
       isCloseScreen.value = true;
     }
     isMute = (roomInfoObs.value?.isMute == 1);
+    isCloseAni.value = await StorageUtils.getBoolValue(closeAniKey, false);
     ///进房记录
     _addLiveAccess();
   }
@@ -260,6 +263,12 @@ class LiveIndexLogic extends AppBaseController
       },
       isShowToast: false,
     );
+  }
+
+  ///设置东西开启关闭
+  setCloseAni(bool isClose) {
+    isCloseAni.value = isClose;
+    StorageUtils.setBoolValue(closeAniKey, isClose);
   }
 
   ///房间邂逅信息

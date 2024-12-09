@@ -21,6 +21,9 @@ class AppApi {
   //文章详情
   static const String commonArticleUrl = "/Common/Article";
 
+  //错误信息
+  static const String errorUrl = "/common/error";
+
   ///登录相关
   //密码/id登录
   static const String loginUrl = "/common/login";
@@ -381,4 +384,5 @@ class AppApi {
 
   ///游戏相关
   static const String wheelGameUrl = "/common/turntableInfo";
+
 }
