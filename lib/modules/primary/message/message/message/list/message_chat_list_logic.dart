@@ -10,13 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message_receipt.dart';
+import 'package:youyu/utils/untis_ext.dart';
 
 class MessageChatListLogic extends AppBaseController
     with
         IMMessageC2CReadReceiptListener,
         IMMessageReceiveListener,
         IMMessageSendListener {
-
   //上下文
   BuildContext? context;
 
@@ -48,6 +48,9 @@ class MessageChatListLogic extends AppBaseController
 
   //滑动计时器
   Timer? _scrollTimer;
+
+  //对方用户昵称
+  String nickName = '';
 
   @override
   void onInit() {

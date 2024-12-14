@@ -45,6 +45,7 @@ class _MessageDetailPageState extends State<MessageDetailPage>
 
     chatListWidget = MessageChatListWidget(
       userId: logic.userId ?? 0,
+      nickName: logic.pageTitle,
     );
   }
 

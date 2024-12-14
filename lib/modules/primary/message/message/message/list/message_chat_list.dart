@@ -1,3 +1,4 @@
+import 'package:youyu/modules/primary/message/message/list/widget/im_msg_red_widget.dart';
 import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/widgets/app/app_loading.dart';
@@ -19,10 +20,12 @@ import 'widget/im_msg_gif_widget.dart';
 
 ///聊天内容
 class MessageChatListWidget extends StatefulWidget {
-  const MessageChatListWidget({super.key, required this.userId, this.tag});
+  const MessageChatListWidget(
+      {super.key, required this.userId, this.tag, required this.nickName});
 
   final int userId;
   final String? tag;
+  final String nickName;
 
   @override
   State<MessageChatListWidget> createState() => _MessageChatListWidgetState();
@@ -37,6 +40,7 @@ class _MessageChatListWidgetState extends State<MessageChatListWidget> {
     super.initState();
     Get.put<MessageChatListLogic>(MessageChatListLogic(), tag: widget.tag);
     logic.userId = widget.userId;
+    logic.nickName = widget.nickName;
     logic.getHistoryMsg(true);
   }
 
@@ -72,6 +76,7 @@ class _MessageChatListWidgetState extends State<MessageChatListWidget> {
                             if (msgIndex == logic.dataList.length) {
                               return _topLoadMore();
                             }
+
                             V2TimMessage message = logic.dataList[msgIndex];
                             if (message.textElem != null) {
                               ///text
@@ -112,6 +117,14 @@ class _MessageChatListWidgetState extends State<MessageChatListWidget> {
                                 ///gift
                                 return IMMsgGifWidget(
                                   key: ObjectKey(message.msgID ?? ""),
+                                  message: message,
+                                  index: msgIndex,
+                                  logic: logic,
+                                );
+                              } else if (message.customElem?.desc ==
+                                  IMMsgType.red.type) {
+                                return IMMsgRedWidget(
+                                  key: UniqueKey(),
                                   message: message,
                                   index: msgIndex,
                                   logic: logic,

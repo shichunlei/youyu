@@ -71,6 +71,7 @@ class _LiveMessageDetailPageState extends State<LiveMessageDetailPage>
     chatListWidget = MessageChatListWidget(
       tag: _tag,
       userId: logic.userId ?? 0,
+      nickName: logic.pageTitle,
     );
 
     logic.initData();
