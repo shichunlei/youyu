@@ -1,8 +1,8 @@
+import 'package:youyu/modules/primary/message/message/message/message_detail_logic.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/utils/toast_utils.dart';
 
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/primary/message/message/message_detail_logic.dart';
 import 'package:youyu/services/permission_service.dart';
 import 'package:youyu/services/voice_service.dart';
 import 'package:flutter/material.dart';

@@ -1,8 +1,8 @@
+import 'package:youyu/modules/primary/message/message/message/list/widget/base/im_msg_base_widget.dart';
 import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/primary/message/message/list/widget/base/im_msg_base_widget.dart';
 import 'package:youyu/services/im/model/im_msg_type.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/app_page.dart';

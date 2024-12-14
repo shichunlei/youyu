@@ -8,10 +8,11 @@ import 'package:youyu/services/im/model/im_custom_message_mdoel.dart';
 import 'package:youyu/services/im/model/im_msg_type.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/primary/message/message/list/widget/base/im_msg_base_widget.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
+
+import 'base/im_msg_base_widget.dart';
 
 class IMMsgGifWidget extends IMMsgBaseWidget {
   const IMMsgGifWidget(

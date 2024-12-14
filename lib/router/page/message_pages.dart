@@ -1,5 +1,5 @@
-import 'package:youyu/modules/primary/message/message/message_detail_binding.dart';
-import 'package:youyu/modules/primary/message/message/message_detail_view.dart';
+import 'package:youyu/modules/primary/message/message/message/message_detail_binding.dart';
+import 'package:youyu/modules/primary/message/message/message/message_detail_view.dart';
 import 'package:youyu/modules/primary/message/notification/message_notification_binding.dart';
 import 'package:youyu/modules/primary/message/notification/message_notification_view.dart';
 import 'package:youyu/modules/primary/message/remark/message_remark_binding.dart';

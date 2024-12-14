@@ -1,7 +1,7 @@
+import 'package:youyu/modules/primary/message/message/message/list/message_chat_list_logic.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/utils/toast_utils.dart';
 import 'package:youyu/models/localmodel/menu_model.dart';
-import 'package:youyu/modules/primary/message/message/list/message_chat_list_logic.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -2,11 +2,12 @@ import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/primary/message/message/message_detail_logic.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../message_detail_logic.dart';
 
 ///底部更多
 class MessageInputBottomWidget extends StatelessWidget {

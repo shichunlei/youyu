@@ -2,14 +2,15 @@ import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/primary/message/message/input/message_input_content_widget.dart';
-import 'package:youyu/modules/primary/message/message/message_detail_logic.dart';
-import 'package:youyu/modules/primary/message/message/voice/message_voice_btn_widget.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/button/app_color_button.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../message_detail_logic.dart';
+import '../voice/message_voice_btn_widget.dart';
+import 'message_input_content_widget.dart';
 
 ///输入框
 class MessageInputWidget extends StatelessWidget {

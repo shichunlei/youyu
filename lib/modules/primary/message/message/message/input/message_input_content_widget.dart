@@ -1,9 +1,10 @@
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/primary/message/message/message_detail_logic.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/input/app_normal_input.dart';
 import 'package:flutter/material.dart';
+
+import '../message_detail_logic.dart';
 
 class MessageInputContentWidget extends StatelessWidget {
   const MessageInputContentWidget({super.key, required this.logic});

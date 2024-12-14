@@ -1,7 +1,7 @@
+import 'package:youyu/modules/primary/message/message/message/message_detail_logic.dart';
 import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/primary/message/message/message_detail_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';

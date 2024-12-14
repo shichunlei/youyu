@@ -12,7 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation.dart';
-import 'message_conversation_logic.dart';
+
+import '../../../index/conversation/message_conversation_logic.dart';
 
 class MessageConversationPage extends StatefulWidget {
   const MessageConversationPage({Key? key}) : super(key: key);

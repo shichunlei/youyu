@@ -1,17 +1,17 @@
+import 'package:youyu/modules/primary/message/message/message/view/message_detail_main_view.dart';
 import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/config/theme.dart';
 import 'package:youyu/controllers/user/user_controller.dart';
 import 'package:youyu/models/room_list_item.dart';
-import 'package:youyu/modules/primary/message/message/list/message_chat_list.dart';
-import 'package:youyu/modules/primary/message/message/message_detail_logic.dart';
-import 'package:youyu/modules/primary/message/message/view/message_detail_main_view.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/other/emoji/app_emoji_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_item.dart';
 
+import '../../../../primary/message/message/message/list/message_chat_list.dart';
+import '../../../../primary/message/message/message/message_detail_logic.dart';
 import 'widget/live_message_detail_nav_bar.dart';
 
 class LiveMessageDetailPage extends StatefulWidget {

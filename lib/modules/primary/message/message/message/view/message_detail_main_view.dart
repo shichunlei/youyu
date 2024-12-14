@@ -1,16 +1,17 @@
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/primary/message/message/input/message_input_bottom_widget.dart';
-import 'package:youyu/modules/primary/message/message/input/message_input_widget.dart';
-import 'package:youyu/modules/primary/message/message/list/message_chat_list.dart';
-import 'package:youyu/modules/primary/message/message/message_detail_logic.dart';
-import 'package:youyu/modules/primary/message/message/tip/message_detail_tip_widget.dart';
-import 'package:youyu/modules/primary/message/message/voice/message_voice_modal_widget.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/app_page.dart';
 import 'package:youyu/widgets/app/other/emoji/app_emoji_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../input/message_input_bottom_widget.dart';
+import '../input/message_input_widget.dart';
+import '../list/message_chat_list.dart';
+import '../message_detail_logic.dart';
+import '../tip/message_detail_tip_widget.dart';
+import '../voice/message_voice_modal_widget.dart';
 
 class MessageDetailMainView extends StatelessWidget {
   const MessageDetailMainView(

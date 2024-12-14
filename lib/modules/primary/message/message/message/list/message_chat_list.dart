@@ -1,13 +1,8 @@
-import 'package:youyu/modules/primary/message/message/list/widget/im_msg_red_widget.dart';
 import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/widgets/app/app_loading.dart';
 import 'package:youyu/widgets/other/expanded_viewport.dart';
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/primary/message/message/list/widget/im_msg_audio_widget.dart';
-import 'package:youyu/modules/primary/message/message/list/widget/im_msg_gift_widget.dart';
-import 'package:youyu/modules/primary/message/message/list/widget/im_msg_image_widget.dart';
-import 'package:youyu/modules/primary/message/message/list/widget/im_msg_text_widget.dart';
 import 'package:youyu/services/im/model/im_msg_type.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/app_round_container.dart';
@@ -16,7 +11,12 @@ import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'message_chat_list_logic.dart';
+import 'widget/im_msg_audio_widget.dart';
 import 'widget/im_msg_gif_widget.dart';
+import 'widget/im_msg_gift_widget.dart';
+import 'widget/im_msg_image_widget.dart';
+import 'widget/im_msg_red_widget.dart';
+import 'widget/im_msg_text_widget.dart';
 
 ///聊天内容
 class MessageChatListWidget extends StatefulWidget {

@@ -1,9 +1,6 @@
 import 'package:youyu/utils/screen_utils.dart';
 
 import 'package:youyu/config/resource.dart';
-import 'package:youyu/modules/primary/message/message/list/message_chat_list.dart';
-import 'package:youyu/modules/primary/message/message/nav/message_detail_nav_bar.dart';
-import 'package:youyu/modules/primary/message/message/view/message_detail_main_view.dart';
 import 'package:youyu/router/router.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
@@ -11,7 +8,10 @@ import 'package:youyu/widgets/app/other/emoji/app_emoji_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youyu/widgets/app/other/emoji/model/app_custom_emoji_item.dart';
+import 'list/message_chat_list.dart';
 import 'message_detail_logic.dart';
+import 'nav/message_detail_nav_bar.dart';
+import 'view/message_detail_main_view.dart';
 
 class MessageDetailPage extends StatefulWidget {
   const MessageDetailPage({Key? key}) : super(key: key);

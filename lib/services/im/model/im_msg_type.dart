@@ -37,6 +37,8 @@ enum IMMsgType {
   gift(type: "gift"),
   //福袋礼物
   luckyGift(type: "lucky_gift"),
+  //红包消息
+  red(type:"change"),
 
   joinRoomWithDressCar(type: "dress_car");
 

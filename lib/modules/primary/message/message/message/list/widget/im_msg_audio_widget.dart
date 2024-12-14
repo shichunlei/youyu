@@ -6,7 +6,6 @@ import 'package:youyu/utils/toast_utils.dart';
 
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/primary/message/message/list/widget/base/im_msg_base_widget.dart';
 import 'package:youyu/services/voice_service.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/image/app_local_image.dart';
@@ -14,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message_online_url.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
+
+import 'base/im_msg_base_widget.dart';
 
 ///语音item
 class IMMsgAudioWidget<IMMsgVoiceModel> extends IMMsgBaseWidget {

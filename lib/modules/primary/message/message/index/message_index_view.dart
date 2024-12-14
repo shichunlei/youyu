@@ -6,9 +6,9 @@ import 'package:youyu/widgets/app/app_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youyu/widgets/top_bg/top_ba.dart';
+import '../../index/message_index_logic.dart';
 import 'contact/message_contact_view.dart';
 import 'conversation/message_conversation_view.dart';
-import 'message_index_logic.dart';
 import 'package:youyu/widgets/page_life_state.dart';
 
 class MessageIndexPage extends IndexWidget {

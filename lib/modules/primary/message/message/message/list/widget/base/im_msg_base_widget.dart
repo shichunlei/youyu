@@ -1,11 +1,11 @@
+import 'package:youyu/modules/primary/message/message/message/list/message_chat_list_logic.dart';
+import 'package:youyu/modules/primary/message/message/message/list/widget/base/im_msg_base_menu.dart';
 import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/config/theme.dart';
-import 'package:youyu/modules/primary/message/message/list/widget/base/im_msg_base_menu.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:youyu/utils/time_utils.dart';
 
 import 'package:youyu/controllers/user/user_controller.dart';
-import 'package:youyu/modules/primary/message/message/list/message_chat_list_logic.dart';
 import 'package:youyu/utils/format_utils.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/image/app_circle_net_image.dart';

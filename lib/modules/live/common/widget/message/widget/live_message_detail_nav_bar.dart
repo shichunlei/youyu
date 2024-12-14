@@ -2,13 +2,14 @@ import 'package:youyu/utils/screen_utils.dart';
 import 'package:youyu/widgets/svga/simple_player_ext.dart';
 import 'package:youyu/config/theme.dart';
 import 'package:youyu/controllers/app_controller.dart';
-import 'package:youyu/modules/primary/message/message/message_detail_logic.dart';
 import 'package:youyu/config/resource.dart';
 import 'package:youyu/widgets/app/app_base_widget.dart';
 import 'package:youyu/widgets/app/icon/app_more_icon.dart';
 import 'package:youyu/widgets/app/icon/app_un_read_icon.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../primary/message/message/message/message_detail_logic.dart';
 
 ///导航栏
 class LiveMessageDetailNavBar extends StatefulWidget
