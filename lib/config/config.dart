@@ -18,7 +18,7 @@ import 'env.dart';
 // 1
 class AppConfig {
   //应用名称
-  static const String appName = "知遇派对";
+  static const String appName = "星空party";
 
   // 请求地址
   static final String baseUrl = _getUrl('api');

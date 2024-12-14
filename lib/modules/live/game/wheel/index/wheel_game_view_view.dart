@@ -125,7 +125,11 @@ class _WheelGameViewPageState extends State<WheelGameViewPage>
                 Expanded(
                   child: AppLocalImage(
                       onTap: () {
-                        logic.onSend(1);
+                        // logic.onSend(1);
+                        logic.onSend(
+                            logic.viewType.value == GameSubViewType.primary
+                                ? 10
+                                : 500);
                       },
                       path: logic.viewType.value == GameSubViewType.primary
                           ? AppResource().gameWheelCoinLeft1
@@ -134,7 +138,11 @@ class _WheelGameViewPageState extends State<WheelGameViewPage>
                 Expanded(
                   child: AppLocalImage(
                       onTap: () {
-                        logic.onSend(10);
+                        // logic.onSend(10);
+                        logic.onSend(
+                            logic.viewType.value == GameSubViewType.primary
+                                ? 100
+                                : 5000);
                       },
                       path: logic.viewType.value == GameSubViewType.primary
                           ? AppResource().gameWheelCoinCenter1
@@ -143,7 +151,11 @@ class _WheelGameViewPageState extends State<WheelGameViewPage>
                 Expanded(
                   child: AppLocalImage(
                       onTap: () {
-                        logic.onSend(30);
+                        // 12.14 改动 30次 改成 送百次 1000
+                        logic.onSend(
+                            logic.viewType.value == GameSubViewType.primary
+                                ? 1000
+                                : 15000);
                       },
                       path: logic.viewType.value == GameSubViewType.primary
                           ? AppResource().gameWheelCoinRight1

@@ -80,6 +80,7 @@ class CommonGiftPopLogic extends AppBaseController {
     CommonGiftCountModel(name: "一心一意", count: 1),
     CommonGiftCountModel(name: "十全十美", count: 10),
     CommonGiftCountModel(name: "一切顺利", count: 30),
+    CommonGiftCountModel(name: "六六大顺", count: 66),
   ];
 
   // 要赠送礼物的数量
@@ -168,10 +169,10 @@ class CommonGiftPopLogic extends AppBaseController {
       sendModel.selUserPosInfo = [];
       for (var userId in selectedUsers) {
         GiftUserPositionInfo userInfo =
-        giftUserList.firstWhere((element) => element.user.id == userId);
+            giftUserList.firstWhere((element) => element.user.id == userId);
         sendModel.selUserPosInfo?.add(userInfo);
       }
-       return sendModel;
+      return sendModel;
     }
     return null;
   }
@@ -193,7 +194,7 @@ class CommonGiftPopLogic extends AppBaseController {
       sendModel.selUserPosInfo = [];
       for (var userId in selectedUsers) {
         GiftUserPositionInfo userInfo =
-        giftUserList.firstWhere((element) => element.user.id == userId);
+            giftUserList.firstWhere((element) => element.user.id == userId);
         sendModel.selUserPosInfo?.add(userInfo);
       }
 

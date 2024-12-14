@@ -17,7 +17,8 @@ class UserInfoWidget extends StatelessWidget {
       required this.name,
       this.sex,
       this.userType,
-      this.nameFontSize, this.viewType = UserInfoViewType.dark});
+      this.nameFontSize,
+      this.viewType = UserInfoViewType.dark});
 
   final UserInfoViewType viewType;
 
@@ -92,7 +93,7 @@ class UserInfoWidget extends StatelessWidget {
               fontSize: nameFontSize ?? 14.sp,
               color: viewType == UserInfoViewType.light
                   ? Colors.white
-                  : Colors.black,
+                  : Colors.white,
               fontWeight: FontWeight.w700,
             ),
           ));
@@ -105,7 +106,7 @@ class UserInfoWidget extends StatelessWidget {
             fontSize: nameFontSize ?? 14.sp,
             color: viewType == UserInfoViewType.light
                 ? Colors.white
-                : Colors.black,
+                : Colors.white,
             fontWeight: FontWeight.w700,
           ),
         ),
